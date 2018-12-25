@@ -1,0 +1,55 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}  {{lbl.lblCreate}}</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Chức năng cha</label>
+                    <select class="form-control" ng-model="target.MACHA" ng-options="opt.Value as opt.Text for opt in lstParent"></select>
+                </div>
+                <div class="col-lg-6">
+                    <label>Mã chức năng</label><span style="color: red"> (*)</span>
+                    <input type="text" class="form-control" ng-model="target.MAMENU" name="MAMENU" maxlength="100" required placeholder="phb_xxxx...">
+                    <span style="color:red" ng-show="_form.MAMENU.$dirty && _form.MAMENU.$invalid">
+                        <span ng-show="_form.MAMENU.$error.required">Không được để trống</span>
+                        <span ng-show="_form.MAMENU.$error.maxlength">Bạn không được nhập quá 100 ký tự</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Tên chức năng</label><span style="color: red"> (*)</span>
+                    <input type="text" class="form-control" ng-model="target.TENMENU" name="TENMENU" maxlength="300" required>
+                    <span style="color: red" ng-show="_form.TENMENU.$dirty && _form.TENMENU.$invalid">
+                        <span ng-show="_form.TENMENU.$error.required">Không được để trống</span>
+                        <span ng-show="_form.TENMENU.$error.maxlength">Bạn không được nhập quá 300 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Thứ tự hiển thị</label>
+                    <input type="text" class="form-control" ng-model="target.SORT" name="SORT">
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Trạng thái</label><span style="color: red"> (*)</span>
+                    <select class="form-control" ng-model="target.TRANG_THAI" required>
+                        <option value="" selected="selected">Chọn trạng thái</option>
+                        <option value="I">Không sử dụng</option>
+                        <option value="A">Sử dụng</option>
+                    </select>
+                    <span style="color: red" ng-show="_form.T.$dirty && _form.TRANG_THAI.$invalid">
+                        <span ng-show="_form.TRANG_THAI.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+﻿create or replace type GetSumReport_B03H_table as table of GetSumReport_B03H_record;

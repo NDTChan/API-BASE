@@ -1,0 +1,16 @@
+﻿create or replace PROCEDURE PRO_GET_DATA_PL08BM05_XP (P_CONGTHUC      NVARCHAR2,
+                                                        P_USER        NVARCHAR2,
+                                                        outRef  OUT SYS_REFCURSOR)
+    AS
+      QUERY_STR       VARCHAR2 (30000);
+GIA_TRI         NUMBER:=0;
+P_CT VARCHAR2(32767);
+        
+BEGIN
+IF TRIM(P_CONGTHUC) IS NOT NULL THEN 
+SELECT STC_PA_SYS.FNC_CONVERT_FORMULA (P_CONGTHUC) INTO P_CT FROM dual;
+END IF;
+QUERY_STR := 'SELECT nvl( SUM (GIA_TRI_HACH_TOAN),0) as GIATRI FROM PHA_MLNS WHERE 1=1 AND '|| P_CT ||' AND USERID = '''||P_USER||''' '; 
+DBMS_OUTPUT.PUT_LINE(QUERY_STR);
+OPEN outRef FOR QUERY_STR;
+END PRO_GET_DATA_PL08BM05_XP;

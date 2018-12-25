@@ -1,0 +1,59 @@
+﻿create or replace PROCEDURE "PHB_B01BCQT_GET_DETAIL" ( REF_ID IN VARCHAR, TYPE_DATA IN VARCHAR,MALOAI IN VARCHAR, cur OUT SYS_REFCURSOR) as
+   QUERY_STR  VARCHAR2(32767); 
+   KHOAN_STR VARCHAR2(32767);
+   CURSOR khoan IS select DISTINCT(MA_KHOAN) from PHB_B01BCQT_DETAIL where PHB_B01BCQT_REFID = REF_ID order by MA_KHOAN; 
+   BEGIN
+
+    KHOAN_STR := '';
+    FOR kh IN khoan
+    LOOP
+    IF KHOAN_STR IS NOT NULL THEN
+    KHOAN_STR := ''||KHOAN_STR||''','''||kh.MA_KHOAN||'';
+    ELSE
+    KHOAN_STR := KHOAN_STR||kh.MA_KHOAN;
+    END IF;
+    END LOOP;
+    
+    UPDATE PHB_B01BCQT_DETAIL A SET A.MA_LOAI = (SELECT B.MA_CHA FROM PHB_DM_LOAIKHOAN B WHERE B.MA = A.MA_KHOAN); 
+    
+--DBMS_OUTPUT.put_line (KHOAN_STR);
+    IF TYPE_DATA = '0' THEN
+    QUERY_STR:='select * from PHB_B01BCQT_TEMPLATE ND
+          left join 
+          (
+          select * from (
+          select MA_CHI_TIEU,MA_SO,MA_KHOAN, Sum(GIA_TRI) as SO_TIEN from PHB_B01BCQT_DETAIL WHERE PHB_B01BCQT_REFID = '''||REF_ID||''' group by MA_CHI_TIEU,MA_SO,MA_KHOAN order by MA_CHI_TIEU,MA_SO,MA_KHOAN
+          )
+          PIVOT (  Sum(SO_TIEN)
+          FOR MA_KHOAN
+          IN ('''||KHOAN_STR||''')
+          )
+          order by TO_NUMBER(MA_SO)
+          )GT
+          on ND.MA_CHI_TIEU = GT.MA_CHI_TIEU
+          order by TO_NUMBER(ND.SAP_XEP)'; 
+    END IF;
+    IF TYPE_DATA = '1' THEN
+    QUERY_STR:='select DISTINCT(MA_KHOAN) as MA_KHOAN from PHB_B01BCQT_DETAIL where MA_LOAI = '||maLoai||'  and PHB_B01BCQT_REFID = '''||REF_ID||''' order by MA_KHOAN';
+    END IF;
+    IF TYPE_DATA = '2' THEN
+    QUERY_STR:='select DISTINCT(MA_LOAI) as MA_LOAI from PHB_B01BCQT_DETAIL where PHB_B01BCQT_REFID = '''||REF_ID||''' order by MA_LOAI';
+    END IF;
+    IF TYPE_DATA = '3' THEN
+    QUERY_STR:='select * from PHB_B01BCQT_TEMPLATE order by TO_NUMBER(SAP_XEP)';
+    END IF;
+DBMS_OUTPUT.put_line (QUERY_STR);
+BEGIN
+OPEN cur FOR QUERY_STR;
+EXCEPTION
+   WHEN NO_DATA_FOUND
+   THEN
+      DBMS_OUTPUT.put_line ('<your message>' || SQLERRM);
+   WHEN OTHERS
+   THEN
+      DBMS_OUTPUT.put_line (QUERY_STR  || SQLERRM); 
+END;
+END PHB_B01BCQT_GET_DETAIL;
+ 
+ 
+ 

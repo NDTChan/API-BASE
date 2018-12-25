@@ -1,0 +1,56 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}  {{lbl.lblCreate}}</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã đối tượng <span style="color: red"> (*)</span> </label>
+                    <input type="text" class="form-control" ng-model="target.MA_DOITUONG" name="MA_DOITUONG" maxlength="50" readonly>
+                    <span style="color:red" ng-show="_form.MA_DOITUONG.$dirty && _form.MA_DOITUONG.$invalid">
+                        <span ng-show="_form.MA_DOITUONG.$error.required">Không được để trống</span>
+                        <span ng-show="_form.MA_DOITUONG.$error.maxlength">Bạn không được nhập quá 50 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên đối tượng <span style="color: red"> (*)</span> </label>
+                    <input type="text" class="form-control" ng-model="target.TEN_DOITUONG" name="TEN_DOITUONG" maxlength="240" readonly>
+                    <span style="color:red" ng-show="_form.TEN_DOITUONG.$dirty && _form.TEN_DOITUONG.$invalid">
+                        <span ng-show="_form.TEN_DOITUONG.$error.required">Không được để trống</span>
+                        <span ng-show="_form.TEN_DOITUONG.$error.maxlength">Bạn không được nhập quá 240 ký tự</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Năm <span style="color: red"> (*)</span> </label>
+                    <input type="text" class="form-control" ng-model="target.NAM" name="NAM" maxlength="240" readonly>
+                    <span style="color:red" ng-show="_form.NAM.$dirty && _form.NAM.$invalid">
+                        <span ng-show="_form.NAM.$error.required">Không được để trống</span>
+                        <span ng-show="_form.NAM.$error.maxlength">Bạn không được nhập quá 240 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Mã đơn vị quan hệ ngân sách <span style="color: red"> (*)</span> </label>
+                    <input type="text" class="form-control" ng-model="target.MA_DVQHNS" name="TEN_DOITUONG" maxlength="240" readonly>
+                    <span style="color:red" ng-show="_form.MA_DVQHNS.$dirty && _form.MA_DVQHNS.$invalid">
+                        <span ng-show="_form.MA_DVQHNS.$error.required">Không được để trống</span>
+                        <span ng-show="_form.MA_DVQHNS.$error.maxlength">Bạn không được nhập quá 240 ký tự</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Trạng thái</label>
+                    <select ng-model="target.TRANG_THAI" ng-options="item.value as item.text for item in tempData('statusStr')" class="form-control" disabled></select>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">Lưu</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">Hủy</button>
+    </div>
+</div>

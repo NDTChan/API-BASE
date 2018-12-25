@@ -1,0 +1,13 @@
+﻿create or replace type GetSumReport_B03H_record AS OBJECT(
+       MA_CHUONG NVARCHAR2(15), 
+       TEN_CHUONG NVARCHAR2(50),
+       LOAI NVARCHAR2(15),
+       KHOAN NVARCHAR2(15),
+       MA_CHI_TIEU NVARCHAR2(15),
+       TEN_CHI_TIEU NVARCHAR2(50),
+       STT_CHI_TIEU NVARCHAR2(15),
+       SO_TIEN NUMBER(18,2),
+       HOATDONG_ID1 NUMBER(18,2), 
+       HOATDONG_ID2 NUMBER(18,2), 
+       HOATDONG_ID3 NUMBER(18,2)
+    );

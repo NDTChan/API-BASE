@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AB23954B-59F8-4C68-875B-EDB048627796}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BTS.SP.PHF.ENTITY</RootNamespace>
+    <AssemblyName>BTS.SP.PHF.ENTITY</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BTS.SP.TOOLS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1858cf915cbf2c4b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\BTS.SP.TOOLS.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LinqKit, Version=1.1.15.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.1.1.15\lib\net45\LinqKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.022\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.1.022\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Repository.Pattern, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Repository.Pattern.dll</HintPath>
+    </Reference>
+    <Reference Include="Repository.Pattern.Ef6, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Repository.Pattern.Ef6.dll</HintPath>
+    </Reference>
+    <Reference Include="Service.Pattern, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Service.Pattern.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auth\AU_NGUOIDUNG.cs" />
+    <Compile Include="Auth\AU_NGUOIDUNG_NHOMQUYEN.cs" />
+    <Compile Include="Auth\AU_NGUOIDUNG_QUYEN.cs" />
+    <Compile Include="Auth\AU_NHOMQUYEN.cs" />
+    <Compile Include="Auth\AU_NHOMQUYEN_CHUCNANG.cs" />
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="CommonEnum.cs" />
+    <Compile Include="Dm\PHF_DM_TAOMA.cs" />
+    <Compile Include="Dm\PHF_DM_BAOCAO.cs" />
+    <Compile Include="Dm\PHF_DM_CANBO.cs" />
+    <Compile Include="Dm\PHF_DM_CHUCNANG.cs" />
+    <Compile Include="Dm\PHF_DM_COQUAN.cs" />
+    <Compile Include="Dm\PHF_DM_DIABAN.cs" />
+    <Compile Include="Dm\PHF_DM_DOITUONG.cs" />
+    <Compile Include="Dm\PHF_DM_DONVI_PHONGBAN.cs" />
+    <Compile Include="Dm\PHF_DM_DOTTHANHTRA.cs" />
+    <Compile Include="Dm\PHF_DM_PHONGBAN.cs" />
+    <Compile Include="Nv\PHF_BM_01TT_CQHC.cs" />
+    <Compile Include="Nv\PHF_BM_01TT_DVSN.cs" />
+    <Compile Include="Nv\PHF_BM_01TT_TCDN.cs" />
+    <Compile Include="Nv\PHF_BM_01TT_TCXD.cs" />
+    <Compile Include="Nv\PHF_BM_02TT_CQHC.cs" />
+    <Compile Include="Nv\PHF_BM_02TT_DVSN.cs" />
+    <Compile Include="Nv\PHF_BM_03TT_CQHC.cs" />
+    <Compile Include="Nv\PHF_BM_03TT_DVSN.cs" />
+    <Compile Include="Nv\PHF_BM_03TT_NSDP.cs" />
+    <Compile Include="Nv\PHF_BM_02TT_NSDP.cs" />
+    <Compile Include="Nv\PHF_BM_02TT_TCXD.cs" />
+    <Compile Include="Nv\PHF_BM_04TT_CQHC.cs" />
+    <Compile Include="Nv\PHF_BM_04TT_DVSN.cs" />
+    <Compile Include="Nv\PHF_BM_04TT_TCXD.cs" />
+    <Compile Include="Nv\PHF_BM_05TT_CQHC.cs" />
+    <Compile Include="Nv\PHF_BM_05TT_DVSN.cs" />
+    <Compile Include="Nv\PHF_BM_05TT_TCXD.cs" />
+    <Compile Include="Nv\PHF_BM_06TT_CQHC.cs" />
+    <Compile Include="Nv\PHF_BM_06TT_DVSN.cs" />
+    <Compile Include="Nv\PHF_BM_06TT_TCXD.cs" />
+    <Compile Include="Nv\PHF_BM_07TT_CQHC.cs" />
+    <Compile Include="Nv\PHF_BM_07TT_DVSN.cs" />
+    <Compile Include="Nv\PHF_BM_07TT_TCXD .cs" />
+    <Compile Include="Nv\PHF_BM_08TT_CQHC.cs" />
+    <Compile Include="Nv\PHF_BM_08TT_DVSN.cs" />
+    <Compile Include="Nv\PHF_BM_08TT_TCXD.cs" />
+    <Compile Include="Nv\PHF_BM_09TT_DVSN.cs" />
+    <Compile Include="Nv\PHF_BM_10TT_TCXD.cs" />
+    <Compile Include="Nv\PHF_BM_16TT_NSDP.cs" />
+    <Compile Include="Nv\PHF_BM_15TT_NSDP.cs" />
+    <Compile Include="Nv\PHF_BM_14TT_NSDP.cs" />
+    <Compile Include="Nv\PHF_BM_11TT_NSDP.cs" />
+    <Compile Include="Nv\PHF_BM_03TT_TCXD.cs" />
+    <Compile Include="Nv\PHF_BM_12TT_NSDP.cs" />
+    <Compile Include="Nv\PHF_BM_10TT_NSDP.cs" />
+    <Compile Include="Nv\PHF_BM_05TT_NSDP.cs" />
+    <Compile Include="Nv\PHF_BM_60TT_NSDVN.cs" />
+    <Compile Include="Nv\PHF_BM_FILE_CQHC.cs" />
+    <Compile Include="Nv\PHF_BM_FILE_DVSN.cs" />
+    <Compile Include="Nv\PHF_BM_FILE_NSDP.cs" />
+    <Compile Include="Nv\PHF_BM_01TT_NSDP.cs" />
+    <Compile Include="Nv\PHF_BM_FILE_NSDVN.cs" />
+    <Compile Include="Nv\PHF_BM_FILE_TCDN.cs" />
+    <Compile Include="Nv\PHF_BM_FILE_TCXD.cs" />
+    <Compile Include="Nv\PHF_KH_THANHTRA_COQUAN.cs" />
+    <Compile Include="Nv\PHF_KH_THANHTRA_COQUAN_CT.cs" />
+    <Compile Include="Nv\PHF_QD_GIAOTHUCHIEN_THANHTRA.cs" />
+    <Compile Include="Nv\PHF_QD_GIAOTHUCHIEN_TT_THUOCBO.cs" />
+    <Compile Include="Nv\PHF_QD_PHEDUYET_THANHTRA.cs" />
+    <Compile Include="Nv\PHF_SOANTHAO_THANHTRA.cs" />
+    <Compile Include="Nv\PHF_THEODOI_CANBO.cs" />
+    <Compile Include="Nv\PHF_THEODOI_CANBO_CT.cs" />
+    <Compile Include="Nv\PHF_THUMUC_FILE.cs" />
+    <Compile Include="Nv\PHF_TIENDO_THUCHIEN_KH.cs" />
+    <Compile Include="Nv\PHF_SOANTHAO_THANHTRA_CT.cs" />
+    <Compile Include="Nv\PHF_TIENDO_THUCHIEN_KH_CT.cs" />
+    <Compile Include="Nv\PHF_TIEUCHI_DGRR.cs" />
+    <Compile Include="Nv\PHF_TIEUCHI_DGRR_DETAIL.cs" />
+    <Compile Include="Nv\PHF_TTB_NHATKY.cs" />
+    <Compile Include="Nv\PHF_XD_KH_THANHTRA_BO.cs" />
+    <Compile Include="Nv\PHF_XD_KH_THANHTRA_BO_CHITIET.cs" />
+    <Compile Include="Nv\PHF_XD_KH_TT_THUOC_BO.cs" />
+    <Compile Include="Nv\PHF_XD_KH_TT_THUOC_BO_CT.cs" />
+    <Compile Include="Sys\PHF_SYS_TUDIEN.cs" />
+    <Compile Include="Helper\ExtendObj.cs" />
+    <Compile Include="Helper\ChoiceObj.cs" />
+    <Compile Include="Helper\ErrorMessage.cs" />
+    <Compile Include="Helper\ExportExcelAttribute.cs" />
+    <Compile Include="Helper\MD5Encrypt.cs" />
+    <Compile Include="Helper\Paging.cs" />
+    <Compile Include="Helper\PagingParam.cs" />
+    <Compile Include="Helper\Response.cs" />
+    <Compile Include="Helper\SelectObject.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Nv\PHF_BIEU02.cs" />
+    <Compile Include="Nv\PHF_BIEU05.cs" />
+    <Compile Include="Nv\PHF_BIEU06.cs" />
+    <Compile Include="PHFContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="State.cs" />
+    <Compile Include="Sys\SYS_CHUCNANG.cs" />
+    <Compile Include="Sys\SYS_DVQHNS.cs" />
+    <Compile Include="WriteLogs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Content\WSS_Content_8585.bak" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\BTS.SP.TOOLS.dll" />
+    <Content Include="DLL\Repository.Pattern.dll" />
+    <Content Include="DLL\Repository.Pattern.Ef6.dll" />
+    <Content Include="DLL\Service.Pattern.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

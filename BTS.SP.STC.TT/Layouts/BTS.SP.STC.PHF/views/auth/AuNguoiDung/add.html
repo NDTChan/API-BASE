@@ -1,0 +1,134 @@
+﻿<style>
+    .modal-content {
+        width: 600px;
+        margin: 90px auto;
+    }
+
+    .k-dropdowntree .k-sprite, .k-popup .k-sprite {
+        background-image: url('/_layouts/15/BTS.SP.STC.PHF/utils/kendo/styles/content/web/treeview/coloricons-sprite.png');
+    }
+
+    .rootfolder {
+        background-position: 0 0;
+    }
+
+    .folder {
+        background-position: 0 -16px;
+    }
+
+    .pdf {
+        background-position: 0 -32px;
+    }
+
+    .html {
+        background-position: 0 -48px;
+    }
+
+    .image {
+        background-position: 0 -64px;
+    }
+
+    .k-dropdown-wrap .k-input {
+        display: block;
+    }
+
+    .k-dropdown-wrap .k-sprite {
+        vertical-align: middle;
+    }
+
+    span.k-checkbox-label.checkbox-span {
+        display: none;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title}}</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label>Đơn vị</label><span style="color: red"> (*)</span>
+                    <div class="demo-section k-content">
+                        <div id="dropdowntree" style="width: 100%;" ng-model="target.ma"></div>
+                    </div>
+                    <script id="dropdowntree-template" type="text/kendo-ui-template">
+                        #: item.ten #
+                    </script>
+                    <script id="dropdowntree-value-template" type="text/kendo-ui-template">
+                        <span class="k-sprite #: spriteCssClass #"></span>
+                        <span> #: data.ten # </span>
+                    </script>
+                    <span id="notification"></span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Tên đăng nhập</label><span style="color: red"> (*)</span>
+                    <input type="text" class="form-control" ng-model="target.username" name="USERNAME" id="USERNAME" maxlength="50" ng-blur="checkExistCode(target.username);" required tabindex="1" />
+                    <span style="color:red" ng-show="_form.USERNAME.$dirty && _form.USERNAME.$invalid">
+                        <span ng-show="_form.USERNAME.$error.required">Không được để trống</span>
+                        <span ng-show="_form.USERNAME.$error.maxlength">Bạn không được nhập quá 50 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên đầy đủ</label><span style="color: red"> (*)</span>
+                    <input type="text" class="form-control" ng-model="target.fullname" name="FULLNAME" id="FULLNAME" maxlength="255" required tabindex="2" />
+                    <span style="color:red" ng-show="_form.FULLNAME.$dirty && _form.FULLNAME.$invalid">
+                        <span ng-show="_form.FULLNAME.$error.required">Không được để trống</span>
+                        <span ng-show="_form.FULLNAME.$error.maxlength">Bạn không được nhập quá 255 ký tự</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mật khẩu</label><span style="color: red"> (*)</span>
+                    <input type="password" class="form-control" ng-model="target.password" name="PASSWORD" id="PASSWORD" maxlength="50" required tabindex="3" />
+                    <span style="color:red" ng-show="_form.PASSWORD.$dirty && _form.PASSWORD.$invalid">
+                        <span ng-show="_form.PASSWORD.$error.required">Không được để trống</span>
+                        <span ng-show="_form.PASSWORD.$error.maxlength">Bạn không được nhập quá 50 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Nhập lại mật khẩu</label><span style="color: red"> (*)</span>
+                    <input type="password" class="form-control" ng-model="target.confirmpassword" name="CONFIRMPASSWORD" id="CONFIRMPASSWORD" ng-readonly="!target.password" ng-blur="comparePassword(target.confirmpassword);" maxlength="50" pw-check="CONFIRMPASSWORD" required tabindex="4" />
+                    <span style="color:red" ng-show="_form.CONFIRMPASSWORD.$dirty && _form.CONFIRMPASSWORD.$invalid">
+                        <span ng-show="_form.CONFIRMPASSWORD.$error.required">Không được để trống</span>
+                        <span ng-show="_form.CONFIRMPASSWORD.$error.maxlength">Bạn không được nhập quá 50 ký tự</span>
+                        <span ng-show="_form.CONFIRMPASSWORD.$error.pwmatch">Mật khẩu không trùng khớp</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Email</label>
+                    <input type="text" class="form-control" ng-model="target.email" name="EMAIL" maxlength="50" tabindex="5" />
+                </div>
+                <div class="col-lg-6">
+                    <label>Số điện thoại</label>
+                    <input type="text" class="form-control" ng-model="target.phone" name="PHONE" maxlength="50" tabindex="6" />
+                    <span style="color: red" ng-show="_form.PHONE.$dirty && _form.PHONE.$invalid">
+                        <span ng-show="_form.PHONE.$error.maxlength">Bạn không được nhập quá 50 ký tự</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Chức vụ</label>
+                    <input type="text" class="form-control" ng-model="target.chucvu" name="CHUCVU" maxlength="50" tabindex="7" />
+                    <span style="color: red" ng-show="_form.CHUCVU.$dirty && _form.CHUCVU.$invalid">
+                        <span ng-show="_form.CHUCVU.$error.maxlength">Bạn không được nhập quá 50 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Địa bàn hành chính</label><span style="color: red"> (*)</span>
+                    <input type="text" class="form-control" ng-model="target.ma_dbhc" name="MA_DBHC" maxlength="50" tabindex="8" required />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

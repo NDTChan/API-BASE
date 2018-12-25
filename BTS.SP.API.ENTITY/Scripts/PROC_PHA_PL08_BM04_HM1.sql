@@ -1,0 +1,53 @@
+create or replace procedure PROC_PHA_PL08_BM04_HM1(P_NAM VARCHAR2,P_NHOM VARCHAR2,P_TIEUNHOM VARCHAR2, P_MUC VARCHAR2, P_TIEUMUC VARCHAR2,DONVI_TIEN number, cur OUT SYS_REFCURSOR) as
+   QUERY_STR  VARCHAR2(32767); 
+   P_SQL_INSERT VARCHAR2(32767);
+   BEGIN
+   IF TRIM(P_NHOM) IS NOT NULL THEN 
+        P_SQL_INSERT:= P_SQL_INSERT ||' AND b.MA_NHOM in ('||P_NHOM||')';
+        END IF;
+   IF TRIM(P_TIEUNHOM) IS NOT NULL THEN 
+        P_SQL_INSERT:= P_SQL_INSERT ||' AND b.MA_TIEUNHOM in ('||P_TIEUNHOM||')';
+        END IF;
+   IF TRIM(P_MUC) IS NOT NULL THEN 
+        P_SQL_INSERT:= P_SQL_INSERT ||' AND b.MA_MUC in ('||P_MUC||')';
+        END IF;
+   IF TRIM(P_TIEUMUC) IS NOT NULL THEN 
+        P_SQL_INSERT:= P_SQL_INSERT ||' AND b.MA_TIEUMUC in ('||P_TIEUMUC||')';
+        END IF;
+  -- IF DONVI_TIEN IS NULL THEN 
+    --    DONVI_TIEN:= 1;
+     --   END IF;
+QUERY_STR:='select * FROM (SELECT 
+         MA_NGHIEPVU,
+         MA_MUC,
+         MA_CAP,
+         MA_TIEUMUC,
+         MA_CAPMLNS,
+         MA_KBNN,
+         MA_DVQHNS,
+         MA_NGUON_NSNN,
+         MA_NHOM,
+         MA_TIEUNHOM,
+         SUM (GIA_TRI_HACH_TOAN /'|| DONVI_TIEN ||') AS SOQUYETTOAN
+    FROM PHA_HACHTOAN_THU b
+    WHERE 1=1 '||P_SQL_INSERT||
+    ' And To_Char(NGAY_HIEU_LUC,' ||    Chr(39) || 'yyyy' || Chr(39) || ') = ' || P_NAM ||
+    ' And MA_NGHIEPVU In (Select MA_NGHIEPVU From Dm_NghiepVu Where SUBSTR(CQD,2,1) = ' || Chr(39)|| '1' || Chr(39) ||  ')' ||    
+' GROUP BY MA_NGHIEPVU,MA_MUC, MA_CAP, MA_CAPMLNS, MA_MUC, MA_TIEUMUC,MA_NHOM,MA_TIEUNHOM,MA_KBNN,MA_DVQHNS,MA_NGUON_NSNN
+)
+PIVOT ( sum(SOQUYETTOAN) as SOQUYETTOAN
+          FOR MA_CAPMLNS
+          IN (''1'' AS TW, ''2'' AS TINH, ''3'' AS HUYEN, ''4'' AS XA)
+          )'; 
+DBMS_OUTPUT.put_line (QUERY_STR);
+BEGIN
+OPEN cur FOR QUERY_STR;
+EXCEPTION
+   WHEN NO_DATA_FOUND
+   THEN
+      DBMS_OUTPUT.put_line ('<your message>' || SQLERRM);
+   WHEN OTHERS
+   THEN
+      DBMS_OUTPUT.put_line (QUERY_STR  || SQLERRM); 
+END;
+END PROC_PHA_PL08_BM04_HM1;

@@ -1,0 +1,116 @@
+﻿create or replace FUNCTION FCN_GetAmountSummaryUnit_B06H (
+    MADVQHNS NVARCHAR2,
+    NAMBC NUMBER,
+    MACHUONG NVARCHAR2,
+    KYMOI NUMBER,
+    MAKHOAN NVARCHAR2,
+    MACHITIEU NVARCHAR2,
+    COT NVARCHAR2
+    /*Tên cột trong table*/
+)
+RETURN NUMBER 
+IS 
+        AMOUNT NUMBER:=0;
+BEGIN   
+    CASE
+        WHEN COT='SO_PHAI_NOP_NAMTRUOC' OR COT='SODU_DAUNAM' OR COT='DUTOAN_NAMTRUOC' THEN 
+        /*--Số phải nộp năm trước chuyển sang (Phần IV)
+          --Số dư đầu kỳ (phần II)
+          --Dự toán năm trước chuyển sang (Phần V)
+        */
+            SELECT NVL(SUM(
+                        CASE 
+                        WHEN COT='SO_PHAI_NOP_NAMTRUOC' THEN SO_PHAI_NOP_NAMTRUOC
+                        WHEN COT='SODU_DAUNAM' THEN SODU_DAUNAM
+                        WHEN COT='DUTOAN_NAMTRUOC' THEN DUTOAN_NAMTRUOC
+                        END
+                        ),0) 
+                    INTO AMOUNT FROM PHB_B06H B06H,PHB_B06H_DETAIL B06HD
+                    WHERE B06H.REFID=B06HD.PHB_B06H_REFID 
+                    AND B06H.MA_QHNS=MADVQHNS 
+                    AND B06H.MA_CHUONG=MACHUONG 
+                    AND B06H.NAM_BC=NAMBC 
+                    AND (B06HD.MA_KHOAN=MAKHOAN OR (MAKHOAN IS NULL AND B06HD.MA_KHOAN IS NULL))
+                    AND B06HD.MA_CHI_TIEU=MACHITIEU
+                    AND ((KYMOI=0 AND B06H.KY_BC IN(101)) OR (KYMOI=201 AND B06H.KY_BC IN(101)) OR (KYMOI=202 AND B06H.KY_BC IN(103)));
+        WHEN COT='SODU_CUOINAM' OR COT='SO_CON_PHAI_NOP' THEN 
+        /*--Số dư cuối kỳ (phần II)
+          --Số còn phải nộp năm nay (phần IV)
+        */
+            SELECT NVL(SUM(
+                        CASE 
+                        WHEN COT='SODU_CUOINAM' THEN SODU_CUOINAM
+                        WHEN COT='SO_CON_PHAI_NOP' THEN SO_CON_PHAI_NOP
+                        END
+                        ),0) 
+                    INTO AMOUNT FROM PHB_B06H B06H,PHB_B06H_DETAIL B06HD
+                    WHERE B06H.REFID=B06HD.PHB_B06H_REFID 
+                    AND B06H.MA_QHNS=MADVQHNS 
+                    AND B06H.MA_CHUONG=MACHUONG 
+                    AND B06H.NAM_BC=NAMBC 
+                    AND (B06HD.MA_KHOAN=MAKHOAN OR (MAKHOAN IS NULL AND B06HD.MA_KHOAN IS NULL))
+                    AND B06HD.MA_CHI_TIEU=MACHITIEU
+                    AND ((KYMOI=0 AND B06H.KY_BC IN(104)) OR (KYMOI=201 AND B06H.KY_BC IN(102)) OR (KYMOI=202 AND B06H.KY_BC IN(104)));
+        WHEN COT='SO_PHAI_NOP' OR COT='SO_DA_NOP' OR COT='DUTOAN_GIAO_TRONGNAM' OR COT='DUTOAN_RUT_KHOBAC' OR COT='DUTOAN_LENHCHI' OR COT='DUTOAN_GHITHUGHICHI' OR COT='DUTOAN_NGUONKHAC'  OR COT='DUTOAN_HUY' THEN 
+        /*
+            --Số phải nộp năm nay (Phần IV)
+			--Số đã nộp năm nay (Phần IV)
+			--Dự toán được giao trong năm (Phần V)
+			--Dự toán đã nhận --nhận lệnh chi tiền (phần V)
+			--Dự toán đã nhận --rút từ kho bạc (phần V)
+			--Dự toán đã nhận --ghi thu ghi chi (phần V)
+			--Dự toán đã nhận --nguồn khác (phần V)
+			--Dự toán hủy (Phần V)
+        */
+            SELECT NVL(SUM(
+                        CASE 
+                        WHEN COT='SO_PHAI_NOP' THEN SO_PHAI_NOP
+                        WHEN COT='SO_DA_NOP' THEN SO_DA_NOP
+                        WHEN COT='DUTOAN_GIAO_TRONGNAM' THEN DUTOAN_GIAO_TRONGNAM
+                        WHEN COT='DUTOAN_RUT_KHOBAC' THEN DUTOAN_RUT_KHOBAC
+                        WHEN COT='DUTOAN_LENHCHI' THEN DUTOAN_LENHCHI
+                        WHEN COT='DUTOAN_GHITHUGHICHI' THEN DUTOAN_GHITHUGHICHI
+                        WHEN COT='DUTOAN_NGUONKHAC' THEN DUTOAN_NGUONKHAC
+                        WHEN COT='DUTOAN_HUY' THEN DUTOAN_HUY
+                        END
+                        ),0) 
+                    INTO AMOUNT FROM PHB_B06H B06H,PHB_B06H_DETAIL B06HD
+                    WHERE B06H.REFID=B06HD.PHB_B06H_REFID 
+                    AND B06H.MA_QHNS=MADVQHNS 
+                    AND B06H.MA_CHUONG=MACHUONG 
+                    AND B06H.NAM_BC=NAMBC 
+                    AND (B06HD.MA_KHOAN=MAKHOAN OR (MAKHOAN IS NULL AND B06HD.MA_KHOAN IS NULL))
+                    AND B06HD.MA_CHI_TIEU=MACHITIEU
+                    AND ((KYMOI=0 AND B06H.KY_BC IN(101,102,103,104)) OR (KYMOI=201 AND B06H.KY_BC IN(101,102)) OR (KYMOI=202 AND B06H.KY_BC IN(103,104)));
+        WHEN COT='QUY_KHENTHUONG' OR COT='QUY_PHUCLOI' OR COT='QUY_KHAC' OR COT='QUY_TONGSO' OR COT='NGUONPHI_LEPHI' OR COT='PHI_TIEPNHAN' OR COT='NOI_DUNG' THEN 
+        /*
+            --Quỹ khen thưởng (phần III)
+			--Quỹ phúc lợi  (phần III)
+			--Quỹ Khác  (phần III)
+			--Tổng số (Phần III)
+			--Số tiền (Phần VII)
+			--Số tiền (Phần VI)
+        */
+            SELECT NVL((
+                CASE
+                    WHEN COT='QUY_KHENTHUONG' THEN FCN_GetAmount_ByCOL_SUM_B06H(MADVQHNS,NAMBC,MACHUONG,KYMOI,B06HD.MA_KHOAN,B06HD.MA_CHI_TIEU,'QUY_KHENTHUONG')
+                    WHEN COT='QUY_PHUCLOI' THEN FCN_GetAmount_ByCOL_SUM_B06H(MADVQHNS,NAMBC,MACHUONG,KYMOI,B06HD.MA_KHOAN,B06HD.MA_CHI_TIEU,'QUY_PHUCLOI')
+                    WHEN COT='QUY_KHAC' THEN FCN_GetAmount_ByCOL_SUM_B06H(MADVQHNS,NAMBC,MACHUONG,KYMOI,B06HD.MA_KHOAN,B06HD.MA_CHI_TIEU,'QUY_KHAC')
+                    WHEN COT='QUY_TONGSO' THEN FCN_GetAmount_ByCOL_SUM_B06H(MADVQHNS,NAMBC,MACHUONG,KYMOI,B06HD.MA_KHOAN,B06HD.MA_CHI_TIEU,'QUY_KHENTHUONG')+FCN_GetAmount_ByCOL_SUM_B06H(MADVQHNS,NAMBC,MACHUONG,KYMOI,B06HD.MA_KHOAN,B06HD.MA_CHI_TIEU,'QUY_PHUCLOI')+FCN_GetAmount_ByCOL_SUM_B06H(MADVQHNS,NAMBC,MACHUONG,KYMOI,B06HD.MA_KHOAN,B06HD.MA_CHI_TIEU,'QUY_KHAC')
+                    WHEN COT='NGUONPHI_LEPHI' THEN FCN_GetAmount_ByCOL_SUM_B06H(MADVQHNS,NAMBC,MACHUONG,KYMOI,B06HD.MA_KHOAN,B06HD.MA_CHI_TIEU,'NGUONPHI_LEPHI')
+                    WHEN COT='PHI_TIEPNHAN' THEN FCN_GetAmount_ByCOL_SUM_B06H(MADVQHNS,NAMBC,MACHUONG,KYMOI,B06HD.MA_KHOAN,B06HD.MA_CHI_TIEU,'PHI_TIEPNHAN')
+                    WHEN COT='NOI_DUNG' THEN FCN_GetAmount_ByCOL_SUM_B06H(MADVQHNS,NAMBC,MACHUONG,KYMOI,B06HD.MA_KHOAN,B06HD.MA_CHI_TIEU,'NOI_DUNG')
+                END
+            ),0)
+                    INTO AMOUNT FROM PHB_B06H B06H,PHB_B06H_DETAIL B06HD
+                    WHERE B06H.REFID=B06HD.PHB_B06H_REFID 
+                    AND B06H.MA_QHNS=MADVQHNS 
+                    AND B06H.MA_CHUONG=MACHUONG 
+                    AND B06H.NAM_BC=NAMBC 
+                    AND (B06HD.MA_KHOAN=MAKHOAN OR (MAKHOAN IS NULL AND B06HD.MA_KHOAN IS NULL))
+                    AND B06HD.MA_CHI_TIEU=MACHITIEU
+                    AND ((KYMOI=0 AND B06H.KY_BC IN(101,102,103,104)) OR (KYMOI=201 AND B06H.KY_BC IN(101,102)) OR (KYMOI=202 AND B06H.KY_BC IN(103,104)));
+        ELSE AMOUNT:=0;
+    END CASE;
+RETURN AMOUNT;
+END FCN_GetAmountSummaryUnit_B06H;

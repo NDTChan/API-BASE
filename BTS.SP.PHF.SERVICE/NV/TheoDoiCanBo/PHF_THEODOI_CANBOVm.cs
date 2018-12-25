@@ -1,0 +1,134 @@
+﻿using BTS.SP.PHF.ENTITY.Nv;
+using BTS.SP.PHF.SERVICE.UTILS;
+using BTS.SP.TOOLS;
+using BTS.SP.TOOLS.BuildQuery;
+using BTS.SP.TOOLS.BuildQuery.Implimentations;
+using BTS.SP.TOOLS.BuildQuery.Types;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BTS.SP.PHF.SERVICE.NV.TheoDoiCanBo
+{
+    public class PHF_THEODOI_CANBOVm
+    {
+        public class ViewModel
+        {
+            public string MA_PHIEU { get; set; }
+            public string TEN_PHIEU { get; set; }
+            public int? NAM_THANHTRA { get; set; }
+            public string DOT_THANHTRA { get; set; }
+        }
+        public class Search : IDataSearch
+        {
+            public string MA_PHIEU { get; set; }
+            public string MA_DOITUONG { get; set; }
+            public string MA_PHONGBAN { get; set; }
+            public string MA_DOT { get; set; }
+            public int NAM { get; set; }
+            public string DefaultOrder
+            {
+
+                get
+                {
+                    return ClassHelper.GetPropertyName(() => new PHF_THEODOI_CANBO().MA_PHIEU);
+
+                }
+            }
+
+            public List<IQueryFilter> GetFilters()
+            {
+                var result = new List<IQueryFilter>();
+                var refObj = new PHF_THEODOI_CANBO();
+
+                if (!string.IsNullOrEmpty(this.MA_PHIEU))
+                {
+                    result.Add(new QueryFilterLinQ
+                    {
+                        Property = ClassHelper.GetProperty(() => refObj.MA_PHIEU),
+                        Value = this.MA_PHIEU,
+                        Method = FilterMethod.Like
+                    });
+                }
+                if (!string.IsNullOrEmpty(this.MA_DOITUONG))
+                {
+                    result.Add(new QueryFilterLinQ
+                    {
+                        Property = ClassHelper.GetProperty(() => refObj.MA_DOITUONG),
+                        Value = this.MA_DOITUONG,
+                        Method = FilterMethod.Like
+                    });
+                }
+                if (!string.IsNullOrEmpty(this.MA_PHONGBAN))
+                {
+                    result.Add(new QueryFilterLinQ
+                    {
+                        Property = ClassHelper.GetProperty(() => refObj.MA_PHONGBAN),
+                        Value = this.MA_PHONGBAN,
+                        Method = FilterMethod.EqualTo
+                    });
+                }
+                if (!string.IsNullOrEmpty(this.MA_DOT))
+                {
+                    result.Add(new QueryFilterLinQ
+                    {
+                        Property = ClassHelper.GetProperty(() => refObj.DOT_THANHTRA),
+                        Value = this.MA_DOT,
+                        Method = FilterMethod.Like
+                    });
+                }
+                if (this.NAM != 0)
+                {
+                    result.Add(new QueryFilterLinQ
+                    {
+                        Property = ClassHelper.GetProperty(() => refObj.NAM_THANHTRA),
+                        Value = this.NAM,
+                        Method = FilterMethod.EqualTo
+                    });
+                }
+                return result;
+
+            }
+
+            public List<IQueryFilter> GetQuickFilters()
+            {
+                return null;
+            }
+
+            public void LoadGeneralParam(string summary)
+            {
+                MA_PHIEU = summary;
+            }
+        }
+        public class DTO
+        {
+            public DTO()
+            {
+                DETAILS = new List<DTO_DETAILS>();
+            }
+            public int ID { get; set; }
+            public string MA_PHIEU { get; set; }
+            public string TEN_PHIEU { get; set; }
+            public int? NAM_THANHTRA { get; set; }
+            public string DOT_THANHTRA { get; set; }
+            public List<DTO_DETAILS> DETAILS { get; set; }
+        }
+
+        public class DTO_DETAILS
+        {
+            public string MA_PHIEU { get; set; }
+            public string TEN_CANBO { get; set; }
+            public string CHUCVU { get; set; }
+            public int? GIOI_TINH { get; set; }
+            public DateTime? NGAY_SINH { get; set; }
+            public string PHONGBAN { get; set; }
+            public string SO_MAY_LE { get; set; }
+            public string SO_DI_DONG { get; set; }
+            public string TEN_DOT_THANHTRA { get; set; }
+            public string SO_QUYETDINH { get; set; }
+            public int? STT { get; set; }
+        }
+    }
+}

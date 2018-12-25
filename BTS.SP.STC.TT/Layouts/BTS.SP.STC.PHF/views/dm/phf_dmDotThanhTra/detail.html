@@ -1,0 +1,59 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}  {{lbl.lblCreate}}</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã đợt thanh tra <span style="color: red"> (*)</span> </label>
+                    <input type="text" class="form-control" ng-model="target.MA_DOT" name="MA_DOT" maxlength="50" readonly>
+                    <span style="color:red" ng-show="_form.MA_DOT.$dirty && _form.MA_DOT.$invalid">
+                        <span ng-show="_form.MA_DOT.$error.required">Không được để trống</span>
+                        <span ng-show="_form.MA_DOT.$error.maxlength">Bạn không được nhập quá 50 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên đợt thanh tra <span style="color: red"> (*)</span> </label>
+                    <input type="text" class="form-control" ng-model="target.TEN_DOT" name="TEN_DOT" maxlength="240" readonly>
+                    <span style="color:red" ng-show="_form.TEN_DOT.$dirty && _form.TEN_DOT.$invalid">
+                        <span ng-show="_form.TEN_DOT.$error.required">Không được để trống</span>
+                        <span ng-show="_form.TEN_DOT.$error.maxlength">Bạn không được nhập quá 240 ký tự</span>
+                    </span>
+                </div>
+            </div>
+            <div class=" row form-group">
+                <div class="col-lg-6">
+                    <label>Từ ngày <span style="color: red"> (*)</span> </label>
+                    <input type="text" class="form-control" uib-datepicker-popup="{{config.dateFormat}}" ng-model="target.TU_NGAY" name="TU_NGAY" readonly />
+                    <span style="color:red" ng-show="_form.TU_NGAY.$dirty && _form.TU_NGAY.$invalid">
+                        <span ng-show="_form.TU_NGAY.$error.required">Không được để trống</span>
+                        <span ng-show="_form.TU_NGAY.$error.maxlength">Bạn không được nhập quá 240 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Đến ngày <span style="color: red"> (*)</span> </label>
+                    <input type="text" class="form-control" uib-datepicker-popup="{{config.dateFormat}}" ng-model="target.DEN_NGAY" name="DEN_NGAY" readonly />
+                    <span style="color:red" ng-show="_form.DEN_NGAY.$dirty && _form.DEN_NGAY.$invalid">
+                        <span ng-show="_form.DEN_NGAY.$error.required">Không được để trống</span>
+                        <span ng-show="_form.DEN_NGAY.$error.maxlength">Bạn không được nhập quá 240 ký tự</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Trạng thái</label>
+                    <select ng-model="target.TRANG_THAI" ng-options="item.value as item.text for item in tempData('statusStr')" class="form-control" disabled></select>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-default" ng-click="cancel()">Hủy</button>
+        <button prevent-default class="btn btn-primary" ng-click="nhatKyThanhTra('phf_nvNhatKy')">Nhật ký thanh tra</button>
+        <button prevent-default class="btn btn-primary" ng-click="nhatKyThanhTra('phf_phanCongKeHoach')">Lập kế hoạch thanh tra bộ</button>
+        <button prevent-default class="btn btn-primary" ng-click="nhatKyThanhTra('phf_nvKhThanhTraThuocBo')">Lập kế hoạch thanh tra thuộc bộ</button>
+
+    </div>
+</div>

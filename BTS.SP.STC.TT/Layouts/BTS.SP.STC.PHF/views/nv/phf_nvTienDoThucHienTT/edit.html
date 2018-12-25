@@ -1,0 +1,56 @@
+﻿<style>
+    .modal-dialog {
+        width: 95% !important
+    }
+     
+</style>
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}} </h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã phiếu</label><span style="color: red"> (*1)</span>
+                    <input type="text" class="form-control" ng-model="target.MA_PHIEU" name="MA_PHIEU" maxlength="50" required>
+                    <span style="color: red" ng-show="_form.MA_PHIEU.$dirty && _form.MA_PHIEU.$invalid">
+                        <span ng-show="_form.MA_PHIEU.$error.maxlength">Bạn không được nhập quá 50 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Năm thanh tra</label><span style="color: red"> (2)</span>
+                    <input type="text" class="form-control" ng-model="target.NAM_THANHTRA" name="NAM_THANHTRA" ng-change="ChangYear(target.NAM_THANHTRA)">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Đợt thanh tra</label><span style="color: red"> (2)</span>
+                    <input type="text" class="form-control" ng-model="target.DOT_THANHTRA" name="DOT_THANHTRA" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmDotThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmDotThanhTra)">
+                </div>
+                <div class="col-lg-6">
+                    <label>Nội dung</label><span style="color: red"> (3)</span>
+                    <input class="form-control" name="NOI_DUNG" type="text" ng-model="target.NOI_DUNG" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-body" id="formAddDetail" style="padding-top:0px;">
+        <label>Chi tiết tiến độ</label>
+        <div id="myWorkContent">
+            <div id="treelist"></div>
+        </div>
+        <div class="panel-footer" style="padding:0 15px;">
+            <uib-pagination class="no-margin-vertical pagination-sm" style="margin:0;padding: 5px 0;" ng-model="paged.currentPage"
+                            ng-change="pageChanged()"
+                            items-per-page="itemsPerPage" ng-show="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.pageSize"
+                            boundary-links="true" num-pages="paged.totalPage"
+                            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+            </uib-pagination>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

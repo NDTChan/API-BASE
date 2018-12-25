@@ -1,0 +1,354 @@
+﻿<style type="text/css">
+    a {
+        cursor: pointer;
+    }
+
+    .gray-text {
+        color: #73879C;
+    }
+
+    .label-success {
+        font-size: 14px;
+    }
+
+    .text-label {
+        display: inline-block;
+        line-height: 25px;
+        width: 100%;
+    }
+
+    label {
+        color: #73879C;
+    }
+
+    .normal-text {
+        line-height: 25px;
+        color: #73879C;
+        height: 25px;
+    }
+
+    .border-left {
+        border-left: solid 1px #E6E9ED;
+        padding-left: 19px;
+    }
+
+    .border-right {
+        border-right: solid 1px #E6E9ED;
+        padding-right: 19px;
+    }
+
+    .label-success {
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        display: block;
+        float: left;
+        padding: 5px 9px;
+        background: #f2c549;
+        color: #ad4b14;
+        margin-right: 3px;
+        font-weight: 500;
+        margin-bottom: 3px;
+        font-family: helvetica;
+        font-size: 12px;
+    }
+
+        .label-success a {
+            color: white !important;
+        }
+
+    .btn-section {
+        background-color: #d35959;
+        color: white !important;
+        font-weight: normal;
+        overflow: hidden;
+    }
+
+    .white-box {
+        background-color: white;
+        padding-top: 3px;
+        min-height: 30px;
+        margin-bottom: 3px;
+        border: solid 1px #ccc;
+    }
+
+    .search_box {
+        font-size: 17px;
+        color: #d35959;
+    }
+
+    .show {
+        color: #d35959;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="gray-text"><b>BÁO CÁO QUYẾT TOÁN</b></h4>
+    </div>
+</div>
+<div class="row well">
+    <div class="col-md-12">
+        <div class="text-label">
+            <label>Báo cáo (<span style="color: red; vertical-align: middle;">*</span>)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <div class="input-group">
+            <input type="text" style="width: 100%" class="form-control" ng-model="target.MABAOCAO" name="MABAOCAO" typeahead-editable="false" uib-typeahead="item.MABAOCAO as item.TENBAOCAO for item in LoaiBaoCaos | filter:$viewValue | limitTo:5" typeahead-on-select="select(target.MABAOCAO)" typeahead-input-formatter="formatLabel($model, 'LoaiBaoCaos')">
+            <select style="width: 100%" ng-model="target.MABAOCAO" class="form-control" ng-change="select(target.MABAOCAO)" ng-options="item.MABAOCAO as item.TENBAOCAO group by item.GROUP_NAME for item in LoaiBaoCaos"></select>
+            <div class="input-group-btn" style="padding-left:10px">
+                <button class="btn btn-default" prevent-default title="go" ng-click="goTo(target.MABAOCAO)" ng-if="ISNHAPTAY"><span class="fa fa-external-link"></span>&ensp;Kê khai</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row well">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="normal-text">Đơn vị tiền(<span style="color:red; vertical-align:middle;">*</span>)</div>
+            <div class="normal-text">
+                <select class="form-control" ng-model="target.DONVI_TIEN" ng-options="opt.Value as opt.Text for opt in donViTiens" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="normal-text">Kỳ báo cáo (<span style="color:red; vertical-align:middle;">*</span>)</div>
+            <div class="normal-text">
+                <select class="form-control" ng-change="changekybaocao(target.KYBC)" ng-model="target.KYBC" ng-options="opt.Value as opt.Text for opt in Kybaocao" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="normal-text">Chọn loại báo cáo:(<span style="color:red; vertical-align:middle;">*</span>)</div>
+            <div class="normal-text">
+                Điều hành <input type="radio" ng-model="target.LOAI_BC_DH_QT" id="_Dieuhanh" value="DH" />
+                Quyết toán <input type="radio" ng-model="target.LOAI_BC_DH_QT" checked id="_Quyettoan" value="QT" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row well">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                Từ ngày hiệu lực:<input type="date" class="form-control" ng-model="target.TUNGAY_HL" placeholder="dd/MM/yyyy" />
+                Đến ngày hiệu lực:<input type="date" class="form-control" ng-model="target.DENNGAY_HL" placeholder="dd/MM/yyyy" />
+            </div>
+            <div class="col-md-4">
+                Từ ngày kết sổ:<input type="date" class="form-control" ng-model="target.TUNGAY_KS" placeholder="dd/MM/yyyy" ng-change="test(NGAY.TUNGAY_KS)" />
+                Đến ngày kết sổ:<input type="date" class="form-control" ng-model="target.DENNGAY_KS" placeholder="dd/MM/yyyy" />
+            </div>
+            <div ng-if="target.showdiv">
+
+                <div class="col-md-4">
+                    Phân loại báo cáo địa phương
+                    <select ng-model="target.P_HUYEN" class="form-control" ng-options="opt.Value as opt.Text for opt in maHuyen"></select>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                .
+                <div class='row'>
+                    <div class="col-md-8">
+                        <a class="search_box" ng-click="openSearch()" ng-show="!open_Search">Mở rộng tìm kiếm</a>
+                        <a class="search_box ng-hide" ng-click="closeSearch()" ng-show="open_Search">Đóng tìm kiếm</a>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-section" prevent-default="" ng-click="report()">Báo cáo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Mở rộng tìm kiếm -->
+
+<div class="row well" ng-show="open_Search">
+    <div class="modal-header">
+        <div class="row form-group">
+            <div class="col-lg-4">
+                <label>Điều Kiện</label>
+            </div>
+            <div class="col-lg-3">
+                <label>Thấp</label>
+            </div>
+            <div class="col-lg-3">
+                <label>Cao</label>
+            </div>
+        </div>
+    </div>
+    <div>
+        <form role="form" name="_form">
+
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label>Mã Kho Bạc</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaKhoBacThap" name="MaKhoBacThap" required>
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmTKKBTu()">Chọn</button></div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaKhoBacCao" name="MaKhoBacCao" required>
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmTKKBDen()">Chọn</button></div>
+                <span class="show" ng-show="IsMatch">Kho Bạc Thấp Phải Nhỏ Hơn Kho Bạc Cao </span>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label>Mã Cấp Ngân Sách</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaCapCao">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmCAPTu()">Chọn</button></div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaCapThap">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmCAPDen()">Chọn</button></div>
+                <span class="show" ng-show="IsMatch9">Cấp Thấp Phải Nhỏ Hơn Cấp Cao </span>
+                <span class="show" ng-show="IsMatch10">Cấp này không tồn tại chỉ có cấp 4 đến 1 </span>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label>Mã Chương</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaChuongThap">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmCHUONGTu()">Chọn</button></div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaChuongCao">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmCHUONGDen()">Chọn</button></div>
+                <span class="show" ng-show="IsMatch1">Chương Thấp Phải Nhỏ Hơn Chương Cao </span>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label>Mã Loại</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaLoaiThap">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmLOAITu()">Chọn</button></div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaLoaiCao">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmLOAIDen()">Chọn</button></div>
+                <span class="show" ng-show="IsMatch2">Loại Thấp Phải Nhỏ Hơn Loại Cao </span>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label>Mã Khoản</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaKhoanThap">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmNGANHKTTu()">Chọn</button></div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaKhoanCao">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmNGANHKTDen()">Chọn</button></div>
+                <span class="show" ng-show="IsMatch3">Khoản Thấp Phải Nhỏ Hơn Khoản Cao </span>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label>Mã Nhóm</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaNhomThap">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmNHOMTu()">Chọn</button></div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaNhomCao">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmNHOMDen()">Chọn</button></div>
+                <span class="show" ng-show="IsMatch4">Nhóm Thấp Phải Nhỏ Hơn Nhóm Cao </span>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label>Mã Tiểu Nhóm</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaTieuNhomThap">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmTIEUNHOMTu()">Chọn</button></div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaTieuNhomCao">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmTIEUNHOMDen()">Chọn</button></div>
+                <span class="show" ng-show="IsMatch5">Tiểu Nhóm Thấp Phải Nhỏ Hơn Tiểu Nhóm Cao </span>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label>Mã Mục</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaMucThap">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmMUCTu()">Chọn</button></div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaMucCao">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmMUCDen()">Chọn</button></div>
+                <span class="show" ng-show="IsMatch6">Mục Thấp Phải Nhỏ Hơn Mục Cao </span>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label>Mã Tiểu Mục</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaTieuMucThap">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmTIEUMUCTu()">Chọn</button></div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaTieuMucCao">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmTIEUMUCDen()">Chọn</button></div>
+                <span class="show" ng-show="IsMatch7">Tiểu Mục Thấp Phải Nhỏ Hơn Tiểu Mục Cao </span>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label>Mã Chương Trình Mục Tiêu Quốc Gia</label>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaCTMTThap">
+                </div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-sm btn-section" ng-click="selectdmCTMTQGTu()">Chọn</button>
+                </div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" ng-model="target.MaCTMTCao">
+                </div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-sm btn-section" ng-click="selectdmCTMTQGDen()">Chọn</button>
+                </div>
+                <span class="show" ng-show="IsMatch8">CTMT Thấp Phải Nhỏ Hơn CTMT Cao </span>
+            </div>
+
+
+
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label>Mã Địa Bàn</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control" ng-model="target.MaDiaBanThap" ng-change="loadHtdmDiaBanHanhChinh()">
+                </div>
+                <div class="col-lg-1"><button type="button" class="btn btn-sm btn-section" ng-click="selectdmDBHC()">Chọn</button></div>
+
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <label>Mã Đơn Vị Quan Hệ Ngân Sách</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control" ng-model="target.MaDVNSThap">
+                </div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-sm btn-section" ng-click="selectsysDVQHNS()">Chọn</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+

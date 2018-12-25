@@ -1,0 +1,271 @@
+﻿<!--<style type="text/css">
+    a {
+        cursor: pointer;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Quyết định giao kế hoạch thanh tra</h2>
+            <div style="padding: 20px 0px;">
+                <button prevent-default class="btn btn-primary" title="Thêm mới" ng-click="create()" ng-if="accessList.Add" style="float: left;margin-right: 10px;">{{config.label.btnCreate}}</button>
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="filtered.Summary" ng-enter="doSearch()">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" prevent-default title="Tìm kiếm" ng-click="doSearch()" ng-if="accessList.View"><span class="fa fa-search"></span>&ensp;{{config.label.btnSearch}}</button>
+                        <button class="btn btn-default" prevent-default title="Tải lại trang" ng-click="refresh()" ng-if="accessList.View"><span class="fa fa-refresh"></span>&ensp;{{config.label.btnRefresh}}</button>
+                        <button class="btn btn-default" prevent-default title="Xuất Excel" ng-click="export()"><span class="fa fa-download"></span>&ensp;Xuất Excel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th width="12%"><a>Hành động</a></th>
+
+                            <th>
+                                <a ng-click="sortType = 'SO_QUYETDINH'; sortReverse = !sortReverse">
+                                    Số quyết định
+                                    <span ng-show="sortType == 'SO_QUYETDINH' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'SO_QUYETDINH' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'NAM_THANHTRA'; sortReverse = !sortReverse">
+                                    Năm thanh tra
+                                    <span ng-show="sortType == 'NAM_THANHTRA' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'NAM_THANHTRA' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'NGAY_QUYETDINH'; sortReverse = !sortReverse">
+                                    Ngày quyết định
+                                    <span ng-show="sortType == 'NGAY_QUYETDINH' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'NGAY_QUYETDINH' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'QD_GIAOTHUCHIEN_THANHTRA'; sortReverse = !sortReverse">
+                                    Số quyết định giao thực hiện thanh tra
+                                    <span ng-show="sortType == 'QD_GIAOTHUCHIEN_THANHTRA' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'QD_GIAOTHUCHIEN_THANHTRA' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody ng-if="accessList.View">
+                        <tr ng-show="data==NULL ||data.length<=0">
+                            <td colspan="8" style="background-color: #e2e2e2;">
+                                <p>Không có dữ liệu</p>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="item in data | orderBy:sortType:sortReverse track by $index ">
+                            <td style="text-align: center;">
+                                <a class="fa fa-search" ng-click="detail(item)" ng-if="accessList.View"></a> &nbsp;&nbsp;
+                                <a class="fa fa-pencil" ng-click="edit(item)" ng-if="accessList.Edit"></a> &nbsp;&nbsp;
+                                <a class="fa fa-remove" ng-click="delete(item)" ng-if="accessList.Delete"></a>&nbsp;&nbsp;
+                                <a class="fa fa-print" ng-click="print(item)"></a>
+                            </td>
+
+                            <td>{{item.SO_QUYETDINH}}</td>
+                            <td>{{item.NAM_THANHTRA}}</td>
+                            <td>{{item.NGAY_QUYETDINH | date : 'dd/MM/yyyy'}}</td>
+                            <td>{{item.QD_GIAOTHUCHIEN_THANHTRA}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: right;" ng-if="accessList.View">
+                    <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                                    ng-change="pageChanged()"
+                                    items-per-page="paged.itemsPerPage" ng-if="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.maxSize"
+                                    boundary-links="true" num-pages="paged.totalPage"
+                                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+
+<style>
+    .product-view {
+        float: left;
+        width: 50%;
+        height: 230px;
+        box-sizing: border-box;
+        border-top: 0;
+        position: relative;
+    }
+
+        .product-view:nth-child(even) {
+            border-left-width: 0;
+        }
+
+        .product-view dl {
+            margin: 10px 10px 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .product-view dt, dd {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            line-height: 24px;
+            font-size: 18px;
+        }
+
+        .product-view dt {
+            font-size: 11px;
+            height: 16px;
+            line-height: 16px;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        .product-view dd {
+            height: 46px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+            .product-view dd .k-widget,
+            .product-view dd .k-textbox {
+                font-size: 14px;
+            }
+
+    #example .k-listview {
+        border-width: 1px 0 0;
+        padding: 0;
+        overflow: hidden;
+        min-height: 150px;
+    }
+
+    .edit-buttons {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: right;
+        padding: 5px;
+        background-color: rgba(0,0,0,0.1);
+    }
+
+    .k-pager-wrap {
+        border-top: 0;
+    }
+
+    span.k-invalid-msg {
+        position: absolute;
+        margin-left: 6px;
+    }
+
+    .k-add-button {
+        margin-bottom: 2em;
+    }
+
+    @media only screen and (max-width : 620px) {
+
+        .product-view {
+            width: 100%;
+        }
+
+            .product-view:nth-child(even) {
+                border-left-width: 1px;
+            }
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>{{title()}}</h2>
+            <div style="padding: 20px 0px;">
+                <div class="input-group" style="width: 70%;">
+                    <div class="input" style="width: 40%;float: left;margin-left:5px;">
+                        <div class="demo-section k-content">
+                            <div id="dropdownNam" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="input" style="width: 40%;float: right;margin-left:5px;">
+                        <div class="demo-section k-content">
+                            <div id="dropdownDotThanhTra" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="input-group-btn" style="padding-left:20px">
+                        <button class="btn btn-default" prevent-default title="Xuất Word" ng-click="exportWord()">Xuất Word</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div kendo-tab-strip k-content-urls="[ null, null]">
+            <ul>
+                <li class="k-state-active">Danh sách</li>
+                <li>Thông tin</li>
+            </ul>
+            <div>
+                <div class="demo-section k-content wide">
+                    <a class="k-button k-button-icontext k-add-button"><span class="k-icon k-i-add"></span>Thêm mới</a>
+                    <div id="listView"></div>
+                    <div id="pager" class="k-pager-wrap"></div>
+                </div>
+                <script type="text/x-kendo-tmpl" id="template">
+                    <div class="product-view k-widget">
+                        <dl>
+                            <dt>Số quyết định</dt>
+                            <dd>#:SO_QUYETDINH#</dd>
+                            <dt>Số quyết định giao thực hiện thanh tra</dt>
+                            <dd>#:QD_GIAOTHUCHIEN_THANHTRA#</dd>
+                            <dt>Ngày quyết định</dt>
+                            <dd>#:kendo.toString(kendo.parseDate(NGAY_QUYETDINH), "dd/MM/yyyy")#</dd>
+                        </dl>
+                        <div class="edit-buttons">
+                            <a class="k-button k-upload-button" style="float:left !important"><span class="k-icon k-i-upload"></span></a>
+                            <a class="k-button k-print-button"><span class="k-icon k-i-print"></span></a>
+                            <a class="k-button k-edit-button"><span class="k-icon k-i-edit"></span></a>
+                            <a class="k-button k-delete-button"><span class="k-icon k-i-close"></span></a>
+                        </div>
+                    </div>
+                </script>
+                <script type="text/x-kendo-tmpl" id="editTemplate">
+                    <div class="product-view k-widget">
+                        <dl>
+                            <dt>Số Quyết định</dt>
+                            <dd>
+                                <input type="text" class="k-textbox" data-bind="value:SO_QUYETDINH" name="SO_QUYETDINH" required="required" validationMessage="required" />
+                                <span data-for="SO_QUYETDINH" class="k-invalid-msg"></span>
+                            </dd>
+                            <dt>Số quyết định giao thực hiện thanh tra</dt>
+                            <dd>
+                                <input type="text" class="k-textbox" data-bind="value:QD_GIAOTHUCHIEN_THANHTRA" name="QD_GIAOTHUCHIEN_THANHTRA" required="required" validationMessage="required" />
+                                <span data-for="QD_GIAOTHUCHIEN_THANHTRA" class="k-invalid-msg"></span>
+                            </dd>
+                            <dt>Ngày Quyết định</dt>
+                            <dd>
+                                <input data-role="datepicker" data-bind="value: NGAY_QUYETDINH" name="NGAY_QUYETDINH" required="required" validationMessage="required" />
+                                <span data-for="NGAY_QUYETDINH" class="k-invalid-msg"></span>
+                            </dd>
+                        </dl>
+                        <div class="edit-buttons">
+
+                            <a class="k-button k-update-button"><span class="k-icon k-i-check"></span></a>
+                            <a class="k-button k-cancel-button"><span class="k-icon k-i-cancel"></span></a>
+                        </div>
+                    </div>
+                </script>
+            </div>
+
+            <div>
+                <div style="margin: 0 auto ">
+                    <div ckeditor="options" ng-model="content" ready="onReady()" readonly="false"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

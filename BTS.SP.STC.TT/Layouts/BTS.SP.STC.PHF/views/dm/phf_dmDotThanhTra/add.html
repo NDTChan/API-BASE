@@ -1,0 +1,70 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}  {{lbl.lblCreate}}</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã đợt thanh tra <span style="color: red"> (*)</span> </label>
+                    <input type="text" class="form-control" ng-model="target.MA_DOT" id="MA_DOT" name="MA_DOT" ng-blur="CheckExist(target.MA_DOT)" maxlength="50" required>
+                    <span style="color:red" ng-show="_form.MA_DOT.$dirty && _form.MA_DOT.$invalid">
+                        <span ng-show="_form.MA_DOT.$error.required">Không được để trống</span>
+                        <span ng-show="_form.MA_DOT.$error.maxlength">Bạn không được nhập quá 50 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên đợt thanh tra <span style="color: red"> (*)</span> </label>
+                    <input type="text" class="form-control" ng-model="target.TEN_DOT" name="TEN_DOT" maxlength="240" required>
+                    <span style="color:red" ng-show="_form.TEN_DOT.$dirty && _form.TEN_DOT.$invalid">
+                        <span ng-show="_form.TEN_DOT.$error.required">Không được để trống</span>
+                        <span ng-show="_form.TEN_DOT.$error.maxlength">Bạn không được nhập quá 240 ký tự</span>
+                    </span>
+                </div>
+                
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Từ ngày <span style="color: red"> (*)</span> </label>
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{config.dateFormat}}" ng-model="target.TU_NGAY" name="TU_NGAY" is-open="popup1.opened" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="popup1.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <span style="color:red" ng-show="_form.TU_NGAY.$dirty && _form.TU_NGAY.$invalid">
+                        <span ng-show="_form.TU_NGAY.$error.required">không được để trống</span>
+                        <span ng-show="_form.TU_NGAY.$error.maxlength">bạn không được nhập quá 240 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Đến ngày <span style="color: red"> (*)</span> </label>
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{config.dateFormat}}" ng-model="target.DEN_NGAY" name="DEN_NGAY" is-open="popup2.opened" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="popup2.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <span style="color:red" ng-show="_form.DEN_NGAY.$dirty && _form.DEN_NGAY.$invalid">
+                        <span ng-show="_form.DEN_NGAY.$error.required">không được để trống</span>
+                        <span ng-show="_form.DEN_NGAY.$error.maxlength">bạn không được nhập quá 240 ký tự</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Trạng thái</label>
+                    <select ng-model="target.TRANG_THAI" class="form-control">
+                        <option value="1" selected="selected">Sử dụng</option>
+                        <option value="0">Không sử dụng</option>
+                    </select>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+﻿create or replace PROCEDURE PHB_B01H_SUMMARYDATA
+/*
+-- =============================================
+-- Author:		vtlam
+-- Create date: 10/08/2009
+-- Description:	Lấy dữ liệu báo cáo của các đơn vị để sinh báo cáo tổng hợp
+-- nvtoan modify 16/09/2009 Bổ sung các trường Nguồn, loại khoản theo yêu cầu mới
+-- nvtoan modify 21/09/2009: Lấy toàn bộ dữ liệu của tất cả các đơn vị (trừ đơn vị tổng hợp và các đơn vị ngừng theo dõi)
+-- =============================================
+-- [dbo].[Proc_Get_B02CTHP1_For_GenerateSummaryData] '001', 2009, 0
+-- Modify by: ĐaTú - 05.12.2016: Tổng hợp chỉ lấy những tài khoản thuộc tài khoản cấp trên
+-- Modify by: ĐaTú - 06.12.2016: Xử lý bù trừ Nợ - Có tài khoản lưỡng tính PBI 19330
+*/
+(
+  MACHUONG IN NVARCHAR2,
+  NAMBC IN NUMBER,
+  KYBC IN NUMBER,
+  cur OUT SYS_REFCURSOR
+)IS
+BEGIN
+    INSERT INTO PHB_B01H_TMP(
+            MA_TAI_KHOAN,TEN_TAI_KHOAN,LA_MA_CHA,TINH_CHAT,MA_NGUON_NSNN,MA_LOAI,MA_KHOAN,
+            SO_TIEN_DUDK_N,SO_TIEN_DUDK_C,
+            SO_TIEN_PSKN_N,SO_TIEN_PSKN_C,
+            SO_TIEN_PSLK_N,SO_TIEN_PSLK_C,
+            SO_TIEN_DUCK_N,SO_TIEN_DUCK_C)
+            SELECT 
+            B01HD.MA_TAI_KHOAN,
+            TAIKHOAN.TEN_TAI_KHOAN,
+            TAIKHOAN.LA_MA_CHA,
+            NVL(TAIKHOAN.TINH_CHAT,0) AS TINH_CHAT,
+            B01HD.MA_NGUON_NSNN,
+            B01HD.MA_LOAI,
+            B01HD.MA_KHOAN,
+            NVL(SUM(SO_TIEN_DUDK_N),0) AS SO_TIEN_DUDK_N,
+            NVL(SUM(SO_TIEN_DUDK_C),0) AS SO_TIEN_DUDK_C,
+            NVL(SUM(SO_TIEN_PSKN_N),0) AS SO_TIEN_PSKN_N,
+            NVL(SUM(SO_TIEN_PSKN_C),0) AS SO_TIEN_PSKN_C,
+            NVL(SUM(SO_TIEN_PSLK_N),0) AS SO_TIEN_PSLK_N,
+            NVL(SUM(SO_TIEN_PSLK_C),0) AS SO_TIEN_PSLK_C,
+            NVL(SUM(SO_TIEN_DUCK_N),0) AS SO_TIEN_DUCK_N,
+            NVL(SUM(SO_TIEN_DUCK_C),0) AS SO_TIEN_DUCK_C
+            FROM PHB_B01H B01H 
+            INNER JOIN PHB_B01H_DETAIL B01HD ON B01H.REFID=B01HD.PHB_B01H_REFID
+            INNER JOIN PHB_DM_DVQHNS DVQHNS ON B01H.MA_QHNS=DVQHNS.MA_QHNS
+            INNER JOIN PHB_DM_TAIKHOAN TAIKHOAN ON B01HD.MA_TAI_KHOAN=TAIKHOAN.MA_TAI_KHOAN
+            GROUP BY 
+            B01H.MA_CHUONG,
+            B01H.NAM_BC,
+            B01H.KY_BC,
+            DVQHNS.DON_VI_TONG_HOP,
+            DVQHNS.TRANG_THAI,
+            B01HD.MA_TAI_KHOAN,
+            TAIKHOAN.TEN_TAI_KHOAN,
+            TAIKHOAN.TINH_CHAT,
+            B01HD.MA_NGUON_NSNN,
+            B01HD.MA_LOAI,
+            B01HD.MA_KHOAN,
+            TAIKHOAN.LA_MA_CHA
+            HAVING(B01H.MA_CHUONG=MACHUONG OR (MACHUONG IS NULL AND B01H.MA_CHUONG IS NULL))
+            AND (B01H.NAM_BC=CASE NAMBC WHEN -1 THEN B01H.NAM_BC ELSE NAMBC END)
+            AND (B01H.KY_BC=CASE KYBC WHEN -1 THEN B01H.KY_BC ELSE KYBC END)
+            AND DVQHNS.DON_VI_TONG_HOP<>1 AND DVQHNS.TRANG_THAI='A';
+
+    OPEN cur FOR
+        SELECT MA_TAI_KHOAN,
+        TEN_TAI_KHOAN,
+        MA_NGUON_NSNN,
+        MA_LOAI,
+        MA_KHOAN,
+        CASE 
+            WHEN TINH_CHAT=2 THEN CASE WHEN (SO_TIEN_DUDK_N - SO_TIEN_DUDK_C) >0 THEN (SO_TIEN_DUDK_N - SO_TIEN_DUDK_C)ELSE 0 END
+            ELSE SO_TIEN_DUDK_N
+        END AS SO_TIEN_DUDK_N,
+        CASE 
+            WHEN TINH_CHAT=2 THEN CASE WHEN (SO_TIEN_DUDK_C - SO_TIEN_DUDK_N) >0 THEN (SO_TIEN_DUDK_C - SO_TIEN_DUDK_N)ELSE 0 END
+            ELSE SO_TIEN_DUDK_C
+        END AS SO_TIEN_DUDK_C,
+        SO_TIEN_PSKN_N,
+        SO_TIEN_PSKN_C,
+        SO_TIEN_PSLK_N,
+        SO_TIEN_PSLK_C,
+        CASE 
+            WHEN TINH_CHAT=2 THEN CASE WHEN (SO_TIEN_DUCK_N - SO_TIEN_DUCK_N) >0 THEN (SO_TIEN_DUCK_N - SO_TIEN_DUCK_N)ELSE 0 END
+            ELSE SO_TIEN_DUCK_N
+        END AS SO_TIEN_DUCK_N,
+        CASE 
+            WHEN TINH_CHAT=2 THEN CASE WHEN (SO_TIEN_DUCK_C - SO_TIEN_DUCK_N) >0 THEN (SO_TIEN_DUCK_C - SO_TIEN_DUCK_N)ELSE 0 END
+            ELSE SO_TIEN_DUCK_C
+        END AS SO_TIEN_DUCK_C
+        FROM PHB_B01H_TMP
+        WHERE LA_MA_CHA=1
+        OR (SO_TIEN_DUDK_C - SO_TIEN_DUDK_N)<>0
+        OR SO_TIEN_PSKN_N <>0
+        OR SO_TIEN_PSKN_C <>0
+        OR SO_TIEN_PSLK_N <>0
+        OR SO_TIEN_PSLK_C <>0
+        OR (SO_TIEN_DUCK_N - SO_TIEN_DUCK_C)<>0
+        ORDER BY MA_TAI_KHOAN;
+END PHB_B01H_SUMMARYDATA;

@@ -1,0 +1,77 @@
+create or replace PROCEDURE PHB_B01BCQT_SUMREPORT(
+  LOAIBC IN NVARCHAR2,
+  MADVQHNS IN NVARCHAR2,
+  MADBHC IN NVARCHAR2,
+  NAMBC IN NUMBER,
+  KYBC IN NUMBER,
+  CUR OUT SYS_REFCURSOR
+) AS 
+   QUERY_STR  VARCHAR2(32767); 
+   KHOAN_STR VARCHAR2(32767);
+   P_CON VARCHAR2(32767);
+   P_LSTQHNS VARCHAR2(500);
+   LST_QHNS VARCHAR2(5000);
+BEGIN
+    UPDATE PHB_B01BCQT_DETAIL A SET A.MA_LOAI = (SELECT B.MA_CHA FROM PHB_DM_LOAIKHOAN B WHERE B.MA = A.MA_KHOAN); 
+    DECLARE
+       TEMP_KHOAN VARCHAR(20);
+       QUERRY_MAKHOAN VARCHAR2(5000);
+       TEMP_CUR SYS_REFCURSOR;
+    BEGIN
+    
+     IF LOAIBC = 2 THEN    
+     P_CON := ' and bc.MA_QHNS in (select MA_DVQHNS from SYS_DVQHNS where MA_DVQHNS_CHA in ('||MADVQHNS||')) OR bc.MA_QHNS in ('||MADVQHNS||')'; 
+        END IF;
+          
+     IF LOAIBC = 3 THEN    
+     P_CON := ' and bc.MA_QHNS in ('||MADVQHNS||')'; 
+        END IF; 
+        
+     QUERRY_MAKHOAN :=  'select DISTINCT(MA_KHOAN) from PHB_B01BCQT bc 
+       inner join PHB_B01BCQT_DETAIL bcct on bc.REFID = bcct.PHB_B01BCQT_REFID 
+       where (bc.NAM_BC = '||NAMBC||') and (bc.KY_BC = '||KYBC||') '||P_CON||' order by MA_KHOAN';
+    DBMS_OUTPUT.PUT_LINE('QUERRY_MAKHOAN:'||QUERRY_MAKHOAN);   
+      OPEN TEMP_CUR FOR QUERRY_MAKHOAN;
+      LOOP
+          FETCH TEMP_CUR INTO TEMP_KHOAN;
+          EXIT WHEN TEMP_CUR%NOTFOUND;
+          KHOAN_STR := KHOAN_STR || '''' || TEMP_KHOAN || '''' || ',';
+       END LOOP;
+        KHOAN_STR := SUBSTR(KHOAN_STR,0,LENGTH(KHOAN_STR) - 1);
+    CLOSE TEMP_CUR;
+   
+     QUERY_STR:='select * from (
+            select t.STT_CHI_TIEU, t.MA_CHI_TIEU,t.TEN_CHI_TIEU,t.IS_BOLD,t.IS_ITALIC, t.MA_SO, t.SAP_XEP, b01bcqt.MA_KHOAN, b01bcqt.GIA_TRI  from (
+            select bcct.MA_CHI_TIEU,  bcct.MA_KHOAN, sum(bcct.GIA_TRI) as GIA_TRI from PHB_B01BCQT bc
+            inner join PHB_B01BCQT_DETAIL bcct on bc.REFID = bcct.PHB_B01BCQT_REFID
+            
+            where 1 = 1 '||P_CON||'
+            group by bcct.MA_CHI_TIEU, bcct.MA_KHOAN
+            order by TO_NUMBER(bcct.MA_CHI_TIEU))b01bcqt
+            inner join PHB_B01BCQT_TEMPLATE t
+            on b01bcqt.MA_CHI_TIEU = t. MA_CHI_TIEU
+            order by t.SAP_XEP
+            )
+          PIVOT (Sum(GIA_TRI)
+          FOR MA_KHOAN
+          IN ('||KHOAN_STR||')
+          )
+          order by TO_NUMBER(SAP_XEP)
+        ';       
+          
+          
+          DBMS_OUTPUT.put_line (QUERY_STR);
+BEGIN
+OPEN cur FOR QUERY_STR;
+EXCEPTION
+   WHEN NO_DATA_FOUND
+   THEN
+      DBMS_OUTPUT.put_line ('<your message>' || SQLERRM);
+   WHEN OTHERS
+   THEN
+      DBMS_OUTPUT.put_line (QUERY_STR  || SQLERRM); 
+   END;
+   END;
+END PHB_B01BCQT_SUMREPORT;
+ 
+ 

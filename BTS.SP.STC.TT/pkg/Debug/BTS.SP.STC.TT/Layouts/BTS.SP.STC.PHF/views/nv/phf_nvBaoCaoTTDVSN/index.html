@@ -1,0 +1,182 @@
+﻿<style type="text/css">
+    a {
+        cursor: pointer;
+    }
+
+    .container-fluid {
+        margin-top: 25px;
+    }
+
+    .k-dropdowntree .k-sprite, .k-popup .k-sprite {
+        background-image: url("/_layouts/15/BTS.SP.STC.PHF/utils/kendo/styles/content/web/treeview/coloricons-sprite.png");
+    }
+
+    .rootfolder {
+        background-position: 0 0;
+    }
+
+    .folder {
+        background-position: 0 -16px;
+    }
+
+    .image {
+        background-position: 0 -64px;
+    }
+
+    .k-dropdown-wrap .k-input {
+        display: block;
+    }
+
+    .k-dropdown-wrap .k-sprite {
+        vertical-align: middle;
+    }
+
+    span.k-dropdown-wrap.k-state-default {
+        height: 27px;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>{{title()}}</h2>
+            <div style="padding: 20px 0px;">
+
+                <div class="input-group" style="width: 100%;">
+                    <div class="input-group-btn">
+                        <button prevent-default class="btn btn-primary" ng-click="exportExcel()" ng-if="accessList.Add" style="float: left;margin-right: 10px;">
+                            <i class="fa fa-download"></i>&nbsp;&nbsp;Tải template
+                        </button>
+                        <button prevent-default class="btn btn-primary" ng-click="importExcel()" ng-if="accessList.Add" style="float: left;margin-right: 10px;">
+                            <i class="fa fa-bolt"></i>&nbsp;&nbsp;Nhận file
+                        </button>
+                    </div>
+                </div>
+                <br />
+                <div class="input-group" style="width: 100%;">
+                    <div class="input" style="width: 38%;float: left;">
+                        <label>Loại báo cáo <span style="color: red"> (*)</span></label>
+                        <div class="demo-section k-content">
+                            <div id="dropdowntree" style="width: 100%;"></div>
+                        </div>
+                        <script id="dropdowntree-template" type="text/kendo-ui-template">
+                            #: item.text #
+                        </script>
+                        <script id="dropdowntree-value-template" type="text/kendo-ui-template">
+                            <span class="k-sprite #: spriteCssClass #"></span>
+                            <span> #: data.text # </span>
+                        </script>
+                    </div>
+                    <div class="input" style="width: 38%;float: left;padding-left:20px">
+                        <label>Đơn vị thanh tra <span style="color: red"> (*)</span></label>
+                        <div class="demo-section k-content">
+                            <div id="dropdowntreeDonVi" style="width: 100%;"></div>
+                        </div>
+                        <script id="dropdowntree-template-donVi" type="text/kendo-ui-template">
+                            #: item.text #
+                        </script>
+                        <script id="dropdowntree-value-template-donVi" type="text/kendo-ui-template">
+                            <span class="k-sprite #: spriteCssClass #"></span>
+                            <span> #: data.text # </span>
+                        </script>
+                    </div>
+                    <div class="input" style="width: 38%;float: left;margin-top:10px;">
+                        <label>Đợt thanh tra <span style="color: red"> (*)</span></label>
+                        <div class="demo-section k-content">
+                            <div id="dropdowntreeKyBaoCao" style="width: 100%;"></div>
+                        </div>
+                        <script id="dropdowntree-template-kyBaoCao" type="text/kendo-ui-template">
+                            #: item.text #
+                        </script>
+                        <script id="dropdowntree-value-template-kyBaoCao" type="text/kendo-ui-template">
+                            <span class="k-sprite #: spriteCssClass #"></span>
+                            <span> #: data.text # </span>
+                        </script>
+                    </div>
+                    <div class="input" style="width: 38%;float: left; margin-left: 20px; margin-top:10px">
+                        <label>Đối tượng thanh tra <span style="color: red"> (*)</span></label>
+                        <div class="demo-section k-content">
+                            <div id="dropdownDoiTuong" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                   
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" prevent-default title="Tìm kiếm" ng-click="doSearch()" ng-if="accessList.View"><span class="fa fa-search"></span>&ensp;{{config.label.btnSearch}}</button>
+                        <button class="btn btn-default" prevent-default title="Tải lại trang" ng-click="refresh()" ng-if="accessList.View"><span class="fa fa-refresh"></span>&ensp;{{config.label.btnRefresh}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th width="10%">Hành động</th>
+                            <th>
+                                <a ng-click="sortType = 'TEN_FILE'; sortReverse = !sortReverse">
+                                    Tên file
+                                    <span ng-show="sortType == 'TEN_FILE' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'TEN_FILE' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'TEN_BIEUMAU'; sortReverse = !sortReverse">
+                                    Biểu mẫu
+                                    <span ng-show="sortType == 'TEN_BIEUMAU' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'TEN_BIEUMAU' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'NAM'; sortReverse = !sortReverse">
+                                    Năm
+                                    <span ng-show="sortType == 'NAM' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'NAM' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'MA_DOT'; sortReverse = !sortReverse">
+                                    Đợt thanh tra
+                                    <span ng-show="sortType == 'MA_DOT' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'MA_DOT' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'THOIGIAN'; sortReverse = !sortReverse">
+                                    Thời gian
+                                    <span ng-show="sortType == 'THOIGIAN' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'THOIGIAN' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody ng-if="accessList.View">
+                        <tr ng-show="data==NULL ||data.length<=0">
+                            <td colspan="6" style="background-color: #e2e2e2;">
+                                <p>Không có dữ liệu</p>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="item in data | orderBy:sortType:sortReverse track by $index ">
+                            <td style="text-align: center;">
+                                <a class="fa fa-search" ng-click="detail(item)" ng-if="accessList.View"></a> &nbsp;&nbsp;&nbsp;
+                                <a class="fa fa-pencil" ng-click="edit(item)" ng-if="accessList.Edit"></a> &nbsp;&nbsp;&nbsp;
+                                <a class="fa fa-remove" ng-click="delete(item)" ng-if="accessList.Delete"></a>
+                            </td>
+                            <td>{{item.TEN_FILE }}</td>
+                            <td>{{item.TEN_BIEUMAU}}</td>
+                            <td>{{item.NAM}}</td>
+                            <td>{{item.MA_DOT}}</td>
+                            <td>{{item.ICreateDate | date:"dd/MM/yyyy"}}-{{item.THOIGIAN}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: right;" ng-if="accessList.View">
+                    <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                                    ng-change="pageChanged()"
+                                    items-per-page="paged.itemsPerPage" ng-if="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.maxSize"
+                                    boundary-links="true" num-pages="paged.totalPage"
+                                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

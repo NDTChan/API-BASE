@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="BTS.SP.STC.TT.UI.wpControl_TT.wpControl_TT, BTS.SP.STC.TT, Version=1.0.0.0, Culture=neutral, PublicKeyToken=26863c4ef92648b9" />
+      <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">BTS.SP.STC.TT - wpControl_TT</property>
+        <property name="Description" type="string">My Visual Web Part</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>

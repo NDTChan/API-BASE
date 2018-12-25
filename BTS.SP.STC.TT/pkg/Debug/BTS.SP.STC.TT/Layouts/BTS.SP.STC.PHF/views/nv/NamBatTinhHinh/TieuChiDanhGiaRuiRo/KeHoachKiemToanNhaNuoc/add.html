@@ -1,0 +1,117 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Kế hoạch Kiểm toán nhà nước - Thêm mới</h3>
+</div>
+<div class="modal-body">
+    <form role="form" name="_form">
+        <div class="row form-group">
+            <div class="col-lg-12">
+                <label>Loại mã<span style="color: red"> (*)</span> </label>
+                <select class="form-control" name="LOAIMANHAP" required ng-model="target.LOAIMANHAP">
+                    <option value>-Chọn loại mã</option>
+                    <option value="1">Theo đơn vị quan hệ ngân sách</option>
+                    <option value="2">Theo địa bàn</option>
+                </select>
+                <span style="color:red" ng-show="_form.LOAIMANHAP.$dirty && _form.LOAIMANHAP.$invalid">
+                    <span ng-show="_form.LOAIMANHAP.$error.required">Không được để trống</span>
+                </span>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-lg-12">
+                <label>Loại thanh tra<span style="color: red"> (*)</span> </label>
+                <select class="form-control" name="MA_LOAITHANHTRA" required ng-model="target.MA_LOAITHANHTRA" ng-options="item.Value as item.Text for item in lstLoaiThanhTra">
+                    <option value>-Chọn loại thanh tra</option>
+                </select>
+                <span style="color:red" ng-show="_form.MA_LOAITHANHTRA.$dirty && _form.MA_LOAITHANHTRA.$invalid">
+                    <span ng-show="_form.MA_LOAITHANHTRA.$error.required">Không được để trống</span>
+                </span>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-lg-12">
+                <label>Đợt thanh tra<span style="color: red"> (*)</span> </label>
+                <select class="form-control" name="MA_DOTTHANHTRA" required ng-model="target.MA_DOTTHANHTRA" ng-options="item.Value as item.Text for item in lstDotThanhTra">
+                    <option value>-Chọn đợt thanh tra</option>
+                </select>
+                <span style="color:red" ng-show="_form.MA_DOTTHANHTRA.$dirty && _form.MA_DOTTHANHTRA.$invalid">
+                    <span ng-show="_form.MA_DOTTHANHTRA.$error.required">Không được để trống</span>
+                </span>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label>Thanh tra từ ngày<span style="color: red"> (*)</span> </label>
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="{{config.dateFormat}}" ng-model="target.TUNGAY" is-open="popup.TUNGAY" name="TUNGAY" required />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="popup.TUNGAY = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+                <span style="color:red" ng-show="_form.TUNGAY.$dirty && _form.TUNGAY.$invalid">
+                    <span ng-show="_form.TUNGAY.$error.required">Không được để trống</span>
+                </span>
+            </div>
+            <div class="col-md-6">
+                <label>Đến ngày<span style="color: red"> (*)</span> </label>
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="{{config.dateFormat}}" ng-model="target.DENNGAY" is-open="popup.DENNGAY" name="DENNGAY" required />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="popup.DENNGAY = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+                <span style="color:red" ng-show="_form.DENNGAY.$dirty && _form.DENNGAY.$invalid">
+                    <span ng-show="_form.DENNGAY.$error.required">Không được để trống</span>
+                </span>
+            </div>
+        </div>
+        <div id="myWorkContent">
+            <table class="table table-bordered table-hover table-condensed" style="width:100%">
+                <thead>
+                    <tr style="font-weight: bold">
+                        <th style="width:auto;" class="text-center">STT</th>
+                        <th style="width:auto;" class="text-center">Mã DVQHNS/ Mã địa bàn</th>
+                        <th style="width:auto;" class="text-center">Tên DVQHNS/ Tên địa bàn</th>
+                        <th style="width:60px"></th>
+                    </tr>
+                </thead>
+                <tbody name="_formAddDetail">
+                    <tr style="background:rgba(255, 102, 102, 0.48)" ng-enter="addRow()">
+                        <td style="text-align:center;"></td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="newItem.MA" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="newItem.TEN" />
+
+                        </td>
+                        <td style="white-space: nowrap" class="text-center">
+                            <div class="form-buttons form-inline">
+                                <button prevent-default type="button" ng-disabled="_formAddDetail.$invalid" ng-click="addRow()" class="btn btn-primary form-control">Thêm</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="item in target.DETAILS track by $index">
+                        <td class="text-center">{{$index + 1}}</td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.MA" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.TEN" />
+                        </td>
+                        <td style="white-space: nowrap" class="text-center">
+                            <div class="form-buttons form-inline">
+                                <button prevent-default type="button" style="height: 20px; line-height: 2px;background: rgba(255, 213, 93, 0.61);" ng-click="removeItem($index)" class="btn btn-default form-control">
+                                    Xóa
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+    <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+</div>

@@ -1,0 +1,96 @@
+﻿<style type="text/css">
+    table tr th {
+        text-align: center !important;
+        font-size: 15px;
+    }
+
+    .bold {
+        font-weight: bold !important;
+    }
+
+    .italic {
+        font-style: italic !important;
+    }
+
+</style>
+<div class="modal-header" style="text-align:center;">
+    <h3 class="modal-title">{{data.TIEUDE_BIEUMAU}}</h3>
+</div>
+<div class="modal-body">
+    <form role="form" name="_form">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-label">
+                    <label>Năm: {{data.NAM}}</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-label" style="text-align:center; color:#d44350; font-size:22px;">
+                    <label>{{data.TEN_BIEUMAU}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-label">
+                    <label>Tên file: {{data.TEN_FILE}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-label">
+                    <label>Đối tượng: {{displayHepler('listDoiTuong', data.MA_DOITUONG)}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-label">
+                    <label>Thời gian upload: {{data.THOIGIAN}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 3%;">STT</th>
+                                <th style="width: 27%;">Tên sai phạm</th>
+                                <th>Giá trị</th>
+                                <th>Nguyên nhân</th>
+                                <th>Kết quả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in data.PHF_BM_04TT_TCXD_DTO" ng-class="{ bold: item.IS_BOLD, italic: item.IS_ITALIC }" style="font-size: 15px;">
+                                <td>
+                                    <input type="text" ng-model="item.STT_TIEUDE" style="width: 100%;text-align: center;" />
+                                </td>
+                                <td class="text-center">
+                                    <input type="text" ng-model="item.TEN_THUTUC" style="width: 100%;" />
+                                </td>
+                                <td class="text-center">
+                                    <input type="text" ng-model="item.GIATRI" style="width: 100%; text-align: right;" />
+                                </td>
+                                <td class="text-center">
+                                    <input type="text" ng-model="item.NGUYENNHAN" style="width: 100%; text-align: right;" />
+                                </td>
+                                <td class="text-center">
+                                    <input type="text" ng-model="item.KETQUA" style="width: 100%; text-align: right;" />
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button prevent-default class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">Lưu</button>
+    <button prevent-default class="btn btn-default" ng-click="cancel()">Đóng</button>
+</div>

@@ -1,0 +1,91 @@
+﻿<style type="text/css">
+    table tr th {
+        text-align: center !important;
+    }
+</style>
+<div class="modal-header" style="text-align:center;">
+    <h3 class="modal-title">{{data.TIEUDE_BIEUMAU}}</h3>
+</div>
+<div class="modal-body">
+    <form role="form" name="_form">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-label">
+                    <label>Năm: {{data.NAM}}</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <div class="text-label" style="text-align:center; color:#d44350; font-size:22px;">
+                    <label>{{data.TEN_BIEUMAU}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-label">
+                    <label>Tên file: {{data.TEN_FILE}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-label">
+                    <label>Thời gian upload: {{data.THOIGIAN}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" style="width: 3%;">STT</th>
+                                <th rowspan="2" style="width: 27%;">Nội dung thu</th>
+                                <th rowspan="2">Số tiền</th>
+                                <th colspan={{TITLE_NGUYENNHAN.length}}>Nguyên nhân</th>
+                            </tr>
+                            <tr>
+                                <th ng-repeat="item in TITLE_NGUYENNHAN">
+                                    {{item}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <th style="width: 3%;">1</th>
+                                <th style="width: 27%;">2</th>
+                                <th>3</th>
+                                <th ng-repeat="item in TITLE_NGUYENNHAN track by $index">
+                                    {{$index + 4}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in data.PHF_BM_04TT_DVSN_DTO">
+                                <td>
+                                    <input type="text" ng-model="item.STT" style="width: 100%;text-align: center;" />
+                                </td>
+                                <td class="text-center">
+                                    <input type="text" ng-model="item.NOIDUNG_THU" style="width: 100%;" />
+                                </td>
+                                <td class="text-center">
+                                    <input type="text" ng-model="item.SOTIEN" style="width: 100%; text-align: right;" />
+                                </td>
+                                <td class="text-center" ng-repeat="element in item.NGUYENNHAN track by $index">
+                                    <input type="text" ng-model="element" ng-change="item.NGUYENNHAN[$index] = element" style="width: 100%; text-align: right;" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button prevent-default class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">Lưu</button>
+    <button prevent-default class="btn btn-default" ng-click="cancel()">Đóng</button>
+</div>

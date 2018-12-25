@@ -1,0 +1,372 @@
+﻿<style type="text/css">
+    a {
+        cursor: pointer;
+    }
+
+    @import "compass/css3";
+
+    #timeline {
+        text-align: center;
+    }
+
+    .timeline {
+        list-style: none;
+        padding: 20px 0 20px;
+        position: relative;
+    }
+
+    .timeline:before {
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        content: " ";
+        width: 3px;
+        background-color: #cccccc;
+        left: 50%;
+        margin-left: -1.5px;
+    }
+
+    .timeline>li {
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .timeline>li:before,
+    .timeline>li:after {
+        content: " ";
+        display: table;
+    }
+
+    .timeline>li:after {
+        clear: both;
+    }
+
+    .timeline>li:before,
+    .timeline>li:after {
+        content: " ";
+        display: table;
+    }
+
+    .timeline>li:after {
+        clear: both;
+    }
+
+    .timeline>li>.timeline-panel {
+        width: 50%;
+        float: left;
+        border: 1px solid #d4d4d4;
+        border-radius: 2px;
+        background-color: #ffffff;
+        padding: 20px;
+        position: relative;
+        -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+    }
+
+    .timeline>li.timeline-inverted+li:not(.timeline-inverted),
+    .timeline>li:not(.timeline-inverted)+li.timeline-inverted {
+        margin-top: -60px;
+    }
+
+    .timeline>li:not(.timeline-inverted) {
+        padding-right: 90px;
+    }
+
+    .timeline>li.timeline-inverted {
+        padding-left: 90px;
+    }
+
+    .timeline>li>.timeline-panel:before {
+        position: absolute;
+        top: 26px;
+        right: -15px;
+        display: inline-block;
+        border-top: 15px solid transparent;
+        border-left: 15px solid #ccc;
+        border-right: 0 solid #ccc;
+        border-bottom: 15px solid transparent;
+        content: " ";
+    }
+
+    .timeline>li>.timeline-panel:after {
+        position: absolute;
+        top: 27px;
+        right: -14px;
+        display: inline-block;
+        border-top: 14px solid transparent;
+        border-left: 14px solid #fff;
+        border-right: 0 solid #fff;
+        border-bottom: 14px solid transparent;
+        content: " ";
+    }
+
+    .timeline>li>.timeline-badge {
+        color: #fff;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 1.4em;
+        text-align: center;
+        position: absolute;
+        top: 16px;
+        left: 50%;
+        margin-left: -25px;
+        background-color: #999999;
+        z-index: 2;
+        border-top-right-radius: 50%;
+        border-top-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+        border-bottom-left-radius: 50%;
+    }
+
+    .timeline>li.timeline-inverted>.timeline-panel {
+        float: right;
+    }
+
+    .timeline>li.timeline-inverted>.timeline-panel:before {
+        border-left-width: 0;
+        border-right-width: 15px;
+        left: -15px;
+        right: auto;
+    }
+
+    .timeline>li.timeline-inverted>.timeline-panel:after {
+        border-left-width: 0;
+        border-right-width: 14px;
+        left: -14px;
+        right: auto;
+    }
+
+    .timeline-badge.primary {
+        background-color: #2e6da4 !important;
+    }
+
+    .timeline-badge.extra {
+        background-color: #454545 !important;
+    }
+
+    .timeline-badge.work {
+        background-color: #E76B0E !important;
+    }
+
+    .timeline-badge.study {
+        background-color: #EB2690 !important;
+    }
+
+    .timeline-badge.life {
+        background-color: #5bc0de !important;
+    }
+
+    .timeline-title {
+        margin-top: 0;
+        color: inherit;
+    }
+
+    .timeline-body>p,
+    .timeline-body>ul {
+        margin-bottom: 0;
+    }
+
+    .timeline-body>p+p {
+        margin-top: 5px;
+    }
+
+    /* Sorry, header */
+
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    div#timeline_container {
+        margin: 60px auto;
+        position: relative;
+        width: 960px;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Cập nhật Nhật ký thanh tra điện tử</h2>
+            <div style="padding: 20px 0px;">
+                <button prevent-default class="btn btn-primary" title="Thêm mới" ng-click="create()" ng-if="accessList.Add"
+                    style="float: left;margin-right: 10px;">{{config.label.btnCreate}}</button>
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="filtered.Summary" ng-enter="doSearch()">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" prevent-default title="Tìm kiếm" ng-click="doSearch()" ng-if="accessList.View"><span
+                                class="fa fa-search"></span>&ensp;{{config.label.btnSearch}}</button>
+                        <button type="button" class="btn btn-default" title="show search advance" ng-click="filtered.isAdvance = !filtered.isAdvance">
+                            <span class="fa fa-search-plus" ng-class="{
+                                  'fa-search-minus' : filtered.isAdvance,
+                                  'fa-search-plus' : !filtered.isAdvance
+                                  }">
+                            </span>
+                        </button>
+                        <button class="btn btn-default" prevent-default title="Tải lại trang" ng-click="refresh()"
+                            ng-if="accessList.View"><span class="fa fa-refresh"></span>&ensp;{{config.label.btnRefresh}}</button>
+                        <!--  <button class="btn btn-default" prevent-default title="Xuất Excel" ng-click="export()"><span class="fa fa-download"></span>&ensp;Xuất Excel</button>-->
+                    </div>
+                </div>
+            </div>
+            <!--<div ng-show="filtered.isAdvance">-->
+            <br>
+            <div class="modal-body">
+                <form role="form" name="_form">
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <label>Năm <span style="color: red"> </span></label>
+                            <input type="text" class="form-control" ng-model="target.NAM" name="NAM" maxlength="240"
+                                required>
+                            <span style="color:red" ng-show="_form.NAM.$dirty && _form.NAM.$invalid">
+                                <span ng-show="_form.NAM.$error.required">Không được để trống</span>
+                                <span ng-show="_form.NAM.$error.maxlength">Bạn không được nhập quá 240 ký tự</span>
+                            </span>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Đợt thanh tra</label>
+                            <input type="text" class="form-control" ng-model="target.MA_DOT" name="_MA_DOT"
+                                typeahead-editable="false" uib-typeahead="opt.Value as opt.Text for opt in listDmDotThanhTra | filter:$viewValue | limitTo:5"
+                                typeahead-on-select="" typeahead-input-formatter="formatLabel($model, listDmDotThanhTra)" />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-6 ">
+                            <label>Đối tượng</label>
+                            <input type="text" class="form-control" ng-model="target.MA_DOITUONG" name="_MA_DOITUONG"
+                                typeahead-editable="false" uib-typeahead="opt.Value as opt.Text for opt in listDmDoiTuong | filter:$viewValue | limitTo:5"
+                                typeahead-on-select="" typeahead-input-formatter="formatLabel($model, listDmDoiTuong)" />
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Phòng ban</label>
+                            <input type="text" class="form-control" ng-model="target.MA_PHONGBAN" name="_MA_PHONGBAN"
+                                typeahead-editable="false" uib-typeahead="opt.Value as opt.Text for opt in listDmPhongBan | filter:$viewValue | limitTo:5"
+                                typeahead-on-select="" typeahead-input-formatter="formatLabel($model, listDmPhongBan)" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--</div>-->
+            <div class="row">
+                <div kendo-tab-strip k-content-urls="[null, null]">
+                    <ul>
+                        <li class="k-state-active">List</li>
+                        <li>Timeline</li>
+                    </ul>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th width="9%">Hành động</th>
+
+                                    <th width="35%">
+                                        <a ng-click="sortType = 'MA_DOITUONG'; sortReverse = !sortReverse">
+                                            Đơn vị báo cáo
+                                            <span ng-show="sortType == 'MA_DOITUONG' && !sortReverse" class="fa fa-caret-down"></span>
+                                            <span ng-show="sortType == 'MA_DOITUONG' && sortReverse" class="fa fa-caret-up"></span>
+                                        </a>
+                                    </th>
+
+                                    <th width="16%">
+                                        <a ng-click="sortType = 'NOIDDUNG_BAOCAO'; sortReverse = !sortReverse">
+                                            Nội dung báo cáo
+                                            <span ng-show="sortType == 'NOIDDUNG_BAOCAO' && !sortReverse" class="fa fa-caret-down"></span>
+                                            <span ng-show="sortType == 'NOIDDUNG_BAOCAO' && sortReverse" class="fa fa-caret-up"></span>
+                                        </a>
+                                    </th>
+                                    <th width="16%">
+                                        <a ng-click="sortType = 'CONGVIEC_THUCHIEN'; sortReverse = !sortReverse">
+                                            Công việc đã thực hiện
+                                            <span ng-show="sortType == 'CONGVIEC_THUCHIEN' && !sortReverse" class="fa fa-caret-down"></span>
+                                            <span ng-show="sortType == 'CONGVIEC_THUCHIEN' && sortReverse" class="fa fa-caret-up"></span>
+                                        </a>
+                                    </th>
+
+                                    <th width="10%">
+                                        <a ng-click="sortType = 'NGAY_LUUTRU'; sortReverse = !sortReverse">
+                                            Ngày, tháng lưu trữ dữ liệu
+                                            <span ng-show="sortType == 'NGAY_LUUTRU' && !sortReverse" class="fa fa-caret-down"></span>
+                                            <span ng-show="sortType == 'NGAY_LUUTRU' && sortReverse" class="fa fa-caret-up"></span>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a ng-click="sortType = 'TENTEP'; sortReverse = !sortReverse">
+                                            Tên tệp
+                                            <span ng-show="sortType == 'TENTEP' && !sortReverse" class="fa fa-caret-down"></span>
+                                            <span ng-show="sortType == 'TENTEP' && sortReverse" class="fa fa-caret-up"></span>
+                                        </a>
+                                    </th>
+                                    <!-- <th>
+                                            <a ng-click="sortType = 'TRANG_THAI'; sortReverse = !sortReverse">
+                                                Trạng thái
+                                                <span ng-show="sortType == 'TRANG_THAI' && !sortReverse" class="fa fa-caret-down"></span>
+                                                <span ng-show="sortType == 'TRANG_THAI' && sortReverse" class="fa fa-caret-up"></span>
+                                            </a>
+                                        </th> -->
+                                </tr>
+                            </thead>
+                            <tbody ng-if="accessList.View">
+                                <tr ng-show="data==NULL ||data.length<=0">
+                                    <td colspan="8" style="background-color: #e2e2e2;">
+                                        <p>Không có dữ liệu</p>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="item in data | orderBy:sortType:sortReverse track by $index ">
+                                    <td style="text-align: center;">
+                                        <a class="fa fa-search" ng-click="detail(item)" ng-if="accessList.View"></a>
+                                        &nbsp;&nbsp;
+                                        <a class="fa fa-pencil" ng-click="edit(item)" ng-if="accessList.Edit"></a>
+                                        &nbsp;&nbsp;
+                                        <!-- <a class="fa fa-print" ng-click="print(item)" ng-if="accessList.View"></a> &nbsp;&nbsp; -->
+                                        <a class="fa fa-remove" ng-click="delete(item)" ng-if="accessList.Delete"></a>
+                                    </td>
+
+                                    <td>{{displayHepler('listDmDoiTuong',item.MA_DOITUONG)}}</td>
+                                    <td>{{item.NOIDDUNG_BAOCAO }}</td>
+                                    <td>{{item.CONGVIEC_THUCHIEN }}</td>
+                                    <td>{{item.NGAY_LUUTRU| date : 'dd/MM/yyyy'}}</td>
+                                    <td ng-click="print(item)"><a>{{item.TENTEP}}</a></td>
+                                    <!-- <td>{{item.TRANG_THAI == 1 ? 'Sử dụng' : 'Không sử dụng'}}</td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="text-align: right;" ng-if="accessList.View">
+                            <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                                ng-change="pageChanged()" items-per-page="paged.itemsPerPage" ng-if="paged.totalItems > 0"
+                                total-items="paged.totalItems" max-size="paged.maxSize" boundary-links="true" num-pages="paged.totalPage"
+                                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                            </uib-pagination>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="container" id="timeline_container">
+                            <div class="page-header">
+                                <h1 id="timeline">Alfredo Romeu</h1>
+                                <h4 id="timeline">Long story short</h4>
+                            </div>
+                            <ul class="timeline">
+                                <li ng-repeat="index in data | filter:isTypeActive(index)" ng-class-even="'timeline-inverted'">
+                                    <div class="timeline-badge" ng-class="event.type">
+                                        <i class="glyphicon" ng-class="event.glyphicon"></i></div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">{{index.NGUOI_BAOCAO}}</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>{{index.NOIDDUNG_BAOCAO}}</p>
+                                        </div>
+                                        <p ng-if="index.NGAY_LUUTRU" placeholder="{{config.dateFormat}}"><small class="text-muted">Ngày lưu trữ: {{index.NGAY_LUUTRU| date : 'dd/MM/yyyy'}}</small></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{903E31DB-DB7B-49B4-815D-AF4A5D622DB8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BTS.SP.PHF.SERVICE</RootNamespace>
+    <AssemblyName>BTS.SP.PHF.SERVICE</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BTS.SP.TOOLS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1858cf915cbf2c4b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BTS.SP.PHF.ENTITY\DLL\BTS.SP.TOOLS.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net45\CommonServiceLocator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.8.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.8.1\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.022\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.1.022\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Repository.Pattern">
+      <HintPath>..\BTS.SP.PHF.ENTITY\DLL\Repository.Pattern.dll</HintPath>
+    </Reference>
+    <Reference Include="Repository.Pattern.Ef6">
+      <HintPath>..\BTS.SP.PHF.ENTITY\DLL\Repository.Pattern.Ef6.dll</HintPath>
+    </Reference>
+    <Reference Include="Service.Pattern">
+      <HintPath>..\BTS.SP.PHF.ENTITY\DLL\Service.Pattern.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AUTH\AuNguoiDungNhomQuyen\AuNguoiDungNhomQuyenConfigModel.cs" />
+    <Compile Include="AUTH\AuNguoiDungNhomQuyen\AuNguoiDungNhomQuyenService.cs" />
+    <Compile Include="AUTH\AuNguoiDungNhomQuyen\AuNguoiDungNhomQuyenViewModel.cs" />
+    <Compile Include="AUTH\AuNguoiDungQuyen\AuNguoiDungQuyenConfigModel.cs" />
+    <Compile Include="AUTH\AuNguoiDungQuyen\AuNguoiDungQuyenService.cs" />
+    <Compile Include="AUTH\AuNguoiDungQuyen\AuNguoiDungQuyenViewModel.cs" />
+    <Compile Include="AUTH\AuNguoiDung\AuNguoiDungService.cs" />
+    <Compile Include="AUTH\AuNguoiDung\AuNguoiDungVm.cs" />
+    <Compile Include="AUTH\AuNhomQuyenChucNang\AuNhomQuyenChucNangConfigModel.cs" />
+    <Compile Include="AUTH\AuNhomQuyenChucNang\AuNhomQuyenChucNangService.cs" />
+    <Compile Include="AUTH\AuNhomQuyenChucNang\AuNhomQuyenChucNangViewModel.cs" />
+    <Compile Include="AUTH\AuNhomQuyen\AuNhomQuyenService.cs" />
+    <Compile Include="AUTH\AuNhomQuyen\AuNhomQuyenVm.cs" />
+    <Compile Include="AUTH\Shared\SharedService.cs" />
+    <Compile Include="DM\DM_BAOCAOTHANHTRAService.cs" />
+    <Compile Include="DM\DM_BAOCAOTHANHTRAVm.cs" />
+    <Compile Include="DM\DM_CANBOService.cs" />
+    <Compile Include="DM\DM_CANBOVm.cs" />
+    <Compile Include="DM\DM_DOITUONGService.cs" />
+    <Compile Include="DM\DM_DOITUONGVm.cs" />
+    <Compile Include="DM\DM_DONVI_PHONGBANService.cs" />
+    <Compile Include="DM\DM_DONVI_PHONGBANVm.cs" />
+    <Compile Include="DM\DM_DOTTHANHTRAService.cs" />
+    <Compile Include="DM\DM_DOTTHANHTRAVm.cs" />
+    <Compile Include="DM\DM_SYS_TUDIENService.cs" />
+    <Compile Include="DM\DM_SYS_TUDIENVm.cs" />
+    <Compile Include="NV\BaoCaoTT_CQHC\NV_BM_01TT_CQHCService.cs" />
+    <Compile Include="NV\BaoCaoTT_CQHC\NV_BM_02TT_CQHCService.cs" />
+    <Compile Include="NV\BaoCaoTT_CQHC\NV_BM_03TT_CQHCService.cs" />
+    <Compile Include="NV\BaoCaoTT_CQHC\NV_BM_04TT_CQHCService.cs" />
+    <Compile Include="NV\BaoCaoTT_CQHC\NV_BM_05TT_CQHCService.cs" />
+    <Compile Include="NV\BaoCaoTT_CQHC\NV_BM_06TT_CQHCService.cs" />
+    <Compile Include="NV\BaoCaoTT_CQHC\NV_BM_07TT_CQHCService.cs" />
+    <Compile Include="NV\BaoCaoTT_CQHC\NV_BM_08TT_CQHCService.cs" />
+    <Compile Include="NV\BaoCaoTT_CQHC\NV_BM_FILE_CQHCService.cs" />
+    <Compile Include="NV\BaoCaoTT_CQHC\NV_BM_FILE_CQHCVm.cs" />
+    <Compile Include="NV\BaoCaoTT_DVSN\NV_BM_02TT_DVSNService.cs" />
+    <Compile Include="NV\BaoCaoTT_DVSN\NV_BM_01TT_DVSNService.cs" />
+    <Compile Include="NV\BaoCaoTT_DVSN\NV_BM_03TT_DVSNService.cs" />
+    <Compile Include="NV\BaoCaoTT_DVSN\NV_BM_04TT_DVSNService.cs" />
+    <Compile Include="NV\BaoCaoTT_DVSN\NV_BM_05TT_DVSNService.cs" />
+    <Compile Include="NV\BaoCaoTT_DVSN\NV_BM_06TT_DVSNService.cs" />
+    <Compile Include="NV\BaoCaoTT_DVSN\NV_BM_07TT_DVSNService.cs" />
+    <Compile Include="NV\BaoCaoTT_DVSN\NV_BM_08TT_DVSNService.cs" />
+    <Compile Include="NV\BaoCaoTT_DVSN\NV_BM_09TT_DVSNService.cs" />
+    <Compile Include="NV\BaoCaoTT_DVSN\NV_BM_FILE_DVSNService.cs" />
+    <Compile Include="NV\BaoCaoTT_DVSN\NV_BM_FILE_DVSNVm.cs" />
+    <Compile Include="NV\BaoCaoTT_TCDN\NV_BM_FILE_TCDNService.cs" />
+    <Compile Include="NV\BaoCaoTT_TCDN\NV_BM_FILE_TCDNVm.cs" />
+    <Compile Include="NV\BaoCaoTT_TCXD\NV_BM_10TT_TCXDService.cs" />
+    <Compile Include="NV\BaoCaoTT_TCXD\NV_BM_08TT_TCXDService.cs" />
+    <Compile Include="NV\BaoCaoTT_TCXD\NV_BM_07TT_TCXDService.cs" />
+    <Compile Include="NV\BaoCaoTT_TCXD\NV_BM_06TT_TCXDService.cs" />
+    <Compile Include="NV\BaoCaoTT_TCXD\NV_BM_05TT_TCXDService.cs" />
+    <Compile Include="NV\BaoCaoTT_TCXD\NV_BM_03TT_TCXDService.cs" />
+    <Compile Include="NV\BaoCaoTT_TCXD\NV_BM_02TT_TCXDService.cs" />
+    <Compile Include="NV\BaoCaoTT_TCXD\NV_BM_01TT_TCXDService.cs" />
+    <Compile Include="NV\BaoCaoTT_TCXD\NV_BM_04TT_TCXDService.cs" />
+    <Compile Include="NV\BaoCaoTT_TCXD\NV_BM_FILE_TCXDService.cs" />
+    <Compile Include="NV\BaoCaoTT_TCXD\NV_BM_FILE_TCXDVm.cs" />
+    <Compile Include="NV\BaoCao_NSDVN\NV_BM_60TT_NSDVNService.cs" />
+    <Compile Include="NV\BaoCao_NSDVN\NV_BM_FILE_NSDVNService.cs" />
+    <Compile Include="NV\BaoCao_NSDVN\NV_BM_FILE_NSDVNVm.cs" />
+    <Compile Include="NV\CapNhatKetQuaThanhTra\NV_BM_03TT_NSDPService.cs" />
+    <Compile Include="NV\CapNhatKetQuaThanhTra\NV_BM_02TT_NSDPService.cs" />
+    <Compile Include="NV\CapNhatKetQuaThanhTra\NV_BM_16TT_NSDPService.cs" />
+    <Compile Include="NV\CapNhatKetQuaThanhTra\NV_BM_15TT_NSDPService.cs" />
+    <Compile Include="NV\CapNhatKetQuaThanhTra\NV_BM_14TT_NSDPService.cs" />
+    <Compile Include="NV\CapNhatKetQuaThanhTra\NV_BM_11TT_NSDPService.cs" />
+    <Compile Include="NV\CapNhatKetQuaThanhTra\NV_BM_12TT_NSDPService.cs" />
+    <Compile Include="NV\CapNhatKetQuaThanhTra\NV_BM_10TT_NSDPService.cs" />
+    <Compile Include="NV\CapNhatKetQuaThanhTra\NV_BM_05TT_NSDPService.cs" />
+    <Compile Include="NV\CapNhatKetQuaThanhTra\NV_BM_01TT_NSDPService.cs" />
+    <Compile Include="NV\CapNhatKetQuaThanhTra\NV_BM_FILE_NSDPVm.cs" />
+    <Compile Include="NV\CapNhatKetQuaThanhTra\NV_BM_FILE_NSDPService.cs" />
+    <Compile Include="NV\NamBatTinhHinh\TieuChiDanhGiaRuiRo\PHF_TIEUCHI_DGRRVm.cs" />
+    <Compile Include="NV\NamBatTinhHinh\TieuChiDanhGiaRuiRo\PHF_TIEUCHI_DGRR_DETAILService.cs" />
+    <Compile Include="NV\NamBatTinhHinh\TieuChiDanhGiaRuiRo\PHF_TIEUCHI_DGRRService.cs" />
+    <Compile Include="NV\NamBatTinhHinh\TieuChiDanhGiaRuiRo\PHF_TIEUCHI_DGRR_DETAILVm.cs" />
+    <Compile Include="NV\NV_TTB_NHATKYService.cs" />
+    <Compile Include="NV\NV_TTB_NHATKYVm.cs" />
+    <Compile Include="NV\QDGiaoThucHienThanhTra\QDGiaoThucHienThanhTraService.cs" />
+    <Compile Include="NV\QDGiaoThucHienThanhTra\QDGiaoThucHienThanhTraVm.cs" />
+    <Compile Include="NV\QDGiaoThucHienTTThuocBo\QDGiaoThucHienTTThuocBoService.cs" />
+    <Compile Include="NV\QDGiaoThucHienTTThuocBo\QDGiaoThucHienTTThuocBoVm.cs" />
+    <Compile Include="NV\QDPheDuyetThanhTra\QDPheDuyetThanhTraService.cs" />
+    <Compile Include="NV\QDPheDuyetThanhTra\QDPheDuyetThanhTraVm.cs" />
+    <Compile Include="NV\SoanThaoThanhTraBo\NV_SOANTHAO_THANHTRAService.cs" />
+    <Compile Include="NV\SoanThaoThanhTraBo\NV_SOANTHAO_THANHTRAVm.cs" />
+    <Compile Include="NV\SoanThaoThanhTraBo\NV_SOANTHAO_THANHTRA_CTService.cs" />
+    <Compile Include="NV\ThanhTraThuocBo\NV_XD_KH_TT_THUOC_BOService.cs" />
+    <Compile Include="NV\ThanhTraThuocBo\NV_XD_KH_TT_THUOC_BOVm.cs" />
+    <Compile Include="NV\ThanhTraThuocBo\NV_XD_KH_TT_THUOC_BO_CTService.cs" />
+    <Compile Include="NV\TheoDoiCanBo\PHF_THEODOI_CANBOService.cs" />
+    <Compile Include="NV\TheoDoiCanBo\PHF_THEODOI_CANBOVm.cs" />
+    <Compile Include="NV\TheoDoiCanBo\PHF_THEODOI_CANBO_CTService.cs" />
+    <Compile Include="NV\ThuMucFile\THUMUCFILEService.cs" />
+    <Compile Include="NV\ThuMucFile\THUMUCFILEVm.cs" />
+    <Compile Include="NV\TienDoThucHienThanhTra\NV_TIENDO_THUCHIEN_KHService.cs" />
+    <Compile Include="NV\TienDoThucHienThanhTra\NV_TIENDO_THUCHIEN_KHVm.cs" />
+    <Compile Include="NV\TienDoThucHienThanhTra\NV_TIENDO_THUCHIEN_KH_CTService.cs" />
+    <Compile Include="NV\XayDungKeHoachThanhTraBo\NV_XD_KH_THANHTRA_BOService.cs" />
+    <Compile Include="NV\XayDungKeHoachThanhTraBo\NV_XD_KH_THANHTRA_BOVm.cs" />
+    <Compile Include="NV\XayDungKeHoachThanhTraBo\NV_XD_KH_THANHTRA_BO_CHITIETService.cs" />
+    <Compile Include="NV\XayDungKeHoachThanhTraCoQuanThuocBo\PHF_KH_THANHTRA_COQUANService.cs" />
+    <Compile Include="NV\XayDungKeHoachThanhTraCoQuanThuocBo\PHF_KH_THANHTRA_COQUANVm.cs" />
+    <Compile Include="NV\XayDungKeHoachThanhTraCoQuanThuocBo\PHF_KH_THANHTRA_COQUAN_CTService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SERVICES\BaseService.cs" />
+    <Compile Include="SERVICES\CommonService.cs" />
+    <Compile Include="SERVICES\TransferObj.cs" />
+    <Compile Include="SYS\SysChucNang\SysChucNangService.cs" />
+    <Compile Include="SYS\SysDvqhns\SysDvqhnsService.cs" />
+    <Compile Include="SYS\SysDvqhns\SysDvqhnsVm.cs" />
+    <Compile Include="UTILS\ClassHelper.cs" />
+    <Compile Include="UTILS\CustomAuthorizeAttribute.cs" />
+    <Compile Include="UTILS\MemoryCacheHelper.cs" />
+    <Compile Include="UTILS\OpenXmlUtils.cs" />
+    <Compile Include="UTILS\RoleState.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\EntityFramework.SqlServerCompact.dll" />
+    <Content Include="DLL\EPPlus.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BTS.SP.PHF.ENTITY\BTS.SP.PHF.ENTITY.csproj">
+      <Project>{ab23954b-59f8-4c68-875b-edb048627796}</Project>
+      <Name>BTS.SP.PHF.ENTITY</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,160 @@
+﻿<style>
+    .product-view {
+        float: left;
+        width: 25%;
+        height: 300px;
+        box-sizing: border-box;
+        border-top: 0;
+        position: relative;
+    }
+
+        .product-view:nth-child(even) {
+            border-left-width: 0;
+        }
+
+        .product-view dl {
+            margin: 10px 10px 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .product-view dt, dd {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            line-height: 24px;
+            font-size: 18px;
+        }
+
+        .product-view dt {
+            font-size: 11px;
+            height: 16px;
+            line-height: 16px;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        .product-view dd {
+            height: 46px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+            .product-view dd .k-widget,
+            .product-view dd .k-textbox {
+                font-size: 14px;
+            }
+
+    #example .k-listview {
+        border-width: 1px 0 0;
+        padding: 0;
+        overflow: hidden;
+        min-height: 150px;
+    }
+
+    .edit-buttons {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: right;
+        padding: 5px;
+        background-color: rgba(0,0,0,0.1);
+    }
+
+    .k-pager-wrap {
+        border-top: 0;
+    }
+
+    span.k-invalid-msg {
+        position: absolute;
+        margin-left: 6px;
+    }
+
+    .k-add-button {
+        margin-bottom: 2em;
+    }
+
+    @media only screen and (max-width : 620px) {
+
+        .product-view {
+            width: 100%;
+        }
+
+            .product-view:nth-child(even) {
+                border-left-width: 1px;
+            }
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12" style="padding-top:10px; padding-bottom:10px">
+            <h2>{{title()}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <div class="demo-section k-content wide">
+                <a class="k-button k-button-icontext k-add-button"><span class="k-icon k-i-add"></span>Thêm mới</a>
+                <div id="listView"></div>
+                <div id="pager" class="k-pager-wrap"></div>
+            </div>
+            <script type="text/x-kendo-tmpl" id="template">
+                <div class="product-view k-widget">
+                    <dl>
+                        <dt>Mã đợt</dt>
+                        <dd>#:MA_DOT#</dd>
+                        <dt>Tên đợt</dt>
+                        <dd>#:TEN_DOT#</dd>
+                        <dt>Từ ngày</dt>
+                        <dd>#:kendo.toString(kendo.parseDate(TU_NGAY), "dd/MM/yyyy")#</dd>
+                        <dt>Đến ngày</dt>
+                        <dd>#:kendo.toString(kendo.parseDate(DEN_NGAY), "dd/MM/yyyy")#</dd>
+                    </dl>
+                    <div class="edit-buttons">
+                        <a class="k-button k-track-changes-enable-button" style="float:left !important; padding-right:5px"><span class="k-icon k-i-track-changes-enable"></span></a>
+                        <a class="k-button k-link-horizontal-button" style="float:left !important;padding-right:5px"><span class="k-icon k-i-link-horizontal"></span></a>
+                        <a class="k-button k-filter-add-expression-button" style="float:left !important;padding-right:5px"><span class="k-icon k-i-filter-add-expression"></span></a>
+                        <a class="k-button k-edit-button"><span class="k-icon k-i-edit"></span></a>
+                        <a class="k-button k-delete-button"><span class="k-icon k-i-close"></span></a>
+                    </div>
+                </div>
+            </script>
+            <script type="text/x-kendo-tmpl" id="editTemplate">
+                <div class="product-view k-widget">
+                    <dl>
+                        <dt>Mã đợt</dt>
+                        <dd>
+                            <input type="text" class="k-textbox" data-bind="value:MA_DOT" name="MA_DOT" required="required" validationMessage="required" />
+                            <span data-for="MA_DOT" class="k-invalid-msg"></span>
+                        </dd>
+                        <dt>Tên đợt</dt>
+                        <dd>
+                            <input type="text" class="k-textbox" data-bind="value:TEN_DOT" name="TEN_DOT" required="required" validationMessage="required" />
+                            <span data-for="TEN_DOT" class="k-invalid-msg"></span>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>Từ ngày</dt>
+                        <dd>
+                            <input data-role="datepicker" data-bind="value: TU_NGAY" name="TU_NGAY" required="required" validationMessage="required" />
+                            <span data-for="TU_NGAY" class="k-invalid-msg"></span>
+                        </dd>
+                        <dt>Đến ngày</dt>
+                        <dd>
+                            <input data-role="datepicker" data-bind="value: DEN_NGAY" name="DEN_NGAY" required="required" validationMessage="required" />
+                            <span data-for="DEN_NGAY" class="k-invalid-msg"></span>
+                        </dd>
+                    </dl>
+                    <div class="edit-buttons">
+                        <a class="k-button k-update-button"><span class="k-icon k-i-check"></span></a>
+                        <a class="k-button k-cancel-button"><span class="k-icon k-i-cancel"></span></a>
+                    </div>
+                </div>
+            </script>
+        </div>
+
+    </div>
+
+</div>

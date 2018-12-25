@@ -1,0 +1,1 @@
+bin\Debug\BTS.SP.STC.TT.wsp

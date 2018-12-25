@@ -1,0 +1,133 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}} {{lbl.lblCreate}}</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <!-- <div class="col-lg-3">
+                    <label>Mã Phiếu <span style="color: red"> (*)</span></label>
+                    <input type="text" class="form-control" ng-model="target.SO_PHIEU" id="SO_PHIEU" name="SO_PHIEU" maxlength="50" required readonly>
+                    <span style="color:red" ng-show="_form.SO_PHIEU.$dirty && _form.SO_PHIEU.$invalid">
+                        <span ng-show="_form.SO_PHIEU.$error.required">Không được để trống</span>
+                        <span ng-show="_form.SO_PHIEU.$error.maxlength">Bạn không được nhập quá 50 ký tự</span>
+                    </span>
+                </div>                -->
+
+                <div class="col-lg-4">
+                    <label>Người báo cáo <span style="color: red"> (*)</span></label>
+                    <input type="text" class="form-control" ng-model="target.NGUOI_BAOCAO" name="NGUOI_BAOCAO" typeahead-editable="false" uib-typeahead="opt.Value as opt.Text for opt in listDmCanBo | filter:$viewValue | limitTo:5" typeahead-on-select="" typeahead-input-formatter="formatLabel($model, listDmCanBo)" />
+                </div>
+                <div class="col-lg-4">
+                    <label>Thanh tra theo QĐ số </label>
+                    <input type="text" class="form-control" ng-model="target.QD_SO" name="QD_SO"
+                           maxlength="240">
+
+                </div>
+                <div class="col-lg-4">
+                    <label>Năm </label>
+                    <input type="text" class="form-control" ng-model="target.NAM" name="NAM"
+                           maxlength="240">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-4">
+                    <label>Từ Ngày</label>
+                    <div class="add-input-zone">
+                        <input class="form-control" name="TU_NGAY" type="text" ng-model="target.TU_NGAY"
+                               placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                               datepicker-localdate is-open="TU_NGAY" />
+                        <div class="button-calender" ng-click="TU_NGAY = !TU_NGAY; config.delegateEvent($event);">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <label>Đến Ngày</label>
+                    <div class="add-input-zone">
+                        <input class="form-control" name="DEN_NGAY" type="text" ng-model="target.DEN_NGAY"
+                               placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                               datepicker-localdate is-open="DEN_NGAY" />
+                        <div class="button-calender" ng-click="DEN_NGAY = !DEN_NGAY; config.delegateEvent($event);">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <label>Ngày, tháng lưu trữ dữ liệu</label>
+                    <div class="add-input-zone">
+                        <input class="form-control" name="NGAY_LUUTRU" type="text" ng-model="target.NGAY_LUUTRU"
+                               placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                               datepicker-localdate is-open="NGAY_LUUTRU" />
+                        <div class="button-calender" ng-click="NGAY_LUUTRU = !NGAY_LUUTRU; config.delegateEvent($event);">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-4">
+                    <label>Đơn vị báo cáo</label>
+                    <input type="text" class="form-control" ng-model="target.MA_DOITUONG" name="MA_DOITUONG" typeahead-editable="false" uib-typeahead="opt.Value as opt.Text for opt in listDmDoiTuong | filter:$viewValue | limitTo:5" typeahead-on-select="" typeahead-input-formatter="formatLabel($model, listDmDoiTuong)" />
+                </div>
+                <div class="col-lg-4">
+                    <label>Đợt thanh tra</label>
+                    <input type="text" class="form-control" ng-model="target.MA_DOT" name="MA_DOT" typeahead-editable="false" uib-typeahead="opt.Value as opt.Text for opt in listDmDotThanhTra | filter:$viewValue | limitTo:5" typeahead-on-select="" typeahead-input-formatter="formatLabel($model, listDmDotThanhTra)" />
+                </div>
+                <div class="col-lg-4">
+                    <label>Phòng ban</label>
+                    <input type="text" class="form-control" ng-model="target.MA_PHONGBAN" name="MA_PHONGBAN" typeahead-editable="false" uib-typeahead="opt.Value as opt.Text for opt in listDmPhongBan | filter:$viewValue | limitTo:5" typeahead-on-select="" typeahead-input-formatter="formatLabel($model, listDmPhongBan)" />
+                </div>
+            </div>
+            <div class="row form-group">
+
+
+            </div>
+            <!-- <div class="row form-group">
+
+                <div class="col-lg-6">
+                    <label>Trạng thái</label>
+                    <select ng-model="target.TRANG_THAI" ng-options="item.value as item.text for item in tempData('statusStr')" class="form-control"></select>
+                </div>
+            </div> -->
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Nội dung báo cáo</label><span style="color: red"></span>
+                    <textarea style="resize: none; height: 100px" class="form-control" name="NOIDDUNG_BAOCAO" maxlength="1000" ng-model="target.NOIDDUNG_BAOCAO"></textarea>
+                </div>
+                <div class="col-lg-6">
+                    <label>Công việc đã thực hiện</label><span style="color: red"></span>
+                    <textarea style="resize: none; height: 100px" class="form-control" name="CONGVIEC_THUCHIEN" maxlength="1000" ng-model="target.CONGVIEC_THUCHIEN"></textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Tệp đính kèm</label><span style="color: red"> (10)</span>
+                    <!--<input type="text" class="form-control" ng-model="target.NOIDUNG" name="NOIDUNG" maxlength="1000">-->
+                    <!--<form id="js-upload-form" name="_form2">-->
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <input type="file" id="js-upload-files" ngf-select="" ng-model="target.URL" name="file" ngf-accept="'.pdf,.png,.tif,.jpg,.xls,.xlsx,.doc,.docx'" ngf-pattern="'.pdf,.png,.tif,.jpg,.xls,.xlsx,.doc,.docx'" />
+                        </div>
+                        <button type="button" style="background-color: #f35800; background-image: none, linear-gradient(to bottom, rgba(255, 255, 255, .2) 0, rgba(255, 255, 255, 0) 100%);" class="btn btn-sm btn-primary" id="js-upload-submit" ng-disabled="_form2.$invalid" ng-click="upload()">Upload</button>
+                    </div>
+                    <!--</form>-->
+                    <!-- Progress Bar -->
+                    <uib-progressbar max="100" value="progressPercentageBanCung" style="margin-top: 7px;"><span style="color: white; white-space: nowrap;">{{progressPercentageBanCung}}%</span></uib-progressbar>
+                    <!-- Upload Finished -->
+                    <div class="js-upload-finished" ng-if="resultUploadBanCung !== undefined">
+                        <h3>Processed files</h3>
+                        <div class="list-group">
+                            <a class="list-group-item list-group-item-success" ng-if="resultUploadBanCung !== undefined && resultUploadBanCung"><span style="margin-top: -7px" class="badge alert-success pull-right">Success</span>{{target.TEP_DINHKEM.name}}</a>
+                            <a class="list-group-item list-group-item-error" ng-if="resultUploadBanCung !== undefined &&!resultUploadBanCung"><span style="margin-top: -7px" class="badge alert-error pull-right">Error</span>{{target.TEP_DINHKEM.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

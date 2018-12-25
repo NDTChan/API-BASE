@@ -1,0 +1,98 @@
+﻿<style type="text/css">
+    a {
+        cursor: pointer;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Danh mục đơn vị QHNS</h2>
+            <div style="padding: 20px 0px;">
+                <button prevent-default class="btn btn-primary" title="create new item." ng-click="create()" ng-if="accessList.Add" style="float: left;margin-right: 10px;">{{config.label.btnCreate}}</button>
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="filtered.Summary" ng-enter="doSearch()">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" prevent-default title="search" ng-click="doSearch()" ng-if="accessList.View"><span class="fa fa-search"></span>&ensp;{{config.label.btnSearch}}</button>
+                        <button class="btn btn-default" prevent-default title="refresh page" ng-click="refresh()" ng-if="accessList.View"><span class="fa fa-refresh"></span>&ensp;{{config.label.btnRefresh}}</button>
+                        <button class="btn btn-default" prevent-default title="go back" ng-click="goBack()"><span class="fa fa-reply"></span>&ensp;{{config.label.btnBack}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th width="10%">Hành động</th>
+                            <th width="100px">STT</th>
+
+                            <th>
+                                <a ng-click="sortType = 'MA_DVQHNS'; sortReverse = !sortReverse">
+                                    Mã QHNS
+                                    <span ng-show="sortType == 'MA_DVQHNS' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'MA_DVQHNS' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'TEN_DVQHNS'; sortReverse = !sortReverse">
+                                    Tên QHNS
+                                    <span ng-show="sortType == 'TEN_DVQHNS' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'TEN_DVQHNS' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'MA_CAP'; sortReverse = !sortReverse">
+                                    Mã cấp dự toán
+                                    <span ng-show="sortType == 'MA_CAP' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'MA_CAP' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'MA_CHUONG'; sortReverse = !sortReverse">
+                                    Mã chương
+                                    <span ng-show="sortType == 'MA_CHUONG' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'MA_CHUONG' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'TRANG_THAI'; sortReverse = !sortReverse">
+                                    Trạng thái
+                                    <span ng-show="sortType == 'TRANG_THAI' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'TRANG_THAI' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody ng-if="accessList.View">
+                        <tr ng-show="data==NULL ||data.length<=0">
+                            <td colspan="8" style="background-color: #e2e2e2;">
+                                <p>Không có dữ liệu</p>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="item in data | orderBy:sortType:sortReverse track by $index ">
+                            <td style="text-align: center;">
+                                <a class="fa fa-search" ng-click="detail(item)" ng-if="accessList.View"></a> &nbsp;&nbsp;&nbsp;
+                                <a class="fa fa-pencil" ng-click="edit(item)" ng-if="accessList.Edit"></a>&nbsp;&nbsp;&nbsp;
+                                <a class="fa fa-remove" ng-click="delete(item)" ng-if="accessList.Delete"></a>&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td>{{paged.itemsPerPage*(paged.currentPage-1)+$index+1}}</td>
+                            <td>{{item.MA_DVQHNS}}</td>
+                            <td>{{item.TEN_DVQHNS}}</td>
+                            <td>{{item.MA_CAP}}</td>
+                            <td>{{item.MA_CHUONG}}</td>
+                            <td>{{displayHepler('statusStr',item.TRANG_THAI)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: right;" ng-if="accessList.View">
+                    <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                                    ng-change="pageChanged()"
+                                    items-per-page="paged.itemsPerPage" ng-if="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.maxSize"
+                                    boundary-links="true" num-pages="paged.totalPage"
+                                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

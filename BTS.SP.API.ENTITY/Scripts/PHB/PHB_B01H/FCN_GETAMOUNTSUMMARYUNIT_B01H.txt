@@ -1,0 +1,63 @@
+﻿create or replace FUNCTION FCN_GetAmountSummaryUnit_B01H (
+    MADVQHNS NVARCHAR2,
+    NAMBC NUMBER,
+    MACHUONG NVARCHAR2,
+    KYMOI NUMBER,
+    MATAIKHOAN NVARCHAR2,
+    COT NVARCHAR2
+    /*Tên cột trong table*/
+)
+/*[Func_GetReportAmountForSummaryUnitData_B01H]*/
+RETURN NUMBER 
+IS 
+        AMOUNT NUMBER:=0;
+BEGIN   
+    CASE
+        WHEN COT='SO_TIEN_DUDK_N' OR COT='SO_TIEN_DUDK_C' THEN 
+        /*--Nếu tính các cột số đầu năm*/
+            SELECT NVL(SUM(
+                        CASE 
+                        WHEN COT='SO_TIEN_DUDK_N' THEN SO_TIEN_DUDK_N
+                        WHEN COT='SO_TIEN_DUDK_C' THEN SO_TIEN_DUDK_C
+                        END
+                        ),0) 
+                    INTO AMOUNT FROM PHB_B01H B01H INNER JOIN PHB_B01H_DETAIL B01HD ON B01H.REFID=B01HD.PHB_B01H_REFID 
+                    WHERE B01H.MA_QHNS=MADVQHNS 
+                    AND B01H.MA_CHUONG=MACHUONG 
+                    AND B01H.NAM_BC=NAMBC 
+                    AND (B01HD.MA_TAI_KHOAN=MATAIKHOAN OR (MATAIKHOAN IS NULL AND B01HD.MA_TAI_KHOAN IS NULL))
+                    AND ((KYMOI=0 AND B01H.KY_BC IN(101)) OR (KYMOI=201 AND B01H.KY_BC IN(101)) OR (KYMOI=202 AND B01H.KY_BC IN(103)));
+        WHEN COT='SO_TIEN_PSKN_N' OR COT='SO_TIEN_PSKN_C' THEN 
+        /*--Các cột số phát sinh,*/
+            SELECT NVL(SUM(
+                        CASE 
+                        WHEN COT='SO_TIEN_PSKN_N' THEN SO_TIEN_PSKN_N
+                        WHEN COT='SO_TIEN_PSKN_C' THEN SO_TIEN_PSKN_C
+                        END
+                        ),0) 
+                    INTO AMOUNT FROM PHB_B01H B01H INNER JOIN PHB_B01H_DETAIL B01HD ON B01H.REFID=B01HD.PHB_B01H_REFID 
+                    WHERE B01H.MA_QHNS=MADVQHNS 
+                    AND B01H.MA_CHUONG=MACHUONG 
+                    AND B01H.NAM_BC=NAMBC 
+                    AND (B01HD.MA_TAI_KHOAN=MATAIKHOAN OR (MATAIKHOAN IS NULL AND B01HD.MA_TAI_KHOAN IS NULL))
+                    AND ((KYMOI=0 AND B01H.KY_BC IN(101, 102, 103,104)) OR (KYMOI=201 AND B01H.KY_BC IN(101,102)) OR (KYMOI=202 AND B01H.KY_BC IN(103,104)));
+        WHEN COT='SO_TIEN_PSLK_N' OR COT='SO_TIEN_PSLK_C' OR COT='SO_TIEN_DUCK_C' OR COT='SO_TIEN_DUCK_N' THEN 
+        /*--Các cột số lũy kế, số dư cuối kỳ */
+            SELECT NVL(SUM(
+                        CASE 
+                        WHEN COT='SO_TIEN_PSLK_N' THEN SO_TIEN_PSLK_N
+                        WHEN COT='SO_TIEN_PSLK_C' THEN SO_TIEN_PSLK_C
+                        WHEN COT='SO_TIEN_DUCK_C' THEN SO_TIEN_DUCK_C
+                        WHEN COT='SO_TIEN_DUCK_N' THEN SO_TIEN_DUCK_N
+                        END
+                        ),0) 
+                    INTO AMOUNT FROM PHB_B01H B01H INNER JOIN PHB_B01H_DETAIL B01HD ON B01H.REFID=B01HD.PHB_B01H_REFID 
+                    WHERE B01H.MA_QHNS=MADVQHNS 
+                    AND B01H.MA_CHUONG=MACHUONG 
+                    AND B01H.NAM_BC=NAMBC 
+                    AND (B01HD.MA_TAI_KHOAN=MATAIKHOAN OR (MATAIKHOAN IS NULL AND B01HD.MA_TAI_KHOAN IS NULL))
+                    AND ((KYMOI=0 AND B01H.KY_BC IN(104)) OR (KYMOI=201 AND B01H.KY_BC IN(102)) OR (KYMOI=202 AND B01H.KY_BC IN(104)));
+        ELSE AMOUNT:=0;
+    END CASE;
+RETURN AMOUNT;
+END FCN_GetAmountSummaryUnit_B01H;

@@ -1,0 +1,135 @@
+﻿<style type="text/css">
+    a {
+        cursor: pointer;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Soạn thảo nội dung thanh tra</h2>
+            <div style="padding: 20px 0px;">
+                <button prevent-default class="btn btn-primary" title="Thêm mới" ng-click="create()" ng-if="accessList.Add" style="float: left;margin-right: 10px;">{{config.label.btnCreate}}</button>
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="filtered.Summary" ng-enter="doSearch()">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" prevent-default title="Tìm kiếm" ng-click="doSearch()" ng-if="accessList.View"><span class="fa fa-search"></span>&ensp;{{config.label.btnSearch}}</button>
+                        <button type="button" class="btn btn-default" title="show search advance" ng-click="filtered.isAdvance = !filtered.isAdvance">
+                            <span class="fa fa-search-plus" ng-class="{
+                                  'fa-search-minus' : filtered.isAdvance,
+                                  'fa-search-plus' : !filtered.isAdvance
+                                  }">
+                            </span>
+                        </button>
+                        <button class="btn btn-default" prevent-default title="Tải lại trang" ng-click="refresh()" ng-if="accessList.View"><span class="fa fa-refresh"></span>&ensp;{{config.label.btnRefresh}}</button>
+                        <!--  <button class="btn btn-default" prevent-default title="Xuất Excel" ng-click="export()"><span class="fa fa-download"></span>&ensp;Xuất Excel</button>-->
+                    </div>
+                </div>
+            </div>
+            <!--<div ng-show="filtered.isAdvance">-->
+                <br>
+                <div class="modal-body">
+                    <form role="form" name="_form">
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <label>Năm <span style="color: red"> </span></label>
+                                <input type="text" class="form-control" ng-model="target.NAM" name="NAM" maxlength="240" required>
+                                <span style="color:red" ng-show="_form.NAM.$dirty && _form.NAM.$invalid">
+                                    <span ng-show="_form.NAM.$error.required">Không được để trống</span>
+                                    <span ng-show="_form.NAM.$error.maxlength">Bạn không được nhập quá 240 ký tự</span>
+                                </span>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Đợt thanh tra</label>
+                                <input type="text" class="form-control" ng-model="target.MA_DOT" name="_MA_DOT" typeahead-editable="false" uib-typeahead="opt.Value as opt.Text for opt in listDmDotThanhTra | filter:$viewValue | limitTo:5" typeahead-on-select="" typeahead-input-formatter="formatLabel($model, listDmDotThanhTra)" />
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-6 ">
+                                <label>Đối tượng</label>
+                                <input type="text" class="form-control" ng-model="target.MA_DOITUONG" name="_MA_DOITUONG" typeahead-editable="false" uib-typeahead="opt.Value as opt.Text for opt in listDmDoiTuong | filter:$viewValue | limitTo:5" typeahead-on-select="" typeahead-input-formatter="formatLabel($model, listDmDoiTuong)" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Phòng ban</label>
+                                <input type="text" class="form-control" ng-model="target.MA_PHONGBAN" name="_MA_PHONGBAN" typeahead-editable="false" uib-typeahead="opt.Value as opt.Text for opt in listDmPhongBan | filter:$viewValue | limitTo:5" typeahead-on-select="" typeahead-input-formatter="formatLabel($model, listDmPhongBan)" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            <!--</div>-->
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th width="10%">Hành động</th>
+
+                            <th>
+                                <a ng-click="sortType = 'MA_PHIEU'; sortReverse = !sortReverse">
+                                    Mã phiếu thanh tra
+                                    <span ng-show="sortType == 'MA_PHIEU' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'MA_PHIEU' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <!-- <th> -->
+                            <!-- <a ng-click="sortType = 'NAM_THANHTRA'; sortReverse = !sortReverse"> -->
+                            <!-- Năm thanh tra -->
+                            <!-- <span ng-show="sortType == 'NAM_THANHTRA' && !sortReverse" class="fa fa-caret-down"></span> -->
+                            <!-- <span ng-show="sortType == 'NAM_THANHTRA' && sortReverse" class="fa fa-caret-up"></span> -->
+                            <!-- </a> -->
+                            <!-- </th> -->
+                            <th>
+                                <a ng-click="sortType = 'MA_DOITUONG_TT'; sortReverse = !sortReverse">
+                                    Đối tượng thanh tra
+                                    <span ng-show="sortType == 'MA_DOITUONG_TT' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'MA_DOITUONG_TT' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'MA_PHONGBAN'; sortReverse = !sortReverse">
+                                    Phòng ban
+                                    <span ng-show="sortType == 'MA_PHONGBAN' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'MA_PHONGBAN' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'NOI_DUNG'; sortReverse = !sortReverse">
+                                    Nội dung
+                                    <span ng-show="sortType == 'NOI_DUNG' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'NOI_DUNG' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody ng-if="accessList.View">
+                        <tr ng-show="data==NULL ||data.length<=0">
+                            <td colspan="8" style="background-color: #e2e2e2;">
+                                <p>Không có dữ liệu</p>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="item in data | orderBy:sortType:sortReverse track by $index ">
+                            <td style="text-align: center;">
+                                <a class="fa fa-search" ng-click="detail(item)" ng-if="accessList.View"></a> &nbsp;&nbsp;&nbsp;
+                                <a class="fa fa-pencil" ng-click="edit(item)" ng-if="accessList.Edit"></a> &nbsp;&nbsp;&nbsp;
+                                <a class="fa fa-remove" ng-click="delete(item)" ng-if="accessList.Delete"></a>
+                            </td>
+                            <td>{{item.MA_PHIEU }}</td>
+                            <!--<td>{{item.MA_DOITUONG_TT }}</td>-->
+                            <td>{{displayHepler('listDmDoiTuong',item.MA_DOITUONG_TT)}}</td>
+                            <td>{{displayHepler('listDmPhongBan',item.MA_PHONGBAN)}}</td>
+                            <td>{{item.NOI_DUNG }}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: right;" ng-if="accessList.View">
+                    <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                                    ng-change="pageChanged()"
+                                    items-per-page="paged.itemsPerPage" ng-if="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.maxSize"
+                                    boundary-links="true" num-pages="paged.totalPage"
+                                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

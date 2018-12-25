@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" AlwaysForceInstall="TRUE" Id="a3da1c17-3d5f-4d7e-b7db-fb826ad3c8de" Scope="Site" Title="BTS.SP.STC.TT Feature1">
+  <ElementManifests>
+    <ElementManifest Location="wpControl_TT\Elements.xml" />
+    <ElementFile Location="wpControl_TT\wpControl_TT.webpart" />
+  </ElementManifests>
+</Feature>

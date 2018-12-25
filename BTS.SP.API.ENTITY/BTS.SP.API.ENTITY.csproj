@@ -1,0 +1,971 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3D9AAFE7-4555-415A-AB25-7B94C9D4FB0A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BTS.SP.API.ENTITY</RootNamespace>
+    <AssemblyName>BTS.SP.API.ENTITY</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.022\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.1.022\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Repository.Pattern, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BTS.SP.PHB.SERVICE\DLL\Repository.Pattern.dll</HintPath>
+    </Reference>
+    <Reference Include="Repository.Pattern.Ef6, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BTS.SP.PHB.SERVICE\DLL\Repository.Pattern.Ef6.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataContext.cs" />
+    <Compile Include="DataInfoEntityPHF.cs" />
+    <Compile Include="DataInfoEntity.cs" />
+    <Compile Include="DataInfoEntityPHC.cs" />
+    <Compile Include="DataInfoState.cs" />
+    <Compile Include="DetailInfoEntity.cs" />
+    <Compile Include="EntityBase.cs" />
+    <Compile Include="HelperHash.cs" />
+    <Compile Include="Helper\ExportExcelAttribute.cs" />
+    <Compile Include="IDataContext.cs" />
+    <Compile Include="IObjectState.cs" />
+    <Compile Include="Migrations\201812070321567_07122018_INITIALIZE_DATABASE_ANHPT.cs" />
+    <Compile Include="Migrations\201812070321567_07122018_INITIALIZE_DATABASE_ANHPT.Designer.cs">
+      <DependentUpon>201812070321567_07122018_INITIALIZE_DATABASE_ANHPT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812070748459_07122018_EDITBM_PHF_04TT_CQHC_CHUNGNH.cs" />
+    <Compile Include="Migrations\201812070748459_07122018_EDITBM_PHF_04TT_CQHC_CHUNGNH.Designer.cs">
+      <DependentUpon>201812070748459_07122018_EDITBM_PHF_04TT_CQHC_CHUNGNH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812072057557_08122018_AlterTableDVSN_DuongHH.cs" />
+    <Compile Include="Migrations\201812072057557_08122018_AlterTableDVSN_DuongHH.Designer.cs">
+      <DependentUpon>201812072057557_08122018_AlterTableDVSN_DuongHH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812080258239_08122018_update_tbl_PHA_KBQT82_KBQT01_add_COLUMN_NAM_hungvv.cs" />
+    <Compile Include="Migrations\201812080258239_08122018_update_tbl_PHA_KBQT82_KBQT01_add_COLUMN_NAM_hungvv.Designer.cs">
+      <DependentUpon>201812080258239_08122018_update_tbl_PHA_KBQT82_KBQT01_add_COLUMN_NAM_hungvv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812120252078_12122018_updateDVSN_HT.cs" />
+    <Compile Include="Migrations\201812120252078_12122018_updateDVSN_HT.Designer.cs">
+      <DependentUpon>201812120252078_12122018_updateDVSN_HT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812120343327_12122018_EDITBM_PHF_03TT_CQHC_CHUNGNH.cs" />
+    <Compile Include="Migrations\201812120343327_12122018_EDITBM_PHF_03TT_CQHC_CHUNGNH.Designer.cs">
+      <DependentUpon>201812120343327_12122018_EDITBM_PHF_03TT_CQHC_CHUNGNH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812120349357_12122018_AddColumn_PHF_NhatKy_ThanhND.cs" />
+    <Compile Include="Migrations\201812120349357_12122018_AddColumn_PHF_NhatKy_ThanhND.Designer.cs">
+      <DependentUpon>201812120349357_12122018_AddColumn_PHF_NhatKy_ThanhND.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812130810149_13122018_AddBM_PHF_BM_06TT_CQHC_CHUNGNH.cs" />
+    <Compile Include="Migrations\201812130810149_13122018_AddBM_PHF_BM_06TT_CQHC_CHUNGNH.Designer.cs">
+      <DependentUpon>201812130810149_13122018_AddBM_PHF_BM_06TT_CQHC_CHUNGNH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812141036171_14122018_EDITBM_FILE_CQHC_CHUNGNH.cs" />
+    <Compile Include="Migrations\201812141036171_14122018_EDITBM_FILE_CQHC_CHUNGNH.Designer.cs">
+      <DependentUpon>201812141036171_14122018_EDITBM_FILE_CQHC_CHUNGNH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812150146016_15122018_EDITBM_FILE_TCXD_CHUNGNH.cs" />
+    <Compile Include="Migrations\201812150146016_15122018_EDITBM_FILE_TCXD_CHUNGNH.Designer.cs">
+      <DependentUpon>201812150146016_15122018_EDITBM_FILE_TCXD_CHUNGNH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812150209447_15122018_add_column_MA_DBHC_dm_TKKHOBAC_hungvv.cs" />
+    <Compile Include="Migrations\201812150209447_15122018_add_column_MA_DBHC_dm_TKKHOBAC_hungvv.Designer.cs">
+      <DependentUpon>201812150209447_15122018_add_column_MA_DBHC_dm_TKKHOBAC_hungvv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812170757389_17122018_Add2ColumnInPHF_TTB_NHATKY_ThanhND.cs" />
+    <Compile Include="Migrations\201812170757389_17122018_Add2ColumnInPHF_TTB_NHATKY_ThanhND.Designer.cs">
+      <DependentUpon>201812170757389_17122018_Add2ColumnInPHF_TTB_NHATKY_ThanhND.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812180834045_18122018_AddColumnPHF_TTB_NHATKY_ThanhND.cs" />
+    <Compile Include="Migrations\201812180834045_18122018_AddColumnPHF_TTB_NHATKY_ThanhND.Designer.cs">
+      <DependentUpon>201812180834045_18122018_AddColumnPHF_TTB_NHATKY_ThanhND.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812190853392_19122018_EDITBM_PHF_BM_07TT_DVSN_CHUNGNH.cs" />
+    <Compile Include="Migrations\201812190853392_19122018_EDITBM_PHF_BM_07TT_DVSN_CHUNGNH.Designer.cs">
+      <DependentUpon>201812190853392_19122018_EDITBM_PHF_BM_07TT_DVSN_CHUNGNH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812190936499_19122018_EDITBM_PHF_BM_02TT_CQHC_CHUNGNH.cs" />
+    <Compile Include="Migrations\201812190936499_19122018_EDITBM_PHF_BM_02TT_CQHC_CHUNGNH.Designer.cs">
+      <DependentUpon>201812190936499_19122018_EDITBM_PHF_BM_02TT_CQHC_CHUNGNH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812191012198_19122018_UPDATEBM_PHF_BM_03TT_CQHC_CHUNGNH.cs" />
+    <Compile Include="Migrations\201812191012198_19122018_UPDATEBM_PHF_BM_03TT_CQHC_CHUNGNH.Designer.cs">
+      <DependentUpon>201812191012198_19122018_UPDATEBM_PHF_BM_03TT_CQHC_CHUNGNH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812210348177_21122018_AlterTienDoThucHien_DuongHH.cs" />
+    <Compile Include="Migrations\201812210348177_21122018_AlterTienDoThucHien_DuongHH.Designer.cs">
+      <DependentUpon>201812210348177_21122018_AlterTienDoThucHien_DuongHH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812220258360_22122018_SetLengthTienDo_DuongHH.cs" />
+    <Compile Include="Migrations\201812220258360_22122018_SetLengthTienDo_DuongHH.Designer.cs">
+      <DependentUpon>201812220258360_22122018_SetLengthTienDo_DuongHH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812220420313_22122018_ADDBMFILE_PHF_BM_FILE_TCDN_CHUNGNH.cs" />
+    <Compile Include="Migrations\201812220420313_22122018_ADDBMFILE_PHF_BM_FILE_TCDN_CHUNGNH.Designer.cs">
+      <DependentUpon>201812220420313_22122018_ADDBMFILE_PHF_BM_FILE_TCDN_CHUNGNH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812230946555_23122018_Add_TieuChiDanhGiaRuiRo_dvc.cs" />
+    <Compile Include="Migrations\201812230946555_23122018_Add_TieuChiDanhGiaRuiRo_dvc.Designer.cs">
+      <DependentUpon>201812230946555_23122018_Add_TieuChiDanhGiaRuiRo_dvc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812240358388_24122018_UpdateColumnPHF_TTB_NHATKY_ThanhND.cs" />
+    <Compile Include="Migrations\201812240358388_24122018_UpdateColumnPHF_TTB_NHATKY_ThanhND.Designer.cs">
+      <DependentUpon>201812240358388_24122018_UpdateColumnPHF_TTB_NHATKY_ThanhND.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Au\LOG_SIGNIN.cs" />
+    <Compile Include="Models\Au\PHA\PHA_AU_NGUOIDUNG_QUYEN.cs" />
+    <Compile Include="Models\Au\PHA\PHA_AU_NGUOIDUNG_NHOMQUYEN.cs" />
+    <Compile Include="Models\Au\PHA\PHA_AU_NHOMQUYEN.cs" />
+    <Compile Include="Models\Au\PHA\PHA_AU_NHOMQUYEN_CHUCNANG.cs" />
+    <Compile Include="Models\Au\AU_NGUOIDUNG_NHOMQUYEN.cs" />
+    <Compile Include="Models\Au\AU_NGUOIDUNG_QUYEN.cs" />
+    <Compile Include="Models\Au\AU_NHOMQUYEN.cs" />
+    <Compile Include="Models\Au\AU_NHOMQUYEN_CHUCNANG.cs" />
+    <Compile Include="Models\Au\AU_NGUOIDUNG.cs" />
+    <Compile Include="Models\Au\PHB\PHB_AU_NGUOIDUNG.cs" />
+    <Compile Include="Models\Au\PHB\PHB_AU_NGUOIDUNG_QUYEN.cs" />
+    <Compile Include="Models\Au\PHB\PHB_AU_NGUOIDUNG_VAITRO.cs" />
+    <Compile Include="Models\Au\PHB\PHB_AU_VAITRO.cs" />
+    <Compile Include="Models\Au\PHB\PHB_AU_VAITRO_CHUCNANG.cs" />
+    <Compile Include="Models\Au\PHC\AU_PROCESS.cs" />
+    <Compile Include="Models\Au\PHC\AU_KYKETOAN.cs" />
+    <Compile Include="Models\Bc\PHB\B01H\PHB_B01H.cs" />
+    <Compile Include="Models\Bc\PHB\B01H\PHB_B01H_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\B01H\PHB_B01H_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\B02CTHP1\PHB_B02CTHP1.cs" />
+    <Compile Include="Models\Bc\PHB\B02CTHP1\PHB_B02CTHP1_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\B02CTHP1\PHB_B02CTHP1_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\B02HP1\PHB_B02HP1.cs" />
+    <Compile Include="Models\Bc\PHB\B02HP1\PHB_B02HP1_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\B02HP1\PHB_B02HP1_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\B02H_II\PHB_B02H_II.cs" />
+    <Compile Include="Models\Bc\PHB\B02H_II\PHB_B02H_II_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\B02H_II\PHB_B02H_II_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\B03CTH\PHB_B03CTH.cs" />
+    <Compile Include="Models\Bc\PHB\B03CTH\PHB_B03CTH_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\B03CTH\PHB_B03CTH_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\B03H\PHB_B03H.cs" />
+    <Compile Include="Models\Bc\PHB\B03H\PHB_B03H_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\B03H\PHB_B03H_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\B04H\PHB_B04H.cs" />
+    <Compile Include="Models\Bc\PHB\B04H\PHB_B04H_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\B04H\PHB_B04H_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\B06H\PHB_B06H.cs" />
+    <Compile Include="Models\Bc\PHB\B06H\PHB_B06H_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\B06H\PHB_B06H_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\PL32_P1_TT01\PHB_PL32_P1_TT01.cs" />
+    <Compile Include="Models\Bc\PHB\PL32_P1_TT01\PHB_PL32_P1_TT01_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\PL32_P2_TT01\PHB_PL32_P2_TT01.cs" />
+    <Compile Include="Models\Bc\PHB\PL32_P2_TT01\PHB_PL32_P2_TT01_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\C_B03C_X\PHB_C_B03C_X.cs" />
+    <Compile Include="Models\Bc\PHB\C_B03C_X\PHB_C_B03C_X_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\C_B06X\PHB_C_B06X.cs" />
+    <Compile Include="Models\Bc\PHB\C_B06X\PHB_C_B06X_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\C_B06X\PHB_C_B06X_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\C_B01X\PHB_C_B01X.cs" />
+    <Compile Include="Models\Bc\PHB\C_B01X\PHB_C_B01X_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\C_B01X\PHB_C_B01X_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU10TT344\PHB_BIEU10TT344.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU10TT344\PHB_BIEU10TT344_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\C_B03A_X\PHB_C_B03A_X.cs" />
+    <Compile Include="Models\Bc\PHB\C_B03A_X\PHB_C_B03A_X_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU2CP1\PHB_BIEU2CP1.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU2CP1\PHB_BIEU2CP1_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU2CP1\PHB_BIEU2CP1_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU2CP2\PHB_BIEU2CP2.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU2CP2\PHB_BIEU2CP2_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU67NS\PHB_BIEU67NS.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU67NS\PHB_BIEU67NS_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU67NS\PHB_BIEU67NS_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU68NS\PHB_BIEU68NS.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU68NS\PHB_BIEU68NS_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU68NS\PHB_BIEU68NS_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU69NS\PHB_BIEU69NS.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU69NS\PHB_BIEU69NS_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU69NS\PHB_BIEU69NS_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU70NS\PHB_BIEU70NS.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU70NS\PHB_BIEU70NS_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU70NS\PHB_BIEU70NS_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\B01BCQT\PHB_B01BCQT.cs" />
+    <Compile Include="Models\Bc\PHB\B01BCQT\PHB_B01BCQT_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\B01BCQT\PHB_B01BCQT_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\B02BCQT\PHB_B02BCQT.cs" />
+    <Compile Include="Models\Bc\PHB\B02BCQT\PHB_B02BCQT_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\B02BCQT\PHB_B02BCQT_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\B02BCTC\PHB_B02BCTC.cs" />
+    <Compile Include="Models\Bc\PHB\B02BCTC\PHB_B02BCTC_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\B02BCTC\PHB_B02BCTC_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU01CP2\PHB_BIEU01CP2.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU01CP2\PHB_BIEU01CP2_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU01CP2\PHB_BIEU01CP2_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU01C\PHB_BIEU01C.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU01C\PHB_BIEU01C_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU01C\PHB_BIEU01C_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU07TT344\PHB_BIEU07TT344.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU07TT344\PHB_BIEU07TT344_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU07TT344\PHB_BIEU07TT344_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU08TT344\PHB_BIEU08TT344.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU08TT344\PHB_BIEU08TT344_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU08TT344\PHB_BIEU08TT344_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU09TT344\PHB_BIEU09TT344.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU09TT344\PHB_BIEU09TT344_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU09TT344\PHB_BIEU09TT344_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU11TT344\PHB_BIEU11TT344.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU11TT344\PHB_BIEU11TT344_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU12TT344\PHB_BIEU12TT344.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU12TT344\PHB_BIEU12TT344_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU2B\PHB_BIEU2B.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU2B\PHB_BIEU2B_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU2B\PHB_BIEU2B_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU01B\PHB_BIEU01B.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU01B\PHB_BIEU01B_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU01B\PHB_BIEU01B_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU2A\PHB_BIEU2A.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU2A\PHB_BIEU2A_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU2A\PHB_BIEU2A_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU01A\PHB_BIEU01A.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU01A\PHB_BIEU01A_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU01A\PHB_BIEU01A_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\Bieu03\PHB_BIEU03.cs" />
+    <Compile Include="Models\Bc\PHB\Bieu03\PHB_BIEU03_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\Bieu03\PHB_BIEU03_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU3A\PHB_BIEU3A.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU3A\PHB_BIEU3A_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU3A\PHB_BIEU3A_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU3BP2\PHB_BIEU3BP2.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU3BP1\PHB_BIEU3BP1.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU3BP1\PHB_BIEU3BP1_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU3BP1\PHB_BIEU3BP1_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU3BP2\PHB_BIEU3BP2_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU4A\PHB_BIEU4A.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU4A\PHB_BIEU4A_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU4A\PHB_BIEU4A_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU4BP1\PHB_BIEU4BP1.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU4BP1\PHB_BIEU4BP1_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU4BP1\PHB_BIEU4BP1_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU4BP2\PHB_BIEU4BP2.cs" />
+    <Compile Include="Models\Bc\PHB\BIEU4BP2\PHB_BIEU4BP2_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\C_B03D_X\PHB_C_B03D_X_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\C_B03D_X\PHB_C_B03D_X.cs" />
+    <Compile Include="Models\Bc\PHB\C_B03D_X\PHB_C_B03D_X_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\C_B04X\PHB_C_B04X_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\C_B04X\PHB_C_B04X.cs" />
+    <Compile Include="Models\Bc\PHB\DOICHIEUSOLIEU\PHB_DOICHIEUSOLIEU.cs" />
+    <Compile Include="Models\Bc\PHB\F01_01BCQT\PHB_F01_01BCQT.cs" />
+    <Compile Include="Models\Bc\PHB\F01_01BCQT\PHB_F01_01BCQT_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\F01_02BCQT\PHB_F01_02BCQT.cs" />
+    <Compile Include="Models\Bc\PHB\F01_02BCQT\PHB_F01_02BCQT_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\F01_02BCQT\PHB_F01_02BCQT_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\F01_02BCQT_PII\PHB_F01_02BCQT_PII.cs" />
+    <Compile Include="Models\Bc\PHB\F01_02BCQT_PII\PHB_F01_02BCQT_PII_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\C_B02B_X\PHB_C_B02B_X.cs" />
+    <Compile Include="Models\Bc\PHB\C_B02B_X\PHB_C_B02B_X_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\C_B03X\PHB_C_B03X_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\C_B03B_X\PHB_C_B03B_X.cs" />
+    <Compile Include="Models\Bc\PHB\C_B03B_X\PHB_C_B03B_X_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\C_B02AX\PHB_C_B02AX.cs" />
+    <Compile Include="Models\Bc\PHB\C_B02AX\PHB_C_B02AX_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\F022HP1\PHB_F022HP1.cs" />
+    <Compile Include="Models\Bc\PHB\F022HP1\PHB_F022HP1_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\F022HP1\PHB_F022HP1_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\PHB_REPORT_FIELD.cs" />
+    <Compile Include="Models\Bc\PHB\C_B03X\PHB_C_B03X.cs" />
+    <Compile Include="Models\Bc\PHB\PL03\PHB_PL03.cs" />
+    <Compile Include="Models\Bc\PHB\PL3_1\PHB_PL31.cs" />
+    <Compile Include="Models\Bc\PHB\PL3_1\PHB_PL31_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\PL3_1\PHB_PL31_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\PL41\PHB_PL41.cs" />
+    <Compile Include="Models\Bc\PHB\PL41\PHB_PL41_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHB\PL41\PHB_PL41_TEMPLATE.cs" />
+    <Compile Include="Models\Bc\PHB\PL42_P1_TT01\PHB_PL42_P1_TT01.cs" />
+    <Compile Include="Models\Bc\PHB\PL42_P1_TT01\PHB_PL42_P1_TT01_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHC\QTXDCB\QTXDCB_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHC\QTXDCB\QTXDCB_HEADER.cs" />
+    <Compile Include="Models\Bc\PHC\S17_X\S17_X_DETAIL.cs" />
+    <Compile Include="Models\Bc\PHC\S17_X\S17_X_HEADER.cs" />
+    <Compile Include="Models\Bc\PHC\S16_X\S16_X_HEADER.cs" />
+    <Compile Include="Models\Bc\PHC\S16_X\S16_X_DETAIL.cs" />
+    <Compile Include="Models\Dm\DM_CHITIEU_DUTOAN.cs" />
+    <Compile Include="Models\Dm\DM_DONVI_CHUDAUTU.cs" />
+    <Compile Include="Models\Dm\DM_NGHIEPVU.cs" />
+    <Compile Include="Models\Dm\DM_CHITIEU_COT_SOLIEU.cs" />
+    <Compile Include="Models\Dm\DM_CHITIEU_COT.cs" />
+    <Compile Include="Models\Dm\DM_MAUBAOCAO.cs" />
+    <Compile Include="Models\Dm\DM_PHONGBAN.cs" />
+    <Compile Include="Models\Dm\DM_BAOCAO.cs" />
+    <Compile Include="Models\Dm\DM_CHITIEU.cs" />
+    <Compile Include="Models\Dm\DM_CHUONG.cs" />
+    <Compile Include="Models\Dm\DM_CTMTQG.cs" />
+    <Compile Include="Models\Dm\DM_DBHC.cs" />
+    <Compile Include="Models\Dm\DM_IDBUILDER.cs" />
+    <Compile Include="Models\Dm\DM_MUC.cs" />
+    <Compile Include="Models\Dm\DM_NGANHKT.cs" />
+    <Compile Include="Models\Dm\DM_NGUON_NSNN.cs" />
+    <Compile Include="Models\Dm\DM_NVC.cs" />
+    <Compile Include="Models\Dm\DM_TIEUMUC.cs" />
+    <Compile Include="Models\Dm\DM_TIEUNHOM.cs" />
+    <Compile Include="Models\Dm\DM_CHUCVU.cs" />
+    <Compile Include="Models\Dm\DM_NGUON_DIA_PHUONG.cs" />
+    <Compile Include="Models\Dm\DM_TKTN.cs" />
+    <Compile Include="Models\Dm\DM_CHITIEU_BAOCAO.cs" />
+    <Compile Include="Models\Dm\PHA\DM_CHITIEU_BAOCAO_COL.cs" />
+    <Compile Include="Models\Dm\PHA\DM_LOAI_KHV.cs" />
+    <Compile Include="Models\Dm\PHA\DM_MA_LOAIVON.cs" />
+    <Compile Include="Models\Dm\PHA\DM_TINHCHAT_DONGTIEN.cs" />
+    <Compile Include="Models\Dm\PHB\PHB_DM_DUAN.cs" />
+    <Compile Include="Models\Dm\PHB\PHB_DM_BAOCAO.cs" />
+    <Compile Include="Models\Dm\PHB\PHB_DM_DVQHNS.cs" />
+    <Compile Include="Models\Dm\PHB\PHB_DM_HOATDONG.cs" />
+    <Compile Include="Models\Dm\PHB\PHB_DM_LOAIKHOAN.cs" />
+    <Compile Include="Models\Dm\PHB\PHB_DM_LOAINGANSACH.cs" />
+    <Compile Include="Models\Dm\PHB\PHB_DM_LOAI_CAPPHAT.cs" />
+    <Compile Include="Models\Dm\PHB\PHB_DM_NGUONNGANSACH.cs" />
+    <Compile Include="Models\Dm\PHB\PHB_DM_NHOMMUCCHI.cs" />
+    <Compile Include="Models\Dm\PHB\PHB_DM_NOIDUNGKT.cs" />
+    <Compile Include="Models\Dm\PHB\PHB_DM_TAIKHOAN.cs" />
+    <Compile Include="Models\Dm\PHB\PHB_DM_TSCD.cs" />
+    <Compile Include="Models\Dm\PHC\DM_CHITIEU_HAS_CONGTHUC.cs" />
+    <Compile Include="Models\Dm\PHC\DM_HACHTOANTUDONG.cs" />
+    <Compile Include="Models\Dm\PHC\TCS_DM_TYLEDIEUTIET.cs" />
+    <Compile Include="Models\Dm\PHC\TCS_DM_DOITUONGNOPTHUE.cs" />
+    <Compile Include="Models\Dm\PHC\TCS_DM_COQUANTHU.cs" />
+    <Compile Include="Models\Dm\PHC\DM_CTMUCTIEU.cs" />
+    <Compile Include="Models\Dm\PHC\DM_DANHMUC.cs" />
+    <Compile Include="Models\Dm\PHC\DM_DAUTU_XDCB.cs" />
+    <Compile Include="Models\Dm\PHC\DM_DTTHANHTOAN.cs" />
+    <Compile Include="Models\Dm\PHC\DM_KHO.cs" />
+    <Compile Include="Models\Dm\PHC\DM_LOAICT.cs" />
+    <Compile Include="Models\Dm\PHC\DM_LOAIDUTOAN.cs" />
+    <Compile Include="Models\Dm\PHC\DM_LOAIHINH.cs" />
+    <Compile Include="Models\Dm\PHC\DM_LOAIPHI.cs" />
+    <Compile Include="Models\Dm\PHC\DM_LOAI_TSCD.cs" />
+    <Compile Include="Models\Dm\PHC\DM_MAUBAOCAOCHI.cs" />
+    <Compile Include="Models\Dm\PHC\DM_MAUBAOCAOTHU.cs" />
+    <Compile Include="Models\Dm\PHC\DM_NGUONVON.cs" />
+    <Compile Include="Models\Dm\PHC\DM_PHC_CHITIEUTHU_CHI.cs" />
+    <Compile Include="Models\Dm\PHC\DM_PHC_CONGTHUC_CHITIEUTHU_CHI.cs" />
+    <Compile Include="Models\Dm\PHC\DM_PHC_NGHIEPVU.cs" />
+    <Compile Include="Models\Dm\PHC\DM_QUY.cs" />
+    <Compile Include="Models\Dm\PHC\DM_TAIKHOAN.cs" />
+    <Compile Include="Models\Dm\PHC\DM_TINHCHATNGUON.cs" />
+    <Compile Include="Models\Dm\PHC\DM_TKKHOBAC.cs" />
+    <Compile Include="Models\Dm\PHC\DM_TSCD.cs" />
+    <Compile Include="Models\Dm\PHC\DM_VATTU.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_CAPCONGTRINH.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_CHIPHI.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_CONGVIEC.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_COQUANBANHANH.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_DACTINH_NGUONVON.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_DIABAN.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_DOITUONGVON.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_DONVIQUANLY.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_DUAN_VANBAN.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_DU_AN.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_GIAIDOAN_VON.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_HIENTRANG_HOPDONG.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_HINHTHUC_DUAN.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_HINHTHUC_LUACHON_NHATHAU.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_HINHTHUC_QLDA.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_KHOANCHI.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_LINHVUC.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_LINHVUC_DAUTHAU.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_LOAIDONVI.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_LOAIDUAN.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_LOAIHOPDONG.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_LOAI_KHVON.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_LOAI_PHATSINH.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_LOAI_VANBAN.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_NGHIEPVU.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_NGUON_VON.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_NHATHAU.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_NHOMDONVI.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_NHOMDUAN.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_NHOMVANBAN.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_PHONGBAN.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_PHUONGTHUC_DAUTHAU.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_SYS_LIBRARY.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_TAISAN.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_TINHCHAT_DUAN.cs" />
+    <Compile Include="Models\Dm\PHE\PHE_DM_TRANGTHAI_DUAN.cs" />
+    <Compile Include="Models\Dm\PHF\PHF_DM_BAOCAO.cs" />
+    <Compile Include="Models\Dm\PHF\PHF_DM_CANBO.cs" />
+    <Compile Include="Models\Dm\PHF\PHF_DM_CHUCNANG.cs" />
+    <Compile Include="Models\Dm\PHF\PHF_DM_COQUAN.cs" />
+    <Compile Include="Models\Dm\PHF\PHF_DM_DIABAN.cs" />
+    <Compile Include="Models\Dm\PHF\PHF_DM_DOITUONG.cs" />
+    <Compile Include="Models\Dm\PHF\PHF_DM_DONVI_PHONGBAN.cs" />
+    <Compile Include="Models\Dm\PHF\PHF_DM_DOTTHANHTRA.cs" />
+    <Compile Include="Models\Dm\PHF\PHF_DM_PHONGBAN.cs" />
+    <Compile Include="Models\Dm\PHF\PHF_DM_TAOMA.cs" />
+    <Compile Include="Models\Dm\PHF\PHF_DM_TEST.cs" />
+    <Compile Include="Models\Dm\PHF\PHF_TTB_NHATKY.cs" />
+    <Compile Include="Models\Mobile\MBL_PHA_CQ_THU.cs" />
+    <Compile Include="Models\Mobile\MBL_PHA_C_NSDP.cs" />
+    <Compile Include="Models\Mobile\MBL_PHA_QTTDB.cs" />
+    <Compile Include="Models\Mobile\MBL_PHA_TC_TOANTINH.cs" />
+    <Compile Include="Models\Mobile\MBL_PHA_T_DIABAN.cs" />
+    <Compile Include="Models\Mobile\MBL_PHA_C_DTTX.cs" />
+    <Compile Include="Models\Mobile\MBL_PHA_T_NSDP.cs" />
+    <Compile Include="Models\Mobile\MBL_PHA_T_NSNN.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_BC_NS.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_BC_NS_CHITIET.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DASHBOARD.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_KBQT82.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_KBQT01.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXDBG04_10.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXDBG04_9.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXDBG04_8.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXDBG04_7.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXDBG04_6.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXDBG04_5.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXDBG04_4.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXDBG04_3.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXDBG04_2.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXDBG04_1.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXD01_7.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXD01_6.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXD01_5.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXD01_4.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXD01_3.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXD01_2.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_THANHTOAN_LUONG_DETAIL.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_THANHTOAN_LUONG.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DUTOAN_THUCHI_NSNN.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DUTOAN_THUCHI_NSNN_DETAIL.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DTXD01_1.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_HACHTOAN_KHAC.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_QL_TT_VON.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_QL_TT_VON_CHITIET.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_THDT_HCSN_DT.cs" />
+    <Compile Include="Models\Nv\PHA\TABWH_JEL_FCT_V2.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_BIENLAITHUDETAILS.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_DIEUCHINHKINHPHIDETAILS.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_DIEUCHINHKINHPHIHEADER.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_HMTSCD.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_HMTSCD_DETAILS.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEUCHI_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_BANGKENOPTHUE.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_GDNTT_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_CTTT_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_GT_CCDC_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_GRDT_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEUTHU_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_GRT_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_NHAPXUAT_KHO_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_NOPTIEN_VAONSNN_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_NTVTK_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_GG_CCDC_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_UNT_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_UNC_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_PHIEU_RVDT_IN.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_THUYETMINHTAICHINHTEMPLATE2.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_THUYETMINHTAICHINHDETAILS.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_THUYETMINHTAICHINHHEADER.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_BIENLAITHUHEADER.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_DT_THUCHI_NDKT_CHITIET.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_DT_THUCHI_NDKT.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_DT_CHI_MLNS.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_DT_THU_MLNS.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_DT_CHI_MLNS_CHITIET.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_DT_THU_MLNS_CHITIET.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_NHAPSODUDETAILS.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_CANBOTHAMGIA_DUAN.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_CHIPHI_DUAN_DUTOAN.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_CHITIET_CHIPHI_DUAN_DUTOAN.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_CHITIET_GIAO_KEHOACH_VON.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_CHITIET_HOPDONG.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_CHITIET_KEHOACH_VON_DAUTU.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_CHITIET_QUANLY_KL_THICONG.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_CHITIET_QUANLY_TAISAN.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_CHITIET_THONGTIN_DUAN.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_CHITIET_KEHOACH_KETQUA.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_CT_TT_DT_TMDT.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_DUAN_CONGVIEC.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_DUTOAN.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_DUTOAN_DS_DUAN.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_GIAO_KEHOACH_VON.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_HOPDONG.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_KEHOACH_VON_DAUTU.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_KEHOACH_KETQUA.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_KETQUA_DAUTHAU_CHITIET.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_KETQUA_DAUTHAU.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_PHANCONG_CANBO.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_PHULUC_HOPDONG.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_PHULUC_HOPDONG_CHITIET.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_QUANLY_KL_THICONG.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_QUANLY_TAISAN.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_QUANLY_VB_HS.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_THAMDINH_CHITIET.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_THONGTIN_DUAN.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_THAMDINH.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_TOTRINH_IV.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_TOTRINH_II.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_TOTRINH.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_TT_DT_TMDT.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_VANBAN_HSPL.cs" />
+    <Compile Include="Models\Nv\PHE\PHE_VANBAN_PHAPQUY.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_01TT_CQHC.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_01TT_TCDN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_02TT_CQHC.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_03TT_CQHC.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_04TT_CQHC.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_05TT_CQHC.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_06TT_CQHC.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_07TT_CQHC.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_08TT_CQHC.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_09TT_DVSN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_08TT_DVSN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_07TT_DVSN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_06TT_DVSN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_05TT_DVSN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_04TT_DVSN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_03TT_DVSN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_01TT_DVSN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_01TT_NSDP.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_01TT_TCXD.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_02TT_DVSN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_02TT_NSDP.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_02TT_TCXD.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_03TT_NSDP.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_03TT_TCXD.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_10TT_TCXD.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_08TT_TCXD.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_07TT_TCXD .cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_06TT_TCXD.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_05TT_TCXD.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_04TT_TCXD.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_05TT_NSDP.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_10TT_NSDP.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_11TT_NSDP.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_12TT_NSDP.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_14TT_NSDP.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_15TT_NSDP.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_16TT_NSDP.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_60TT_NSDVN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_FILE_CQHC.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_FILE_DVSN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_FILE_NSDP.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_FILE_NSDVN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_FILE_TCDN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_BM_FILE_TCXD.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_KH_THANHTRA_COQUAN.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_KH_THANHTRA_COQUAN_CT.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_QD_GIAOTHUCHIEN_THANHTRA.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_QD_GIAOTHUCHIEN_TT_THUOCBO.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_QD_PHEDUYET_THANHTRA.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_SOANTHAO_THANHTRA.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_SOANTHAO_THANHTRA_CT.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_THEODOI_CANBO.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_THEODOI_CANBO_CT.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_THUMUC_FILE.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_TIENDO_THUCHIEN_KH.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_TIENDO_THUCHIEN_KH_CT.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_TIEUCHI_DGRR_DETAIL.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_TIEUCHI_DGRR.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_XD_KH_THANHTRA_BO.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_XD_KH_THANHTRA_BO_CHITIET.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_XD_KH_TT_THUOC_BO.cs" />
+    <Compile Include="Models\Nv\PHF\PHF_XD_KH_TT_THUOC_BO_CT.cs" />
+    <Compile Include="Models\Sys\PHB\PHB_SYS_CHUCNANG.cs" />
+    <Compile Include="Models\Sys\PHF\PHF_SYS_TUDIEN.cs" />
+    <Compile Include="Models\Sys\SYS_THAMSO_HETHONG.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_CHUNGTUDETAILS.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_CHUNGTUHEADER.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_DOICHIEUSOLIEUDETAILS.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_DOICHIEUSOLIEUHEADER.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_NHAPCHUNGTU.cs" />
+    <Compile Include="Models\Nv\PHC\PHC_NHAPSODUHEADER.cs" />
+    <Compile Include="Models\Nv\PHA\DM_BAOCAO_DETAIL.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_DUTOAN.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_HACHTOAN_CHI.cs" />
+    <Compile Include="Models\Nv\PHA\PHA_HACHTOAN_THU.cs" />
+    <Compile Include="Models\Sys\SYS_CHUCNANG.cs" />
+    <Compile Include="Models\Sys\SYS_DONVI.cs" />
+    <Compile Include="Models\Sys\SYS_NHOMQUYEN_SD.cs" />
+    <Compile Include="Models\Sys\SYS_QUYEN_CHUCNANG.cs" />
+    <Compile Include="Models\Sys\SYS_QUYEN_NGUOISD.cs" />
+    <Compile Include="Models\Sys\SYS_HUYEN.cs" />
+    <Compile Include="Models\Sys\SYS_DVQHNS.cs" />
+    <Compile Include="Models\Sys\SYS_TONGHOPDL.cs" />
+    <Compile Include="Models\Sys\SYS_XA.cs" />
+    <Compile Include="Models\Sys\SYS_TINH.cs" />
+    <Compile Include="Models\Sys\SYS_TUDIEN.cs" />
+    <Compile Include="Models\Sys\SYS_USER.cs" />
+    <Compile Include="Models\Sys\TDL_SOLIEU.cs" />
+    <Compile Include="ObjectState.cs" />
+    <Compile Include="ProcessState.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\PHA\BACGIANG_CHI\PHA_CHI2_BG.sql" />
+    <Content Include="Scripts\PHA\BACGIANG_THU\PHA_THQTNSX_TT_BG.sql" />
+    <Content Include="Scripts\PHA\BACGIANG_THU\PHA_THU2_BG.sql" />
+    <Content Include="Scripts\PHA\BACGIANG_THU\PHA_BCCT_R_C_THU1_BG.sql" />
+    <Content Include="Scripts\PHA\LENH_CHI_TIEN\PHA_LCT.sql" />
+    <Content Include="Scripts\PHA\TRA_TIEN_LUONG\PHA_TTL_PC_CHUC_VU.sql" />
+    <Content Include="Scripts\PHA\TRA_TIEN_LUONG\PHA_TTL_PC.sql" />
+    <Content Include="Scripts\PROC_PHA_B202_HINH_CAY.sql" />
+    <Content Include="Scripts\UPDATE_SCRIPT_DB.sql" />
+    <Content Include="Scripts\PHA\BIEU3_11\PHA_B3_BAO_CAO_TONG_THU.sql" />
+    <Content Include="Scripts\PHA\BIEU3_11\PHA_B5_BAO_CAO_TONG_HOP_CHI.sql" />
+    <Content Include="Scripts\PHA\BIEU3_11\PHA_B6_BAO_CAO_DU_TOAN_CHI_TX.sql" />
+    <Content Include="Scripts\PHA\BIEU3_11\PHA_B7_BC_DU_TOAN_CHI_TX_HUYEN.sql" />
+    <Content Include="Scripts\PHA\BIEU3_11\PHA_B8_DTXDCB_CT.sql" />
+    <Content Include="Scripts\PHA\BIEU3_11\PHA_B9_DTXDCB_CH.sql" />
+    <Content Include="Scripts\PHA\BIEU3_11\PHA_B10_DTXDCB_CX.sql" />
+    <Content Include="Scripts\PHA\BIEU3_11\PHA_B11_DADTTP.sql" />
+    <Content Include="Scripts\PHA\BM61_TT342_DIABAN\BM61_TT342_DIA_BAN.sql" />
+    <Content Include="Scripts\PHA\MOBILE\MBL_QTT_DB.sql" />
+    <Content Include="Scripts\PHA\MOBILE\MBL_QTC_DB.sql" />
+    <Content Include="Scripts\PHA\MOBILE\MBL_THU_CHI_TOAN_TINH.sql" />
+    <Content Include="Scripts\PHA\MOBILE\MBL_THU_CHI_DASHBOARD.sql" />
+    <Content Include="Scripts\PHA\MOBILE\MBL_PHA_BC_CD_TC.sql" />
+    <Content Include="Scripts\PHA\MOBILE\MBL_PHA_BIEU3.sql" />
+    <Content Include="Scripts\PHA\MOBILE\MBL_PHA_BM60_TT342_2017.sql" />
+    <Content Include="Scripts\PHA\MOBILE\MBL_PHA_MAUBS_02.sql" />
+    <Content Include="Scripts\PHA\MOBILE\MBL_PHA_MAUBS_02_TEST.sql" />
+    <Content Include="Scripts\PHA\MOBILE\MBL_PHA_MAUBS_04.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM61_ND31.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM59_ND31.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM58_ND31.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM57_ND31.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM56_ND31.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM61_ND31_TH.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM61_ND31_TT.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM60_ND31_TH.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM60_ND31.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM58_ND31_TH.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM57_ND31_TH.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM56_ND31_TH.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM55_ND31_TH.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM55_ND31.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM54_ND31_TH.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM54_ND31_T.sql" />
+    <Content Include="Scripts\PHA\ND31\PHA_NS_BM54_ND31.sql" />
+    <Content Include="Scripts\PHA\ND31_TT342\PHA_BCCT_R_C_V8.sql" />
+    <Content Include="Scripts\PHA\PHA_PL08_BM07.sql" />
+    <Content Include="Scripts\PHA\PRC_TH_DASHBOARD.sql" />
+    <Content Include="Scripts\PHA\P_HCSN\PHA_THDT_CHI_DTPT.sql" />
+    <Content Include="Scripts\PHA\P_HCSN\PHA_HCSN_MAU_06.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NGAN_SACH_MAU_63_N_TM.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NGAN_SACH_MAU_63.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NGAN_SACH_MAU_64_N_TM.sql" />
+    <Content Include="Scripts\PHA\TT343\PHA_BM102_TT343.sql" />
+    <Content Include="Scripts\PHA\TT343\PHA_BM101_TT343.sql" />
+    <Content Include="Scripts\PHA\TT343\PHA_BM88_TT343.sql" />
+    <Content Include="Scripts\PHA\TT343\PHA_BM87_TT343.sql" />
+    <Content Include="Scripts\PHA\TT343\PHA_BM86_TT343.sql" />
+    <Content Include="Scripts\PHA\TT343\PHA_BM68_TT343.sql" />
+    <Content Include="Scripts\PHA\TT343\PHA_BM67_TT343.sql" />
+    <Content Include="Scripts\PHA\TT343\PHA_BM66_TT343.sql" />
+    <Content Include="Scripts\PHA\TT343\BM84_TT343.sql" />
+    <Content Include="Scripts\PHA\UOC_TT342\PHA_BCCT_UOC.sql" />
+    <Content Include="Scripts\PHA_BM49_ND31.sql" />
+    <Content Include="Scripts\PHA\PHA_PL06_BM50.sql" />
+    <Content Include="Scripts\PHA\PHA_PL06_BM52.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_BCCT_R_C_DBHC_V2.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_BCCT_R_C_DVQHNS_V1.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NS_BM54_ND31.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NS_BM54_ND31_TH.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NS_BM55_ND31.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NS_BM55_ND31_TH.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NS_BM56_ND31.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NS_BM56_ND31_TH.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NS_BM57_ND31.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NS_BM57_ND31_TH.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NS_BM59_ND31.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NS_BM61_ND31.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NS_BM61_ND31_TH.sql" />
+    <Content Include="Scripts\PHA\ND31_TT342\PHA_BCCT_R_C_V7.sql" />
+    <Content Include="Scripts\PHA\ND31_TT342\PHA_BCCT_R_C_V6.sql" />
+    <Compile Include="Response.cs" />
+    <Compile Include="XmlModel\PHB\PHB_B03H.cs" />
+    <Compile Include="XmlModel\PHB\PHB_ConfigXML.cs" />
+    <Content Include="Scripts\PHA\NGHIEPVU_KHAC\TRACUU_DULIEU_THU_CHI.sql" />
+    <Content Include="Scripts\PHA_BCCT_R_C_V3.sql" />
+    <Content Include="Scripts\PHA_BCQT_PL06_BM52.sql" />
+    <Content Include="Scripts\PHB\DL_TABMIT\HCSN\PHB_BIEU02CP2_SUMREPORT_TABMIT.sql" />
+    <Content Include="Scripts\PHB\DL_TABMIT\XA\PHB_BIEU10TT344_SR_XA_TM.sql" />
+    <Content Include="Scripts\PHB\DL_TABMIT\XA\PHB_BIEU11TT344_SR_XA_TM.sql" />
+    <Content Include="Scripts\PHB\FUNCTION\Body.txt" />
+    <Content Include="Scripts\PHB\FUNCTION\FCN_GetAmountSummaryUnit_B06H.txt" />
+    <Content Include="Scripts\PHB\FUNCTION\FCN_GetAmount_ByCOL_SUM_B06H.txt" />
+    <Content Include="Scripts\PHB\FUNCTION\Func_GetSumReport_B02HP1.txt" />
+    <Content Include="Scripts\PHB\FUNCTION\Package.txt" />
+    <Content Include="Scripts\PHB\PHB_APPROVE_REJECT_REPORT.txt" />
+    <Content Include="Scripts\PHB\PHB_B01BCQT\B01BCQT_Detail.txt" />
+    <Content Include="Scripts\PHB\PHB_B01BCQT\B01BCQT_SumReport.txt" />
+    <Content Include="Scripts\PHB\PHB_B01H\CREATE_TABLE_PHB_B01H_TMP.txt" />
+    <Content Include="Scripts\PHB\PHB_B01H\FCN_GETAMOUNTSUMMARYUNIT_B01H.txt" />
+    <Content Include="Scripts\PHB\PHB_B01H\PROC_PHB_B01H_SUMMARYDATA.txt" />
+    <Content Include="Scripts\PHB\PHB_B01H\PROC_PHB_B01H_SUMMARYUNITDATA.txt" />
+    <Content Include="Scripts\PHB\PHB_B02BCQT\PHB_B02BCQT_SUMREPORT.sql" />
+    <Content Include="Scripts\PHB\PHB_B02BCTC\PHB_B02BCTC_SUMREPORT.sql" />
+    <Content Include="Scripts\PHB\PHB_B02CTHP1\PROC_PHB_GET_D_PHB_B02CTHP1_BYREFID.txt" />
+    <Content Include="Scripts\PHB\PHB_B06H\PHB_B06H_SummaryData.txt" />
+    <Content Include="Scripts\PHB\PHB_B06H\PHB_B06H_SUMMARYUNITDATA.txt" />
+    <Content Include="Scripts\PHB\PHB_B06H\PHB_GET_D_PHB_B06H_BYREFID.txt" />
+    <Content Include="Scripts\PHB\PHB_BIEU09TT344\PHB_BIEU09TT344_SUMREPORT.sql" />
+    <Content Include="Scripts\PHB\PHB_BIEU10TT344\PHB_BIEU10TT344_SUMREPORT.sql" />
+    <Content Include="Scripts\PHB\PHB_DELETE_REPORT.txt" />
+    <Content Include="Scripts\PHB\PHB_B01H\PROC_PHB_GET_D_PHB_B01H_BYREFID.txt" />
+    <Content Include="Scripts\PHB\PHB_B02HP1\PHB_GET_D_PHB_B02HP1_BYREFID.txt" />
+    <Content Include="Scripts\PHB\PHB_GET_RECEIVED_REPORT.txt" />
+    <Content Include="Scripts\PHB\PHB_B03H\PHB_GET_D_PHB_B03H_BYREFID.txt" />
+    <Content Include="Scripts\PHB\PHB_GET_TEMPLATE_REPORT.txt" />
+    <Content Include="Scripts\PHB\TYPE\GetSumReport_B02HP1_record.txt" />
+    <Content Include="Scripts\PHB\TYPE\GetSumReport_B02HP1_table.txt" />
+    <Content Include="Scripts\PHB\TYPE\GetSumReport_B03H_record.txt" />
+    <Content Include="Scripts\PHB\TYPE\GetSumReport_B03H_table.txt" />
+    <Content Include="Scripts\PHA\P_DTXD\PHA_DTXDCB_MAU_01_CQTH.sql" />
+    <Content Include="Scripts\PHA\P_DTXD\PHA_DTXD_MAU_01.sql" />
+    <Content Include="Scripts\PHA\P_DTXD\PHA_DTXD_MAU_02.sql" />
+    <Content Include="Scripts\PHA_BCQT_PL06_BM52_V4.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NGAN_SACH_MAU_64.sql" />
+    <Compile Include="StateApproval.cs" />
+    <Compile Include="StateHelper.cs" />
+    <Compile Include="StateInfoObj.cs" />
+    <Compile Include="StateTranform.cs" />
+    <Compile Include="STCContext.cs" />
+    <Compile Include="TypeVoucher.cs" />
+    <Content Include="SCRIPT_PHC\FUNCTION\FCN_GENERAL_SODU_CUOITHANG.sql" />
+    <Content Include="SCRIPT_PHC\FUNCTION\PHC_FCN_ACCOUNT_BY_MER.sql" />
+    <Content Include="SCRIPT_PHC\FUNCTION\PHC_FCN_TONGHOPCHITIEUCHI.sql" />
+    <Content Include="SCRIPT_PHC\FUNCTION\PHC_FCN_TONGHOPCHITIEUTHU.sql" />
+    <Content Include="SCRIPT_PHC\PHC_B02A_X.sql" />
+    <Content Include="SCRIPT_PHC\PHC_B02B_X.sql" />
+    <Content Include="SCRIPT_PHC\PHC_B03C_X.sql" />
+    <Content Include="SCRIPT_PHC\PHC_B03D_X.sql" />
+    <Content Include="SCRIPT_PHC\PHC_B03_X.sql" />
+    <Content Include="SCRIPT_PHC\PHC_B06_X.sql" />
+    <Content Include="SCRIPT_PHC\PHC_NHATKY_SOCAI_LASTVER.sql" />
+    <Content Include="SCRIPT_PHC\PHC_PRC_SOKHO.sql" />
+    <Content Include="SCRIPT_PHC\PHC_PRC_SONGANSACH.sql" />
+    <Content Include="SCRIPT_PHC\PHC_PRC_BANGKE_CANDOI.sql" />
+    <Content Include="SCRIPT_PHC\PHC_NHATKY_SOCAI.sql" />
+    <Content Include="SCRIPT_PHC\CANDOI_TAIKHOAN.sql" />
+    <Content Include="SCRIPT_PHC\TEMP_TABLE\PHC_TEMP_NHATKY_SOCAI.sql" />
+    <Content Include="SCRIPT_PHC\TEMP_TABLE\PHC_TEMP_SOCAI.sql" />
+    <Content Include="SCRIPT_PHC\TEMP_TABLE\PHC_TEMP_SOKHO.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Nv\PhanHeA\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\insert_PHA_CHI_VW.sql" />
+    <Content Include="Scripts\insert_PHA_THU_VW.sql" />
+    <Content Include="Scripts\package.sql" />
+    <Content Include="Scripts\Package_STC_30_06_2017.sql" />
+    <Content Include="Scripts\PHA_THU_VW.sql" />
+    <Content Include="Scripts\Procedures 2-6-2017.sql" />
+    <Content Include="Scripts\PROC_BCDT_CHI_DTXD_CB.sql" />
+    <Content Include="Scripts\PROC_BCDT_CHI_DV.sql" />
+    <Content Include="Scripts\PROC_DCDT_CHI_DTXD_CB_DV.sql" />
+    <Content Include="Scripts\PROC_PHA_303_PHANII.sql" />
+    <Content Include="Scripts\PROC_PHA_B303.sql" />
+    <Content Include="Scripts\PROC_PHA_B303_HINH_CAY.sql" />
+    <Content Include="Scripts\PROC_PHA_BC_DMCT_V2.sql" />
+    <Content Include="Scripts\PROC_PHA_BC_THEO_DMCT.sql" />
+    <Content Include="Scripts\PROC_PHA_PL08_B04.sql" />
+    <Content Include="Scripts\PROC_PHA_PL08_B05.sql" />
+    <Content Include="Scripts\PROC_PHA_PL08_BM04_HM1.sql" />
+    <Content Include="Scripts\Proc_STC_30_06_2017.sql" />
+    <Content Include="Scripts\PRO_GET_DATA_PL08BM05_XP.sql" />
+    <Content Include="Scripts\PHA\P_HCSN\PHA_HCSN_MAU_01.sql" />
+    <Content Include="Scripts\PHA\P_HCSN\PHA_HCSN_MAU_02.sql" />
+    <Content Include="Scripts\PHA\P_HCSN\PHA_HCSN_MAU_03.sql" />
+    <Content Include="Scripts\PHA\P_HCSN\PHA_HCSN_MAU_04.sql" />
+    <Content Include="Scripts\PHA\P_HCSN\PHA_HCSN_MAU_05.sql" />
+    <Content Include="Scripts\PHA\P_HCSN\PHA_HCSN_MAU_07.sql" />
+    <Content Include="Scripts\PHA\P_HCSN\PHA_HCSN_MAU_08.sql" />
+    <Content Include="Scripts\PHA\P_HCSN\PHA_HCSN_MAU_09.sql" />
+    <Content Include="Scripts\PHA\P_HCSN\PHA_HCSN_MAU_10.sql" />
+    <Content Include="Scripts\PHA\P_NGANSACH\PHA_NGAN_SACH_MAU_65.sql" />
+    <Content Include="Scripts\STC_PHA_BCMCT.sql" />
+    <Content Include="Scripts\tabmiss.sql" />
+    <Content Include="Scripts\PHA_CHI_VW.sql" />
+    <Content Include="Scripts\TEMP_CTBC.sql" />
+    <Content Include="Scripts\truncateDB.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BTS.SP.PHB.ENTITY\BTS.SP.PHB.ENTITY.csproj">
+      <Project>{067FEE0A-EF25-4E4E-8C5C-B58C2D4AA2A1}</Project>
+      <Name>BTS.SP.PHB.ENTITY</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812070321567_07122018_INITIALIZE_DATABASE_ANHPT.resx">
+      <DependentUpon>201812070321567_07122018_INITIALIZE_DATABASE_ANHPT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812070748459_07122018_EDITBM_PHF_04TT_CQHC_CHUNGNH.resx">
+      <DependentUpon>201812070748459_07122018_EDITBM_PHF_04TT_CQHC_CHUNGNH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812072057557_08122018_AlterTableDVSN_DuongHH.resx">
+      <DependentUpon>201812072057557_08122018_AlterTableDVSN_DuongHH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812080258239_08122018_update_tbl_PHA_KBQT82_KBQT01_add_COLUMN_NAM_hungvv.resx">
+      <DependentUpon>201812080258239_08122018_update_tbl_PHA_KBQT82_KBQT01_add_COLUMN_NAM_hungvv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812120252078_12122018_updateDVSN_HT.resx">
+      <DependentUpon>201812120252078_12122018_updateDVSN_HT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812120343327_12122018_EDITBM_PHF_03TT_CQHC_CHUNGNH.resx">
+      <DependentUpon>201812120343327_12122018_EDITBM_PHF_03TT_CQHC_CHUNGNH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812120349357_12122018_AddColumn_PHF_NhatKy_ThanhND.resx">
+      <DependentUpon>201812120349357_12122018_AddColumn_PHF_NhatKy_ThanhND.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812130810149_13122018_AddBM_PHF_BM_06TT_CQHC_CHUNGNH.resx">
+      <DependentUpon>201812130810149_13122018_AddBM_PHF_BM_06TT_CQHC_CHUNGNH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812141036171_14122018_EDITBM_FILE_CQHC_CHUNGNH.resx">
+      <DependentUpon>201812141036171_14122018_EDITBM_FILE_CQHC_CHUNGNH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812150146016_15122018_EDITBM_FILE_TCXD_CHUNGNH.resx">
+      <DependentUpon>201812150146016_15122018_EDITBM_FILE_TCXD_CHUNGNH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812150209447_15122018_add_column_MA_DBHC_dm_TKKHOBAC_hungvv.resx">
+      <DependentUpon>201812150209447_15122018_add_column_MA_DBHC_dm_TKKHOBAC_hungvv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812170757389_17122018_Add2ColumnInPHF_TTB_NHATKY_ThanhND.resx">
+      <DependentUpon>201812170757389_17122018_Add2ColumnInPHF_TTB_NHATKY_ThanhND.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812180834045_18122018_AddColumnPHF_TTB_NHATKY_ThanhND.resx">
+      <DependentUpon>201812180834045_18122018_AddColumnPHF_TTB_NHATKY_ThanhND.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812190853392_19122018_EDITBM_PHF_BM_07TT_DVSN_CHUNGNH.resx">
+      <DependentUpon>201812190853392_19122018_EDITBM_PHF_BM_07TT_DVSN_CHUNGNH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812190936499_19122018_EDITBM_PHF_BM_02TT_CQHC_CHUNGNH.resx">
+      <DependentUpon>201812190936499_19122018_EDITBM_PHF_BM_02TT_CQHC_CHUNGNH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812191012198_19122018_UPDATEBM_PHF_BM_03TT_CQHC_CHUNGNH.resx">
+      <DependentUpon>201812191012198_19122018_UPDATEBM_PHF_BM_03TT_CQHC_CHUNGNH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812210348177_21122018_AlterTienDoThucHien_DuongHH.resx">
+      <DependentUpon>201812210348177_21122018_AlterTienDoThucHien_DuongHH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812220258360_22122018_SetLengthTienDo_DuongHH.resx">
+      <DependentUpon>201812220258360_22122018_SetLengthTienDo_DuongHH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812220420313_22122018_ADDBMFILE_PHF_BM_FILE_TCDN_CHUNGNH.resx">
+      <DependentUpon>201812220420313_22122018_ADDBMFILE_PHF_BM_FILE_TCDN_CHUNGNH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812230946555_23122018_Add_TieuChiDanhGiaRuiRo_dvc.resx">
+      <DependentUpon>201812230946555_23122018_Add_TieuChiDanhGiaRuiRo_dvc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812240358388_24122018_UpdateColumnPHF_TTB_NHATKY_ThanhND.resx">
+      <DependentUpon>201812240358388_24122018_UpdateColumnPHF_TTB_NHATKY_ThanhND.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

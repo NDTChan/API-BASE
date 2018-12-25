@@ -1,0 +1,766 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9C900337-D74C-49CA-825B-C0338081D5F7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BTS.SP.STC.TT</RootNamespace>
+    <AssemblyName>BTS.SP.STC.TT</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetOfficeVersion>15.0</TargetOfficeVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SandboxedSolution>False</SandboxedSolution>
+    <AssemblyDeploymentTarget>WebApplication</AssemblyDeploymentTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.SharePoint" />
+    <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\wpControl_TT\wpControl_TT.cs" />
+    <Compile Include="UI\wpControl_TT\wpControl_TTUserControl.ascx.cs">
+      <DependentUpon>wpControl_TTUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\wpControl_TT\wpControl_TTUserControl.ascx.designer.cs">
+      <DependentUpon>wpControl_TTUserControl.ascx.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Database\WSS_Content_8585.bak" />
+    <None Include="Features\Feature1\Feature1.feature">
+      <FeatureId>{a747458d-6690-42f4-ab55-8baa03d7deac}</FeatureId>
+    </None>
+    <None Include="key.snk" />
+    <None Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\scayt\CHANGELOG.md" />
+    <None Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\scayt\LICENSE.md" />
+    <None Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\scayt\README.md" />
+    <None Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\wsc\LICENSE.md" />
+    <None Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\wsc\README.md" />
+    <None Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\readme.md" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSans-Bold.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSans-Oblique.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSans.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSansMono-Bold.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSansMono-BoldOblique.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSansMono-Oblique.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSansMono.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSerif-Bold.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSerif-BoldItalic.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSerif-Italic.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\DejaVuSerif.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\glyphs\KendoUIGlyphs.eot" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\glyphs\KendoUIGlyphs.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\glyphs\KendoUIGlyphs.woff" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\glyphs\WebComponentsIcons.eot" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\glyphs\WebComponentsIcons.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\glyphs\WebComponentsIcons.woff" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\images\kendoui.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\images\kendoui.woff" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\ui-grid\ui-grid.eot" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\ui-grid\ui-grid.ttf" />
+    <None Include="Layouts\BTS.SP.STC.PHF\utils\ui-grid\ui-grid.woff" />
+    <None Include="Layouts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{6e8122c4-82e8-4286-a5dc-6b1c4a90179b}</SharePointProjectItemId>
+    </None>
+    <None Include="Package\Package.package">
+      <PackageId>{b747ebb5-a82b-41f6-9836-94a95e9a4881}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="UI\wpControl_TT\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a9b88fef-6318-4d2c-b88b-fbbd6d075107}</SharePointProjectItemId>
+    </None>
+    <None Include="UI\wpControl_TT\wpControl_TT.webpart" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\Feature1\Feature1.Template.xml">
+      <DependentUpon>Feature1.feature</DependentUpon>
+    </Content>
+    <Content Include="Layouts\BTS.SP.STC.PHF\app.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\config\config.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\auth\AuNguoiDung.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\auth\AuNguoiDungNhomQuyen.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\auth\AuNguoiDungQuyen.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\auth\AuNhomQuyen.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\auth\AuNhomQuyenChucNang.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\auth\AuController.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\dm\phf_dmCanBo.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\dm\phf_dmChucVu.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\dm\phf_dmDoiTuong.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\dm\phf_dmDonViPhongBan.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\dm\phf_dmDotThanhTra.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\dm\phf_dmKeHoachThanhTra.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\dm\phf_dmLoaiThanhTra.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\dm\phf_dmNhomThanhTra.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\layouts\header-controller.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\layouts\home-controller.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\layouts\layout-controller.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\NamBatTinhHinh\TieuChiDanhGiaRuiRo\ChamNopBaoCaoQuyetToan\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\NamBatTinhHinh\TieuChiDanhGiaRuiRo\DeNghiCuaCucTaiChinh\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\NamBatTinhHinh\TieuChiDanhGiaRuiRo\DeNghiCuaCucTaiChinh\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\NamBatTinhHinh\TieuChiDanhGiaRuiRo\DeNghiCuaCucTaiChinh\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\NamBatTinhHinh\TieuChiDanhGiaRuiRo\KeHoachKiemToanNhaNuoc\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\NamBatTinhHinh\TieuChiDanhGiaRuiRo\KeHoachKiemToanNhaNuoc\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\NamBatTinhHinh\TieuChiDanhGiaRuiRo\KeHoachKiemToanNhaNuoc\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\NamBatTinhHinh\TieuChiDanhGiaRuiRo\ChamNopBaoCaoQuyetToan\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\NamBatTinhHinh\TieuChiDanhGiaRuiRo\ChamNopBaoCaoQuyetToan\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\NamBatTinhHinh\TieuChiDanhGiaRuiRo\phf_TieuChiDanhGiaRuiRo.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\NamBatTinhHinh\bieu02Ctrl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvBaoCaoNSDVN.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvBaoCaoTTCQHC.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvBaoCaoTTDVSN.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvBaoCaoTTTCXD.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvCapNhatKetQuaThanhTra.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvGiaoThucHienTTThuocBo.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvKhThanhTraThuocBo.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvPhanCongKeHoachThanhTraBo.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvKhThanhTra_Bo.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvNhatKy.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvQDGiaoThucHienThanhTra.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvQuyetDinhPheDuyetTT.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvSoanThao.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvTheoDoiCanBo.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\nv\phf_nvTienDoThucHienTT.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\report\phf_dmBaoCaoThanhTra.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\sys\SysChucNang.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\sys\SysDvqhns.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\controllers\sys\sysTuDienCtrl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\css\login.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\css\ng-table.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\css\style.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\css\util.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\directives\common.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\filters\common.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\imgs\bACnINHMAP-01.jpg" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\imgs\bg-01.jpg" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\imgs\icons\favicon.ico" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\imgs\loca.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\imgs\Logo-thanhtra.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\imgs\logo.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\imgs\LOGOBT.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\angular-animate.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\angular-cache.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\angular-file-upload.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\angular-filter.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\angular-local-storage.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\angular-resource.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\angular-sanitize.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\angular-ui-router.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\angular.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\bootstrap.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\angular-ckeditor.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\build-config.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\ckeditor.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\config.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\af.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\ar.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\az.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\bg.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\bn.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\bs.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\ca.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\cs.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\cy.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\da.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\de-ch.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\de.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\el.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\en-au.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\en-ca.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\en-gb.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\en.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\eo.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\es-mx.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\es.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\et.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\eu.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\fa.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\fi.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\fo.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\fr-ca.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\fr.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\gl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\gu.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\he.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\hi.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\hr.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\hu.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\id.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\is.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\it.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\ja.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\ka.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\km.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\ko.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\ku.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\lt.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\lv.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\mk.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\mn.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\ms.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\nb.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\nl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\no.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\oc.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\pl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\pt-br.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\pt.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\ro.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\ru.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\si.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\sk.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\sl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\sq.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\sr-latn.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\sr.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\styles.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\sv.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\th.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\tr.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\tt.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\ug.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\uk.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\vi.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\zh-cn.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\lang\zh.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\af.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\az.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\de-ch.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\en-au.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\en-gb.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\es-mx.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\eu.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\fo.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\oc.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\tt.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\zh.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\colordialog\dialogs\colordialog.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\copyformatting\cursors\cursor-disabled.svg" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\copyformatting\cursors\cursor.svg" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\copyformatting\styles\copyformatting.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\icons.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\magicline\images\hidpi\icon-rtl.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\magicline\images\icon-rtl.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\preview\preview.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\scayt\dialogs\dialog.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\scayt\skins\moono-lisa\scayt.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\angel_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\angry_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\broken_heart.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\confused_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\cry_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\devil_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\embarrassed_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\envelope.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\heart.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\kiss.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\lightbulb.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\omg_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\regular_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\sad_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\shades_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\teeth_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\thumbs_down.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\thumbs_up.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\tongue_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\tongue_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\smiley\images\wink_smile.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\af.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\az.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\da.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\de-ch.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\en-au.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\en-ca.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\en-gb.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\es-mx.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\eu.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\ko.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\lt.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\oc.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\ro.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\tt.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\tableselection\styles\tableselection.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\templates\dialogs\templates.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\templates\templates\images\template3.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\widget\images\handle.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\plugins\wsc\skins\moono-lisa\wsc.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\dialog.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\dialog_ie.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\dialog_ie8.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\dialog_iequirks.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\editor.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\editor_gecko.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\editor_ie.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\editor_ie8.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\editor_iequirks.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\icons.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\icons_hidpi.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\images\arrow.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\images\close.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\images\hidpi\close.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\images\hidpi\lock-open.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\images\hidpi\lock.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\images\hidpi\refresh.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\images\lock-open.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\images\lock.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\images\refresh.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\skins\moono-lisa\images\spinner.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ckeditor\styles.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\jquery.min.1.12.3.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\jquery.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ng-notify\ng-notify.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ng-notify\ng-notify.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ocLazyLoad.require.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\require.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\lib\ui-bootstrap-tpls-1.3.3.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\main.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\services\configService.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\services\htdmService.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\services\interceptorService.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\services\sysService.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\services\tempDataService.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\states\auth.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\states\dm.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\states\hethong.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\states\nv.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\states\report.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\angular-confirm\angular-confirm.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\angular-confirm\angular-confirm.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\angular-ui-tree\angular-ui-tree.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\angular-ui-tree\angular-ui-tree.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\csv.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\dynamic-number.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\jquery-ui\jquery-ui.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\DejaVu\LICENSE.txt" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\glyphs\KendoUIGlyphs.svg" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\fonts\glyphs\WebComponentsIcons.svg" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\images\back.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\images\kendoui.svg" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\images\wp8_icons.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\images\wp8_inverseicons.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\js\angular.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\js\jquery.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\js\kendo.all.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\kendo.blueopal.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\kendo.common-material.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\kendo.common.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\kendo\styles\kendo.default.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\loading-bar\loading-bar.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\loading-bar\loading-bar.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\ng-file-upload-all.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\ng-table.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\pdfmake.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\smart-table\lrStickyHeader.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\smart-table\smart-table.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\smart-table\stStickyHeader.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\telerik\js\telerikReportViewer-11.0.17.118.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\telerik\js\telerikReportViewer.kendo-11.0.17.118.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\telerik\styles\blueopal\loading.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\telerik\styles\blueopal\sprite.png" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\telerik\styles\kendo.blueopal.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\telerik\styles\kendo.common.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\telerik\styles\telerikReportViewer.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\toaster\toaster.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\toaster\toaster.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\tree\template-li.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\tree\template-ul.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\ui-grid\ui-grid.min.css" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\ui-grid\ui-grid.min.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\ui-grid\ui-grid.svg" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\utils\vfs_fonts.js" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\auth\AuNguoiDungNhomQuyen\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\auth\AuNguoiDungQuyen\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\auth\AuNguoiDung\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\auth\AuNguoiDung\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\auth\AuNguoiDung\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\auth\AuNhomQuyenChucNang\config.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\auth\AuNhomQuyen\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\auth\AuNhomQuyen\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\auth\AuNhomQuyen\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\auth\AuNhomQuyen\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmCanBo\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmCanBo\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmCanBo\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmCanBo\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmCanBo\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmCanBo\selectMultiData.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmChucVu\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmChucVu\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmChucVu\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmChucVu\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmChucVu\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmChucVu\DownloadWord.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmDoiTuong\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmDoiTuong\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmDoiTuong\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmDoiTuong\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmDoiTuong\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmDonViPhongBan\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmDonViPhongBan\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmDotThanhTra\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmDotThanhTra\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmDotThanhTra\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmDotThanhTra\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmDotThanhTra\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmKeHoachThanhTra\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmKeHoachThanhTra\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmKeHoachThanhTra\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmKeHoachThanhTra\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmKeHoachThanhTra\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmLoaiThanhTra\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmLoaiThanhTra\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmLoaiThanhTra\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmLoaiThanhTra\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmLoaiThanhTra\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmNhomThanhTra\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmNhomThanhTra\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmNhomThanhTra\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmNhomThanhTra\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\dm\phf_dmNhomThanhTra\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\layouts\login.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\layouts\401.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\layouts\footer.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\layouts\header.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\layouts\home.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\layouts\layout.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\layouts\loadingGif.gif" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\NamBatTinhHinh\Bieu02\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\NamBatTinhHinh\reports.template.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoNSDVN\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\edit_TEMPLATE_BM_01TT_CQHC.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\edit_TEMPLATE_BM_02TT_CQHC.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\edit_TEMPLATE_BM_03TT_CQHC.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\edit_TEMPLATE_BM_04TT_CQHC.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\edit_TEMPLATE_BM_05TT_CQHC.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\edit_TEMPLATE_BM_06TT_CQHC.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\edit_TEMPLATE_BM_07TT_CQHC.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\edit_TEMPLATE_BM_08TT_CQHC.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\importFile.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTCQHC\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\edit_TEMPLATE_BM_07TT_DVSN.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\edit_TEMPLATE_BM_06TT_DVSN.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\edit_TEMPLATE_BM_04TT_DVSN.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\edit_TEMPLATE_BM_03TT_DVSN.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\edit_TEMPLATE_BM_08TT_DVSN.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\edit_TEMPLATE_BM_05TT_DVSN.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\edit_TEMPLATE_BM_09TT_DVSN.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\edit_TEMPLATE_BM_01TT_DVSN.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\edit_TEMPLATE_BM_02TT_DVSN.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\importFile.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTDVSN\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\edit_TEMPLATE_BM_03TT_TCXD.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\edit_TEMPLATE_BM_04TT_TCXD.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\edit_TEMPLATE_BM_05TT_TCXD.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\edit_TEMPLATE_BM_06TT_TCXD.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\edit_TEMPLATE_BM_07TT_TCXD.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\edit_TEMPLATE_BM_08TT_TCXD.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\edit_TEMPLATE_BM_10TT_TCXD.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\edit_TEMPLATE_BM_01TT_TCXD.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\edit_TEMPLATE_BM_02TT_TCXD.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\importFile.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvBaoCaoTTTCXD\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvCapNhatKetQuaThanhTra\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvCapNhatKetQuaThanhTra\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvCapNhatKetQuaThanhTra\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvCapNhatKetQuaThanhTra\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvCapNhatKetQuaThanhTra\importFile.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvCapNhatKetQuaThanhTra\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvGiaoThucHienTTThuocBo\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvGiaoThucHienTTThuocBo\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvPhanCongKeHoachThanhTraBo\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvPhanCongKeHoachThanhTraBo\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvPhanCongKeHoachThanhTraBo\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvPhanCongKeHoachThanhTraBo\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvPhanCongKeHoachThanhTraBo\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvKhThanhTraThuocBo\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvKhThanhTraThuocBo\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvKhThanhTraThuocBo\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvKhThanhTraThuocBo\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvKhThanhTraThuocBo\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvNhatKy\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvNhatKy\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvNhatKy\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvNhatKy\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvNhatKy\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvQDGiaoThucHienThanhTra\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvQDGiaoThucHienThanhTra\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvQDGiaoThucHienThanhTra\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvQDGiaoThucHienThanhTra\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvQDGiaoThucHienThanhTra\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvQuyetDinhPheDuyetTT\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvQuyetDinhPheDuyetTT\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvQuyetDinhPheDuyetTT\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvQuyetDinhPheDuyetTT\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvQuyetDinhPheDuyetTT\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvSoanThao\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvSoanThao\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvSoanThao\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvSoanThao\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvSoanThao\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvTheoDoiCanBo\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvTheoDoiCanBo\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvTheoDoiCanBo\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvTheoDoiCanBo\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvTheoDoiCanBo\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvTienDoThucHienTT\add.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvTienDoThucHienTT\delete.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvTienDoThucHienTT\detail.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvTienDoThucHienTT\edit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\nv\phf_nvTienDoThucHienTT\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\sys\sysChucNang\addoredit.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\sys\sysChucNang\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\sys\SysDvqhns\index.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\sys\SysDvqhns\selectMultidataLoai.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\sys\SysDvqhns\selectMultidataCTMT.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\sys\SysDvqhns\selectMultidataMuc.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\sys\SysDvqhns\selectMultidataTieuMuc.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\sys\SysDvqhns\selectMultidataKhoan.html" />
+    <Content Include="Layouts\BTS.SP.STC.PHF\views\sys\sysTuDien\selectMultiData.html" />
+    <Content Include="UI\wpControl_TT\Elements.xml" />
+    <Content Include="UI\wpControl_TT\wpControl_TTUserControl.ascx" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+</Project>

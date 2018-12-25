@@ -1,0 +1,32 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label>Tệp đính kèm</label><span style="color: red"> (*)</span>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <input type="file" style="width:200%;" id="js-upload-files" ngf-select="" ng-model="target.URL" name="file" ngf-accept="'.xls,.xlsx'" ngf-pattern="'.xls,.xlsx'" />
+                        </div>
+                    </div>
+                    <br />
+                    <uib-progressbar max="100" value="progressPercentage" style="height: 25px;"><span style="color: white; white-space: nowrap; font-size:17px;">{{progressPercentage}}%</span></uib-progressbar>
+                    <br />
+                    <div class="js-upload-finished" ng-if="result !== undefined">
+                        <div class="list-group">
+                            <a ng-if="result !== undefined && result"><span style="color: green; font-size: 17px; background: white;" class="badge alert-success pull-right">{{message}}</span></a>
+                            <a ng-if="result !== undefined && !result"><span style="color: red; font-size: 17px; background: white;" class="badge alert-error pull-right">Lỗi : {{message}}</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="button" class="btn btn-sm btn-primary" ng-if="target.URL" id="js-upload-submit" ng-disabled="_form.$invalid" ng-click="upload()">Tải file</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

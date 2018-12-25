@@ -1,0 +1,112 @@
+﻿<style>
+</style>
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}} </h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-3">
+                    <label>Mã phiếu</label><span style="color: red"> (*1)</span>
+                    <input type="text" class="form-control" ng-model="target.MA_PHIEU" name="MA_PHIEU" maxlength="50" required>
+                    <span style="color: red" ng-show="_form.MA_PHIEU.$dirty && _form.MA_PHIEU.$invalid">
+                        <span ng-show="_form.MA_PHIEU.$error.maxlength">Bạn không được nhập quá 50 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-3">
+                    <label>Tên phiếu</label><span style="color: red"> (2)</span>
+                    <input class="form-control" name="NOI_DUNG" type="text" ng-model="target.TEN_PHIEU" />
+                </div>
+                <div class="col-lg-3">
+                    <label>Năm thanh tra</label><span style="color: red"> (3)</span>
+                    <input type="text" class="form-control" ng-model="target.NAM_THANHTRA" name="NAM_THANHTRA">
+                </div>
+                <div class="col-lg-3">
+                    <label>Đợt thanh tra</label><span style="color: red"> (4)</span>
+                    <select class="form-control" ng-model="target.DOT_THANHTRA" ng-change="changeDotThanhTra(target.DOT_THANHTRA)">
+                        <option value="">--Chưa chọn đợt thanh tra--</option>
+                        <option ng-repeat="opt in lstDmDotThanhTra" value="{{opt.Value}}">{{opt.Text}}</option>
+                    </select>
+                    <!--<input type="text" class="form-control" ng-model="target.DOT_THANHTRA" name="DOT_THANHTRA" ng-change="changeDotThanhTra(target.DOT_THANHTRA)" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmDotThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmDotThanhTra)">-->
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-body" id="formAddDetail" style="padding-top:0px;">
+        <label>Chi tiết tiến độ</label>
+        <div id="myWorkContent">
+            <table class="table table-bordered table-hover table-condensed" style="width:100%">
+                <thead>
+                    <tr style="font-weight: bold">
+                        <th style="width:auto;" class="text-center" rowspan="2">STT</th>
+                        <th style="width:auto;max-width:150px;" class="text-center" rowspan="2">Họ tên cán bộ</th>
+                        <th style="width:auto;" class="text-center" rowspan="2">Chức vụ</th>
+                        <th style="width:auto;" class="text-center" rowspan="2">Giới tính</th>
+                        <th style="width:auto;" class="text-center" rowspan="2">Ngày sinh</th>
+                        <th style="width: auto;" class="text-center" rowspan="2">Phòng số</th>
+                        <th style="width:auto;" class="text-center" rowspan="2">Số máy lẻ</th>
+                        <th style="width:auto;" class="text-center" rowspan="2">Số di động</th>
+                        <th colspan="2">Đợt thanh tra</th>
+                    </tr>
+                    <tr style="font-weight: bold">
+                        <th style="width:auto;" class="text-center">Tên đơn vị thanh tra</th>
+                        <th style="width:auto;" class="text-center">Số quyết định</th>
+                    </tr>
+                </thead>
+                <tbody ng-form name="_formDetail">
+                    <tr ng-if="isLoading">
+                        <td colspan="16"><my-loading></my-loading></td>
+                    </tr>
+                    <tr ng-repeat="item in target.DETAILS track by $index">
+                        <td class="text-center">{{$index + 1}}</td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.TEN_CANBO" name="TEN_CANBO" disabled ng-if="item.STT!=0 && item.STT!=2 && item.STT!=4 && item.STT!=6 && item.STT!=8 && item.STT!=10 && item.STT!=12 && item.STT!=14 && item.STT!=16 && item.STT!=18 && item.STT!=20 && item.STT!=22">
+                            <input type="text" style="font-weight: bolder" class="form-control" ng-model="item.TEN_CANBO" name="TEN_CANBO" disabled ng-if="item.STT==0 || item.STT==2 || item.STT==4 || item.STT==6 || item.STT==8 || item.STT==10 || item.STT==12 || item.STT==14 || item.STT==16 || item.STT==18 || item.STT==20 || item.STT==22">
+                        </td>
+                        <td>
+                            <select ng-model="item.CHUCVU" ng-options="a.Value as a.Text for a in lstDmChucVu" class="form-control" disabled ng-if="item.STT!=0 && item.STT!=2 && item.STT!=4 && item.STT!=6 && item.STT!=8 && item.STT!=10 && item.STT!=12 && item.STT!=14 && item.STT!=16 && item.STT!=18 && item.STT!=20 && item.STT!=22"></select>
+
+                        </td>
+                        <td>
+                            <select ng-model="item.GIOI_TINH" ng-options="a.value as a.text for a in tempData('gioitinh')" class="form-control" disabled ng-if="item.STT!=0 && item.STT!=2 && item.STT!=4 && item.STT!=6 && item.STT!=8 && item.STT!=10 && item.STT!=12 && item.STT!=14 && item.STT!=16 && item.STT!=18 && item.STT!=20 && item.STT!=22"></select>
+                        </td>
+                        <td>
+                            <div class="add-input-zone">
+                                <input class="form-control" name="NGAY_SINH" type="text" ng-model="item.NGAY_SINH" placeholder="{{config.dateFormat}}"
+                                       uib-datepicker-popup="{{config.dateFormat}}" datepicker-localdate is-open="NGAY_SINH" disabled ng-if="item.STT!=0 && item.STT!=2 && item.STT!=4 && item.STT!=6 && item.STT!=8 && item.STT!=10 && item.STT!=12 && item.STT!=14 && item.STT!=16 && item.STT!=18 && item.STT!=20 && item.STT!=22" />
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.PHONGBAN" name="PHONGBAN" disabled ng-if="item.STT!=0 && item.STT!=2 && item.STT!=4 && item.STT!=6 && item.STT!=8 && item.STT!=10 && item.STT!=12 && item.STT!=14 && item.STT!=16 && item.STT!=18 && item.STT!=20 && item.STT!=22">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.SO_MAY_LE" name="SO_MAY_LE" disabled ng-if="item.STT!=0 && item.STT!=2 && item.STT!=4 && item.STT!=6 && item.STT!=8 && item.STT!=10 && item.STT!=12 && item.STT!=14 && item.STT!=16 && item.STT!=18 && item.STT!=20 && item.STT!=22">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.SO_DI_DONG" name="SO_DI_DONG" disabled ng-if="item.STT!=0 && item.STT!=2 && item.STT!=4 && item.STT!=6 && item.STT!=8 && item.STT!=10 && item.STT!=12 && item.STT!=14 && item.STT!=16 && item.STT!=18 && item.STT!=20 && item.STT!=22">
+                        </td>
+                        <td>
+                            <select ng-model="item.TEN_DOT_THANHTRA" ng-options="a.Value as a.Text for a in lstDmDoiTuong" class="form-control" disabled ng-if="item.STT!=0 && item.STT!=2 && item.STT!=4 && item.STT!=6 && item.STT!=8 && item.STT!=10 && item.STT!=12 && item.STT!=14 && item.STT!=16 && item.STT!=18 && item.STT!=20 && item.STT!=22"></select>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.SO_QUYETDINH" name="SO_QUYETDINH" disabled ng-if="item.STT!=0 && item.STT!=2 && item.STT!=4 && item.STT!=6 && item.STT!=8 && item.STT!=10 && item.STT!=12 && item.STT!=14 && item.STT!=16 && item.STT!=18 && item.STT!=20 && item.STT!=22">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer" style="padding:0 15px;">
+            <uib-pagination class="no-margin-vertical pagination-sm" style="margin:0;padding: 5px 0;" ng-model="paged.currentPage"
+                            ng-change="pageChanged()"
+                            items-per-page="itemsPerPage" ng-show="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.pageSize"
+                            boundary-links="true" num-pages="paged.totalPage"
+                            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+            </uib-pagination>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-click="add()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

@@ -1,0 +1,441 @@
+﻿--------------------------------------------------------
+--  DDL for Package PHC - KẾ TOÁN XÃ
+-- PHẠM TUẤN ANH 
+--------------------------------------------------------
+create or replace PACKAGE CANDOI_TAIKHOAN AS
+    PROCEDURE CDTK_CREATE_TABLE_PHATSINH;
+    PROCEDURE CDTK_LENCANDOI(TU_THANG IN NUMBER,DEN_THANG IN NUMBER,THANG_BATDAU_HACHTOAN IN NUMBER, THOIGIAN_DIEUCHINH NUMBER,TAIKHOAN_KHOBAC IN VARCHAR2);
+END CANDOI_TAIKHOAN;
+/
+create or replace PACKAGE BODY CANDOI_TAIKHOAN AS
+    PROCEDURE CDTK_CREATE_TABLE_PHATSINH IS
+        CHECK_TMP_PSC NUMBER;
+        CHECK_TMP_PSN NUMBER;
+        CHECK_TMP_PSK NUMBER;
+        CHECK_CANDOI_TAIKHOAN NUMBER;
+        QUERRY_CREATE_TMP_PSC VARCHAR2(32767);
+        QUERRY_CREATE_TMP_PSN VARCHAR2(32767);
+        QUERRY_CREATE_TMP_PSK VARCHAR2(32767);
+        P_CREATE_TABLE VARCHAR2(32767);
+        --CREATE TABLE TEMP PHATSINHNO,PHATSINHCO,PHATSINHNGHIEPVUKHAC
+        BEGIN
+            SELECT COUNT(*) INTO CHECK_TMP_PSC FROM DBA_TABLES WHERE TABLE_NAME = 'TEMP_PHATSINHCO';
+            SELECT COUNT(*) INTO CHECK_TMP_PSN FROM DBA_TABLES WHERE TABLE_NAME = 'TEMP_PHATSINHNO';
+            SELECT COUNT(*) INTO CHECK_TMP_PSK FROM DBA_TABLES WHERE TABLE_NAME = 'TEMP_PHATSINHKHAC';
+            SELECT COUNT(*) INTO CHECK_CANDOI_TAIKHOAN FROM DBA_TABLES WHERE TABLE_NAME = 'CANDOITAIKHOAN';
+              QUERRY_CREATE_TMP_PSC := 'CREATE GLOBAL TEMPORARY TABLE TEMP_PHATSINHCO (
+                                  ID 			NUMBER(10,0),
+                                  SO_CHUNGTU 	NVARCHAR2(50),
+                                  ONGBA 		NVARCHAR2(500),
+								  DIA_CHI 		NVARCHAR2(250),
+								  NGAY_CT 		DATE,
+								  NGAY_HT 		DATE,
+								  DIENGIAI 		NVARCHAR2(500),
+								  MA_CTMT 		NVARCHAR2(50),
+								  MA_TINHCHATNGUON 		NVARCHAR2(50),
+								  MA_CHUNGTU 		NVARCHAR2(50),
+								  TAIKHOAN_NO 		NVARCHAR2(50),
+								  TAIKHOAN_CO 		NVARCHAR2(50),
+								  LOAI 			NVARCHAR2(50),
+								  MADOITUONG 		NVARCHAR2(10),
+								  MAKHOANMUC 		NVARCHAR2(20),
+								  MACHITIET 		NVARCHAR2(20),
+								  CHUONG 		NVARCHAR2(10),
+								  LOAIKHOAN 		NVARCHAR2(20),
+								  TIEUMUC 		NVARCHAR2(10),
+								  SOLUONG 		NUMBER(18,2),
+								  GIA 		NUMBER(18,2),
+								  SOTIEN 		NUMBER(18,2),
+								  TIEN_NSNN 		NUMBER(18,2),
+								  TIENTHOAITHU 		NUMBER(18,2),
+								  TIENTHOAICHI 		NUMBER(18,2)
+                                )
+                                ON COMMIT DELETE ROWS';  
+              QUERRY_CREATE_TMP_PSN := 'CREATE GLOBAL TEMPORARY TABLE TEMP_PHATSINHNO (
+                                  ID 			NUMBER(10,0),
+                                  SO_CHUNGTU 	NVARCHAR2(50),
+                                  ONGBA 		NVARCHAR2(500),
+								  DIA_CHI 		NVARCHAR2(250),
+								  NGAY_CT 		DATE,
+								  NGAY_HT 		DATE,
+								  DIENGIAI 		NVARCHAR2(500),
+								  MA_CTMT 		NVARCHAR2(50),
+								  MA_TINHCHATNGUON 		NVARCHAR2(50),
+								  MA_CHUNGTU 		NVARCHAR2(50),
+								  TAIKHOAN_NO 		NVARCHAR2(50),
+								  TAIKHOAN_CO 		NVARCHAR2(50),
+								  LOAI 			NVARCHAR2(50),
+								  MADOITUONG 		NVARCHAR2(10),
+								  MAKHOANMUC 		NVARCHAR2(20),
+								  MACHITIET 		NVARCHAR2(20),
+								  CHUONG 		NVARCHAR2(10),
+								  LOAIKHOAN 		NVARCHAR2(20),
+								  TIEUMUC 		NVARCHAR2(10),
+								  SOLUONG 		NUMBER(18,2),
+								  GIA 		NUMBER(18,2),
+								  SOTIEN 		NUMBER(18,2),
+								  TIEN_NSNN 		NUMBER(18,2),
+								  TIENTHOAITHU 		NUMBER(18,2),
+								  TIENTHOAICHI 		NUMBER(18,2)
+                                )
+                                ON COMMIT DELETE ROWS';
+              QUERRY_CREATE_TMP_PSK := 'CREATE GLOBAL TEMPORARY TABLE TEMP_PHATSINHKHAC (
+                                  ID 			NUMBER(10,0),
+                                  SO_CHUNGTU 	NVARCHAR2(50),
+                                  ONGBA 		NVARCHAR2(500),
+								  DIA_CHI 		NVARCHAR2(250),
+								  NGAY_CT 		DATE,
+								  NGAY_HT 		DATE,
+								  DIENGIAI 		NVARCHAR2(500),
+								  MA_CTMT 		NVARCHAR2(50),
+								  MA_TINHCHATNGUON 		NVARCHAR2(50),
+								  MA_CHUNGTU 		NVARCHAR2(50),
+								  TAIKHOAN_NO 		NVARCHAR2(50),
+								  TAIKHOAN_CO 		NVARCHAR2(50),
+								  SOTIEN 		NUMBER(18,2)
+                                )
+                                ON COMMIT DELETE ROWS';
+        -- CREATE TABLE CANDOITAIKHOAN
+                P_CREATE_TABLE := 'CREATE TABLE CANDOITAIKHOAN(
+                    "MA_TAIKHOAN" NVARCHAR2(20), 
+                    "THANG" NUMBER,
+                    "TAMUNG" NUMBER,
+                    "DUNO_LUONG" NUMBER(17,4) DEFAULT 0,
+                    "DUCO_LUONG" NUMBER(17,4) DEFAULT 0,
+                    "DUNO_DAUKY" NUMBER(17,4) DEFAULT 0,
+                    "DUCO_DAUKY" NUMBER(17,4) DEFAULT 0,
+                    "LUYKENO_LUONG" NUMBER(17,4) DEFAULT 0,
+                    "LUYKECO_LUONG" NUMBER(17,4) DEFAULT 0,
+                    "LUYKENO" NUMBER(17,4) DEFAULT 0,
+                    "LUYKECO" NUMBER(17,4) DEFAULT 0,
+                    "LUYKENO_TUKHOIDAU" NUMBER(17,4) DEFAULT 0,
+                    "LUYKECO_TUKHOIDAU" NUMBER(17,4) DEFAULT 0,
+                    "CHUONG" NVARCHAR2(50),
+                    "LOAIKHOAN" NVARCHAR2(50),
+                    "MADOITUONG" NVARCHAR2(50),
+                    "MAKHOANMUC" NVARCHAR2(50),
+                    "MACHITIET" NVARCHAR2(50),
+                    "MUC" NVARCHAR2(50),
+                    "MA_CTMT" NVARCHAR2(50),
+                    "MA_TINHCHATNGUON" NVARCHAR2(50),
+                    "MA_DOITUONGTHANHTOAN" NVARCHAR2(50),
+                    "MA_QUY" NVARCHAR2(50),
+                    "LOAIHINH_DOITUONG" NVARCHAR2(50),
+                    "LOAIHINH_KHOANMUC" NVARCHAR2(50),
+                    "LOAIHINH_CHITIET" NVARCHAR2(50),
+                    "DUNO_NSNN" NUMBER(17,4) DEFAULT 0,
+                    "DUCO_NSNN" NUMBER(17,4) DEFAULT 0,
+                    "LUYKE_NO_NSNN" NUMBER(17,4) DEFAULT 0,
+                    "LUYKE_CO_NSNN" NUMBER(17,4) DEFAULT 0,
+                    "PHATSINH_NO" NUMBER(17,4) DEFAULT 0,
+                    "PHATSINH_CO" NUMBER(17,4) DEFAULT 0,
+                    "PHATSINH_NOLUONG" NUMBER(17,4) DEFAULT 0,
+                    "PHATSINH_COLUONG" NUMBER(17,4) DEFAULT 0,
+                    "PHATSINH_NO_NSNN" NUMBER(17,4) DEFAULT 0,
+                    "PHATSINH_CO_NSNN" NUMBER(17,4) DEFAULT 0) 
+                    SEGMENT CREATION IMMEDIATE PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING STORAGE
+                  (
+                    INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645 PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT
+                  )'; 
+                IF CHECK_TMP_PSC = 0  THEN 
+                    BEGIN
+                        DBMS_OUTPUT.PUT_LINE('QUERRY_CREATE_TMP_PSC--->' || QUERRY_CREATE_TMP_PSC);
+                        EXECUTE IMMEDIATE QUERRY_CREATE_TMP_PSC;    
+                    END;
+                END IF;
+                IF CHECK_TMP_PSN = 0  THEN 
+                    BEGIN
+                        DBMS_OUTPUT.PUT_LINE('QUERRY_CREATE_TMP_PSN--->' || QUERRY_CREATE_TMP_PSN);
+                        EXECUTE IMMEDIATE QUERRY_CREATE_TMP_PSN;    
+                    END;
+                END IF;
+                IF CHECK_TMP_PSK = 0  THEN 
+                    BEGIN
+                        DBMS_OUTPUT.PUT_LINE('QUERRY_CREATE_TMP_PSK--->' || QUERRY_CREATE_TMP_PSK);
+                        EXECUTE IMMEDIATE QUERRY_CREATE_TMP_PSK;    
+                    END;
+                END IF;
+                IF CHECK_CANDOI_TAIKHOAN = 0  THEN 
+                    BEGIN
+                        DBMS_OUTPUT.PUT_LINE('CHECK_CANDOI_TAIKHOAN--->' || P_CREATE_TABLE);
+                        EXECUTE IMMEDIATE P_CREATE_TABLE;    
+                    END;
+                END IF;
+    END CDTK_CREATE_TABLE_PHATSINH;
+    
+    
+    PROCEDURE CDTK_LENCANDOI(TU_THANG IN NUMBER,DEN_THANG IN NUMBER,THANG_BATDAU_HACHTOAN IN NUMBER, THOIGIAN_DIEUCHINH NUMBER,TAIKHOAN_KHOBAC IN VARCHAR2) IS
+        P_INSERT_PSN VARCHAR2(32767);
+        P_INSERT_PSC VARCHAR2(32767);
+        P_INSERT_PSK VARCHAR2(32767);
+        THANG_TRUOC NUMBER;
+        v_MA_CTMT VARCHAR2(50); 
+        v_MA_TINHCHATNGUON  VARCHAR2(50); 
+        v_TAIKHOAN_NO  VARCHAR2(50); 
+        v_MADOITUONG  VARCHAR2(50); 
+        v_MAKHOANMUC  VARCHAR2(50); 
+        v_MACHITIET  VARCHAR2(50); 
+        v_CHUONG  VARCHAR2(50);
+        v_LOAIKHOAN  VARCHAR2(50); 
+        v_TIEUMUC  VARCHAR2(50); 
+        v_SOTIEN  NUMBER; 
+        v_SOLUONG NUMBER;
+        v_TIEN_NSNN NUMBER;
+        v_THAMSO NUMBER;
+        
+        SQL_TEST VARCHAR2(32767);
+    BEGIN 
+           CDTK_CREATE_TABLE_PHATSINH();       
+           IF(THOIGIAN_DIEUCHINH = 0) THEN
+               P_INSERT_PSN := 'INSERT INTO TEMP_PHATSINHNO (
+                    SELECT ct.ID,h.SO_CHUNGTU,h.ONGBA,h.DIA_CHI,h.NGAY_CT,h.NGAY_HT,h.DIENGIAI,
+                    h.MA_CTMT,h.MA_TINHCHATNGUON,h.MA_CHUNGTU,d.TAIKHOAN_NO,d.TAIKHOAN_CO,ct.LOAI,
+                    ct.MADOITUONG,ct.MAKHOANMUC,ct.MACHITIET,ct.CHUONG,ct.LOAIKHOAN,ct.TIEUMUC,ct.SOLUONG,
+                    ct.GIA,ct.SOTIEN,ct.TIEN_NSNN,ct.TIENTHOAITHU,ct.TIENTHOAICHI
+                    FROM PHC_CHUNGTUHEADER h, PHC_CHUNGTUDETAILS d, PHC_CHUNGTUCHITIET ct
+                    WHERE h.SO_CHUNGTU = d.SO_CHUNGTU AND d.SO_CHUNGTU = ct.SO_CHUNGTU 
+                    AND TO_CHAR( h.NGAY_HT, ''MM'' ) BETWEEN '||TU_THANG||' AND '||DEN_THANG||'
+                    AND ct.LOAI = ''N'' 
+                    AND ct.SOTIEN <> 0 OR ct.TIEN_NSNN <> 0)';
+               P_INSERT_PSC := 'INSERT INTO TEMP_PHATSINHCO (
+                    SELECT ct.ID,h.SO_CHUNGTU,h.ONGBA,h.DIA_CHI,h.NGAY_CT,h.NGAY_HT,h.DIENGIAI,
+                    h.MA_CTMT,h.MA_TINHCHATNGUON,h.MA_CHUNGTU,d.TAIKHOAN_NO,d.TAIKHOAN_CO,ct.LOAI,
+                    ct.MADOITUONG,ct.MAKHOANMUC,ct.MACHITIET,ct.CHUONG,ct.LOAIKHOAN,ct.TIEUMUC,ct.SOLUONG,
+                    ct.GIA,ct.SOTIEN,ct.TIEN_NSNN,ct.TIENTHOAITHU,ct.TIENTHOAICHI
+                    FROM PHC_CHUNGTUHEADER h, PHC_CHUNGTUDETAILS d, PHC_CHUNGTUCHITIET ct
+                    WHERE h.SO_CHUNGTU = d.SO_CHUNGTU AND d.SO_CHUNGTU = ct.SO_CHUNGTU 
+                    AND TO_CHAR(h.NGAY_HT, ''MM'' ) BETWEEN '||TU_THANG||' AND '||DEN_THANG||'
+                    AND ct.LOAI = ''C'' 
+                    AND ct.SOTIEN <> 0 OR ct.TIEN_NSNN <> 0)';
+                P_INSERT_PSK := 'INSERT INTO TEMP_PHATSINHKHAC (
+                    SELECT ct.ID,h.SO_CHUNGTU,h.ONGBA,h.DIA_CHI,h.NGAY_CT,h.NGAY_HT,h.DIENGIAI,
+                    h.MA_CTMT,h.MA_TINHCHATNGUON,h.MA_CHUNGTU,d.TAIKHOAN_NO,d.TAIKHOAN_CO,ct.SOTIEN
+                    FROM PHC_CHUNGTUHEADER h, PHC_CHUNGTUDETAILS d, PHC_CHUNGTUCHITIET ct
+                    WHERE h.SO_CHUNGTU = d.SO_CHUNGTU AND d.SO_CHUNGTU = ct.SO_CHUNGTU 
+                    AND TO_CHAR(h.NGAY_HT, ''MM'' ) BETWEEN '||TU_THANG||' AND '||DEN_THANG||'
+                    AND ct.LOAI = ''C'' 
+                    AND ct.SOTIEN <> 0 OR ct.TIEN_NSNN <> 0)';
+               END IF;
+               
+             IF(THOIGIAN_DIEUCHINH = 1) THEN
+               P_INSERT_PSN := 'INSERT INTO TEMP_PHATSINHNO (
+                    SELECT ct.ID,h.SO_CHUNGTU,h.ONGBA,h.DIA_CHI,h.NGAY_CT,h.NGAY_HT,h.DIENGIAI,
+                    h.MA_CTMT,h.MA_TINHCHATNGUON,h.MA_CHUNGTU,d.TAIKHOAN_NO,d.TAIKHOAN_CO,ct.LOAI,
+                    ct.MADOITUONG,ct.MAKHOANMUC,ct.MACHITIET,ct.CHUONG,ct.LOAIKHOAN,ct.TIEUMUC,ct.SOLUONG,
+                    ct.GIA,ct.SOTIEN,ct.TIEN_NSNN,ct.TIENTHOAITHU,ct.TIENTHOAICHI
+                    FROM PHC_CHUNGTUHEADER h, PHC_CHUNGTUDETAILS d, PHC_CHUNGTUCHITIET ct
+                    WHERE h.SO_CHUNGTU = d.SO_CHUNGTU AND d.SO_CHUNGTU = ct.SO_CHUNGTU 
+                    AND TO_CHAR( h.NGAY_HT, ''MM'' ) BETWEEN '||TU_THANG||' AND '||DEN_THANG||'
+                    AND ct.LOAI = ''N'' 
+                    AND ct.SOTIEN <> 0)';
+               P_INSERT_PSC := 'INSERT INTO TEMP_PHATSINHCO (
+                    SELECT ct.ID,h.SO_CHUNGTU,h.ONGBA,h.DIA_CHI,h.NGAY_CT,h.NGAY_HT,h.DIENGIAI,
+                    h.MA_CTMT,h.MA_TINHCHATNGUON,h.MA_CHUNGTU,d.TAIKHOAN_NO,d.TAIKHOAN_CO,ct.LOAI,
+                    ct.MADOITUONG,ct.MAKHOANMUC,ct.MACHITIET,ct.CHUONG,ct.LOAIKHOAN,ct.TIEUMUC,ct.SOLUONG,
+                    ct.GIA,ct.SOTIEN,ct.TIEN_NSNN,ct.TIENTHOAITHU,ct.TIENTHOAICHI
+                    FROM PHC_CHUNGTUHEADER h, PHC_CHUNGTUDETAILS d, PHC_CHUNGTUCHITIET ct
+                    WHERE h.SO_CHUNGTU = d.SO_CHUNGTU AND d.SO_CHUNGTU = ct.SO_CHUNGTU 
+                    AND TO_CHAR(h.NGAY_HT, ''MM'' ) BETWEEN '||TU_THANG||' AND '||DEN_THANG||'
+                    AND ct.LOAI = ''C'' 
+                    AND ct.SOTIEN <> 0)';
+                P_INSERT_PSK := 'INSERT INTO TEMP_PHATSINHKHAC (
+                    SELECT ct.ID,h.SO_CHUNGTU,h.ONGBA,h.DIA_CHI,h.NGAY_CT,h.NGAY_HT,h.DIENGIAI,
+                    h.MA_CTMT,h.MA_TINHCHATNGUON,h.MA_CHUNGTU,d.TAIKHOAN_NO,d.TAIKHOAN_CO,ct.SOTIEN
+                    FROM PHC_CHUNGTUHEADER h, PHC_CHUNGTUDETAILS d, PHC_CHUNGTUCHITIET ct
+                    WHERE h.SO_CHUNGTU = d.SO_CHUNGTU AND d.SO_CHUNGTU = ct.SO_CHUNGTU 
+                    AND TO_CHAR(h.NGAY_HT, ''MM'' ) BETWEEN '||TU_THANG||' AND '||DEN_THANG||'
+                    AND ct.LOAI = ''C'' 
+                    AND ct.SOTIEN <> 0)';
+               END IF;
+            --Lên cân đối theo từng tháng
+        BEGIN
+            IF TU_THANG = THANG_BATDAU_HACHTOAN AND TU_THANG <= DEN_THANG THEN
+                --delete data
+                DBMS_OUTPUT.PUT_LINE('XÓA DỮ LIỆU CÂN ĐỐI THEO THÁNG');
+                DELETE FROM CANDOITAIKHOAN WHERE THANG = ''||TU_THANG||'' AND
+                NVL(DUNO_DAUKY,0) + NVL(DUCO_DAUKY,0) + NVL(LUYKENO,0) + NVL(LUYKECO,0) + 
+                NVL(DUNO_LUONG,0) + NVL(LUYKENO_TUKHOIDAU,0) + NVL(LUYKECO_TUKHOIDAU,0) +
+                NVL(DUNO_NSNN,0) + NVL(DUCO_NSNN,0) = 0;
+                UPDATE CANDOITAIKHOAN SET
+						PHATSINH_NO = 0,
+						PHATSINH_CO = 0,
+						PHATSINH_NOLUONG = 0,
+						PHATSINH_COLUONG = 0,
+						PHATSINH_NO_NSNN = 0,
+						PHATSINH_CO_NSNN = 0
+					WHERE THANG = ''||TU_THANG||'';
+            ELSE
+                DBMS_OUTPUT.PUT_LINE('BẮT ĐẦU LÊN CÂN ĐỐI THEO THÁNG');
+                DELETE FROM CANDOITAIKHOAN WHERE THANG = ''||TU_THANG||'';
+                --tính lại tháng trước
+				THANG_TRUOC := TU_THANG - 1;
+                INSERT INTO CANDOITAIKHOAN(THANG, TAMUNG, MA_TAIKHOAN, MADOITUONG, MAKHOANMUC, MACHITIET, DUNO_LUONG, DUCO_LUONG,
+					DUNO_DAUKY, DUCO_DAUKY, LUYKENO_LUONG, LUYKECO_LUONG, LUYKENO, LUYKECO, LUYKENO_TUKHOIDAU, LUYKECO_TUKHOIDAU, CHUONG, LOAIKHOAN,
+					MUC, LOAIHINH_DOITUONG, LOAIHINH_KHOANMUC, LOAIHINH_CHITIET, DUNO_NSNN, DUCO_NSNN, LUYKE_NO_NSNN, LUYKE_CO_NSNN, PHATSINH_NO,
+					PHATSINH_CO, PHATSINH_NOLUONG, PHATSINH_COLUONG, PHATSINH_NO_NSNN, PHATSINH_CO_NSNN, MA_CTMT, MA_TINHCHATNGUON,
+					MA_DOITUONGTHANHTOAN, MA_QUY)
+					SELECT THANG, TAMUNG, MA_TAIKHOAN, MADOITUONG, MAKHOANMUC, MACHITIET, 
+						NVL(DUNO_LUONG,0) AS DUNO_LUONG, NVL(DUCO_LUONG,0) AS DUCO_LUONG,
+						NVL(DUNO_DAUKY,0) AS DUNO_DAUKY, NVL(DUCO_DAUKY,0) AS DUCO_DAUKY, 
+                        NVL(LUYKENO_LUONG,0) AS LUYKENO_LUONG, NVL(LUYKECO_LUONG,0) AS LUYKECO_LUONG, 
+						NVL(LUYKENO,0) AS LUYKENO, NVL(LUYKECO,0) AS LUYKECO, 
+                        NVL(LUYKENO_TUKHOIDAU,0) AS LUYKENO_TUKHOIDAU, NVL(LUYKECO_TUKHOIDAU,0) AS LUYKECO_TUKHOIDAU,
+						CHUONG, LOAIKHOAN, MUC, LOAIHINH_DOITUONG, LOAIHINH_KHOANMUC, LOAIHINH_CHITIET, 
+						NVL(DUNO_NSNN,0) AS DUNO_NSNN, NVL(DUCO_NSNN,0) AS DUCO_NSNN,
+						NVL(LUYKE_NO_NSNN,0) AS LUYKE_NO_NSNN, NVL(LUYKE_CO_NSNN,0) AS LUYKE_CO_NSNN, NVL(PHATSINH_NO,0) AS PHATSINH_NO, NVL(PHATSINH_CO,0) AS PHATSINH_CO, 
+						NVL(PHATSINH_NOLUONG,0) AS PHATSINH_NOLUONG, NVL(PHATSINH_COLUONG,0) AS PHATSINH_COLUONG, NVL(PHATSINH_NO_NSNN,0) AS PHATSINH_NO_NSNN, NVL(PHATSINH_CO_NSNN,0) AS PHATSINH_CO_NSNN, 
+						MA_CTMT, MA_TINHCHATNGUON, MA_DOITUONGTHANHTOAN, MA_QUY
+					FROM CANDOITAIKHOAN 
+					WHERE THANG = THANG_TRUOC;
+                    
+                    UPDATE CANDOITAIKHOAN SET
+					DUNO_DAUKY = DUNO_DAUKY + PHATSINH_NO - (DUCO_DAUKY + PHATSINH_CO),
+					DUCO_DAUKY = DUCO_DAUKY + PHATSINH_CO - (DUNO_DAUKY + PHATSINH_NO),
+					DUNO_NSNN = DUNO_NSNN + PHATSINH_NO_NSNN - (DUCO_NSNN + PHATSINH_CO_NSNN),
+					DUCO_NSNN = DUCO_NSNN + PHATSINH_CO_NSNN - (DUNO_NSNN + PHATSINH_NO_NSNN),
+					DUNO_LUONG = DUNO_LUONG + PHATSINH_NOLUONG - (DUCO_LUONG + PHATSINH_COLUONG),
+					DUCO_LUONG = DUCO_LUONG + PHATSINH_COLUONG - (DUNO_LUONG + PHATSINH_NOLUONG ),
+					
+					LUYKENO_LUONG = LUYKENO_LUONG + PHATSINH_NOLUONG,
+					LUYKENO = LUYKENO + PHATSINH_NO,
+					LUYKE_NO_NSNN = LUYKE_NO_NSNN + PHATSINH_NO_NSNN,
+					LUYKENO_TUKHOIDAU = LUYKENO_TUKHOIDAU + LUYKENO,
+					
+					LUYKECO_LUONG = LUYKECO_LUONG + PHATSINH_COLUONG,
+					LUYKECO = LUYKECO + PHATSINH_CO,
+					LUYKE_CO_NSNN = LUYKE_CO_NSNN + PHATSINH_CO_NSNN,
+					LUYKECO_TUKHOIDAU = LUYKECO_TUKHOIDAU + LUYKECO,
+
+					PHATSINH_NO = 0,
+					PHATSINH_NOLUONG = 0,
+					PHATSINH_CO = 0,
+					PHATSINH_COLUONG = 0,
+					PHATSINH_NO_NSNN = 0,
+					PHATSINH_CO_NSNN = 0
+				WHERE THANG = ''||TU_THANG||'';					
+				--set số liệu cân đối
+				UPDATE CANDOITAIKHOAN SET DUNO_DAUKY = 0 WHERE THANG = ''||TU_THANG||'' AND DUNO_DAUKY < 0 AND MA_TAIKHOAN IN (SELECT MA FROM DM_TAIKHOAN WHERE TINHCHAT_TK IN ('L','T'));
+				UPDATE CANDOITAIKHOAN SET DUCO_DAUKY = 0 WHERE THANG = ''||TU_THANG||'' AND DUCO_DAUKY < 0 AND MA_TAIKHOAN IN (SELECT MA FROM DM_TAIKHOAN WHERE TINHCHAT_TK IN ('L','T'));
+				UPDATE CANDOITAIKHOAN SET DUNO_NSNN = 0 WHERE THANG = ''||TU_THANG||'' AND DUNO_NSNN < 0 AND MA_TAIKHOAN IN (SELECT MA FROM DM_TAIKHOAN WHERE TINHCHAT_TK IN ('L','T'));
+				UPDATE CANDOITAIKHOAN SET DUCO_NSNN = 0 WHERE THANG = ''||TU_THANG||'' AND DUCO_NSNN < 0 AND MA_TAIKHOAN IN (SELECT MA FROM DM_TAIKHOAN WHERE TINHCHAT_TK IN ('L','T'));
+				UPDATE CANDOITAIKHOAN SET DUNO_LUONG = 0 WHERE THANG = ''||TU_THANG||'' AND DUNO_LUONG < 0 AND MA_TAIKHOAN IN (SELECT MA FROM DM_TAIKHOAN WHERE TINHCHAT_TK IN ('L','T'));
+				UPDATE CANDOITAIKHOAN SET DUCO_LUONG = 0 WHERE THANG = ''||TU_THANG||'' AND DUCO_LUONG < 0 AND MA_TAIKHOAN IN (SELECT MA FROM DM_TAIKHOAN WHERE TINHCHAT_TK IN ('L','T'));
+
+				UPDATE CANDOITAIKHOAN SET DUNO_NSNN = 0, DUCO_NSNN = 0 
+				WHERE THANG = ''||TU_THANG||'' AND MA_TAIKHOAN IN (SELECT MA FROM DM_TAIKHOAN WHERE LATK_THUNS = 0);
+				
+                --trường hợp theo dõi số lượng --  vật tư
+				UPDATE CANDOITAIKHOAN SET DUNO_LUONG = 0, DUCO_LUONG = 0 
+				WHERE THANG = ''||TU_THANG||'' AND MA_TAIKHOAN IN (SELECT MA FROM DM_TAIKHOAN WHERE TINHTON = 0);
+
+				UPDATE CANDOITAIKHOAN SET DUCO_DAUKY = 0, DUCO_LUONG = 0, DUCO_NSNN = 0 
+				WHERE THANG = ''||TU_THANG||'' AND MA_TAIKHOAN IN (SELECT MA FROM DM_TAIKHOAN WHERE TINHCHAT_TK = 'N');
+					
+				UPDATE CANDOITAIKHOAN SET DUNO_DAUKY = 0, DUNO_LUONG = 0, DUNO_NSNN = 0 
+				WHERE THANG = ''||TU_THANG||'' AND MA_TAIKHOAN IN (SELECT MA FROM DM_TAIKHOAN WHERE TINHCHAT_TK = 'C');
+
+				UPDATE CANDOITAIKHOAN SET DUNO_DAUKY = 0, DUNO_LUONG = 0, DUNO_NSNN = 0, DUCO_DAUKY = 0, DUCO_LUONG = 0, DUCO_NSNN = 0 
+				WHERE THANG = ''||TU_THANG||'' AND MA_TAIKHOAN IN (SELECT MA FROM DM_TAIKHOAN WHERE TINHCHAT_TK NOT IN ('N','C','L','T'));
+                
+                --REGION CỘNG DỒN SỐ PHÁT SINH THEO TÀI KHOẢN
+                --SỐ PHÁT SINH NỢ
+                DECLARE
+                    CURSOR PHATSINH_NO_CUR IS SELECT MA_CTMT, MA_TINHCHATNGUON, TAIKHOAN_NO, MADOITUONG, MAKHOANMUC, 
+                    MACHITIET, CHUONG, LOAIKHOAN,TIEUMUC,SUM(NVL(SOTIEN,0)) AS SOTIEN, SUM(NVL(SOLUONG,0)) AS SOLUONG, SUM(NVL(TIEN_NSNN,0)) AS TIEN_NSNN FROM TEMP_PHATSINHNO
+                    WHERE TO_CHAR(NGAY_HT, 'MM' ) = ''||TU_THANG||'' OR ''||TU_THANG||'' = 13 AND TAIKHOAN_NO <> ''
+                    GROUP BY TAIKHOAN_NO, MADOITUONG, MAKHOANMUC, MACHITIET, CHUONG, LOAIKHOAN, TIEUMUC, MA_CTMT, MA_TINHCHATNGUON;
+                BEGIN
+                     FOR phatsinh_NO IN PHATSINH_NO_CUR
+                     LOOP
+                        DBMS_OUTPUT.PUT_LINE('CHẠY QUA ĐÂY:' || phatsinh_NO.MA_CTMT);
+                          v_THAMSO := 0;
+                          SELECT COUNT(*) INTO v_THAMSO FROM CANDOITAIKHOAN 
+                            WHERE THANG = ''||TU_THANG||'' AND MA_TAIKHOAN = phatsinh_NO.TAIKHOAN_NO
+                                AND (MADOITUONG = phatsinh_NO.MADOITUONG OR (phatsinh_NO.MADOITUONG IN NULL AND MADOITUONG IS NULL))
+                                AND (MAKHOANMUC = phatsinh_NO.MAKHOANMUC OR (phatsinh_NO.MAKHOANMUC IN NULL AND MAKHOANMUC IS NULL))
+                                AND (MACHITIET = phatsinh_NO.MACHITIET OR (phatsinh_NO.MACHITIET IN NULL AND MACHITIET IS NULL))
+                                AND (CHUONG = phatsinh_NO.CHUONG OR (phatsinh_NO.CHUONG IN NULL AND CHUONG IS NULL))
+                                AND (LOAIKHOAN = phatsinh_NO.LOAIKHOAN OR (phatsinh_NO.LOAIKHOAN IN NULL AND LOAIKHOAN IS NULL))
+                                AND (MUC = phatsinh_NO.TIEUMUC OR (phatsinh_NO.TIEUMUC IN NULL AND MUC IS NULL))
+                                --note
+                                AND (MA_CTMT = phatsinh_NO.MA_CTMT OR (phatsinh_NO.MA_CTMT IN NULL AND MA_CTMT IS NULL))
+                                AND (MA_TINHCHATNGUON = phatsinh_NO.MA_TINHCHATNGUON OR (phatsinh_NO.MA_TINHCHATNGUON IS NULL AND MA_TINHCHATNGUON IS NULL));
+                        IF v_THAMSO = 0 THEN 
+                        --note
+                            INSERT INTO CANDOITAIKHOAN(THANG, MA_TAIKHOAN, MADOITUONG, MAKHOANMUC, MACHITIET, CHUONG, LOAIKHOAN, MUC, MA_CTMT, MA_TINHCHATNGUON,
+                            PHATSINH_NO, PHATSINH_NOLUONG, PHATSINH_NO_NSNN) VALUES (''||TU_THANG||'', phatsinh_NO.TAIKHOAN_NO, phatsinh_NO.MADOITUONG, phatsinh_NO.MAKHOANMUC,
+                            phatsinh_NO.MACHITIET, phatsinh_NO.CHUONG, phatsinh_NO.LOAIKHOAN,phatsinh_NO.TIEUMUC, phatsinh_NO.MA_CTMT, phatsinh_NO.MA_TINHCHATNGUON,phatsinh_NO.SOTIEN,
+                            phatsinh_NO.SOLUONG, phatsinh_NO.TIEN_NSNN);
+                        ELSE 
+                            UPDATE CANDOITAIKHOAN SET
+                            PHATSINH_NO = phatsinh_NO.SOTIEN,
+                            PHATSINH_NOLUONG = phatsinh_NO.SOLUONG,
+                            PHATSINH_NO_NSNN = phatsinh_NO.TIEN_NSNN
+                        Where THANG = ''||TU_THANG||'' AND MA_TAIKHOAN = phatsinh_NO.TAIKHOAN_NO 
+                        --note
+                            AND (MADOITUONG = phatsinh_NO.TAIKHOAN_NO OR (phatsinh_NO.TAIKHOAN_NO IS NULL AND MADOITUONG IS NULL))
+                            AND (MAKHOANMUC = phatsinh_NO.MAKHOANMUC OR (phatsinh_NO.MAKHOANMUC IS NULL AND MAKHOANMUC IS NULL))
+                            AND (MACHITIET = phatsinh_NO.MACHITIET OR (phatsinh_NO.MACHITIET IS NULL AND MACHITIET IS NULL))
+                            AND (CHUONG = phatsinh_NO.CHUONG OR (phatsinh_NO.CHUONG IS NULL AND CHUONG IS NULL))
+                            AND (LOAIKHOAN = phatsinh_NO.LOAIKHOAN OR (phatsinh_NO.LOAIKHOAN IS NULL AND LOAIKHOAN IS NULL))
+                            AND (MUC = phatsinh_NO.TIEUMUC OR (phatsinh_NO.TIEUMUC IS NULL AND MUC IS NULL))
+                            AND (MA_CTMT = phatsinh_NO.MA_CTMT OR (phatsinh_NO.MA_CTMT IS NULL AND MA_CTMT IS NULL))
+                            AND (MA_TINHCHATNGUON = phatsinh_NO.MA_TINHCHATNGUON OR (phatsinh_NO.MA_TINHCHATNGUON IS NULL AND MA_TINHCHATNGUON IS NULL));
+                        END IF;
+                     END LOOP;
+                     --CLOSE PHATSINH_NO_CUR;
+                END;
+                
+                --SỐ PHÁT SINH CÓ
+                DECLARE
+                    CURSOR PHATSINH_CO_CUR IS SELECT MA_CTMT, MA_TINHCHATNGUON, TAIKHOAN_CO, MADOITUONG, MAKHOANMUC, 
+                    MACHITIET, CHUONG, LOAIKHOAN,TIEUMUC,SUM(NVL(SOTIEN,0)) AS SOTIEN, SUM(NVL(SOLUONG,0)) AS SOLUONG, SUM(NVL(TIEN_NSNN,0)) AS TIEN_NSNN FROM TEMP_PHATSINHCO
+                    WHERE TO_CHAR(NGAY_HT, 'MM' ) = ''||TU_THANG||'' OR ''||TU_THANG||'' = 13 AND TAIKHOAN_CO <> ''
+                    GROUP BY TAIKHOAN_CO, MADOITUONG, MAKHOANMUC, MACHITIET, CHUONG, LOAIKHOAN, TIEUMUC, MA_CTMT, MA_TINHCHATNGUON;
+                BEGIN
+                     FOR phatsinh_CO IN PHATSINH_CO_CUR 
+                     LOOP
+                          v_THAMSO := 0;
+                          SELECT COUNT(*) INTO v_THAMSO FROM CANDOITAIKHOAN 
+                            WHERE THANG = ''||TU_THANG||'' AND MA_TAIKHOAN = phatsinh_CO.TAIKHOAN_CO
+                                And (MADOITUONG = phatsinh_CO.MADOITUONG OR (phatsinh_CO.MADOITUONG IN NULL AND MADOITUONG IS NULL))
+                                And (MAKHOANMUC = phatsinh_CO.MAKHOANMUC OR (phatsinh_CO.MAKHOANMUC IN NULL AND MAKHOANMUC IS NULL))
+                                And (MACHITIET = phatsinh_CO.MACHITIET OR (phatsinh_CO.MACHITIET IN NULL AND MACHITIET IS NULL))
+                                And (CHUONG = phatsinh_CO.CHUONG OR (phatsinh_CO.CHUONG IN NULL AND CHUONG IS NULL))
+                                And (LOAIKHOAN = phatsinh_CO.LOAIKHOAN OR (phatsinh_CO.LOAIKHOAN IN NULL AND LOAIKHOAN IS NULL))
+                                And (MUC = phatsinh_CO.TIEUMUC OR (phatsinh_CO.TIEUMUC IN NULL AND MUC IS NULL))
+                                --note
+                                And (MA_CTMT = phatsinh_CO.MA_CTMT OR (phatsinh_CO.MA_CTMT IN NULL AND MA_CTMT IS NULL))
+                                And (MA_TINHCHATNGUON = phatsinh_CO.MA_TINHCHATNGUON OR (phatsinh_CO.MA_TINHCHATNGUON IS NULL AND MA_TINHCHATNGUON IS NULL));
+                        IF v_THAMSO = 0 THEN 
+                        --note
+                            INSERT INTO CANDOITAIKHOAN(THANG, MA_TAIKHOAN, MADOITUONG, MAKHOANMUC, MACHITIET, CHUONG, LOAIKHOAN, MUC, MA_CTMT, MA_TINHCHATNGUON,
+                            phatsinh_CO, phatsinh_COLUONG, phatsinh_CO_NSNN) VALUES (''||TU_THANG||'', phatsinh_CO.TAIKHOAN_CO, phatsinh_CO.MADOITUONG, phatsinh_CO.MAKHOANMUC,
+                            phatsinh_CO.MACHITIET, phatsinh_CO.CHUONG, phatsinh_CO.LOAIKHOAN,phatsinh_CO.TIEUMUC, phatsinh_CO.MA_CTMT, phatsinh_CO.MA_TINHCHATNGUON,phatsinh_CO.SOTIEN,
+                            phatsinh_CO.SOLUONG, phatsinh_CO.TIEN_NSNN);
+                        ELSE 
+                            UPDATE CANDOITAIKHOAN SET
+                            phatsinh_CO = phatsinh_CO.SOTIEN,
+                            phatsinh_COLUONG = phatsinh_CO.SOLUONG,
+                            phatsinh_CO_NSNN = phatsinh_CO.TIEN_NSNN
+                        Where THANG = ''||TU_THANG||'' AND MA_TAIKHOAN = phatsinh_CO.TAIKHOAN_CO 
+                        --note
+                            AND (MADOITUONG = phatsinh_CO.TAIKHOAN_CO OR (phatsinh_CO.TAIKHOAN_CO IS NULL AND MADOITUONG IS NULL))
+                            AND (MAKHOANMUC = phatsinh_CO.MAKHOANMUC OR (phatsinh_CO.MAKHOANMUC IS NULL AND MAKHOANMUC IS NULL))
+                            AND (MACHITIET = phatsinh_CO.MACHITIET OR (phatsinh_CO.MACHITIET IS NULL AND MACHITIET IS NULL))
+                            AND (CHUONG = phatsinh_CO.CHUONG OR (phatsinh_CO.CHUONG IS NULL AND CHUONG IS NULL))
+                            AND (LOAIKHOAN = phatsinh_CO.LOAIKHOAN OR (phatsinh_CO.LOAIKHOAN IS NULL AND LOAIKHOAN IS NULL))
+                            AND (MUC = phatsinh_CO.TIEUMUC OR (phatsinh_CO.TIEUMUC IS NULL AND MUC IS NULL))
+                            AND (MA_CTMT = phatsinh_CO.MA_CTMT OR (phatsinh_CO.MA_CTMT IS NULL AND MA_CTMT IS NULL))
+                            AND (MA_TINHCHATNGUON = phatsinh_CO.MA_TINHCHATNGUON OR (phatsinh_CO.MA_TINHCHATNGUON IS NULL AND MA_TINHCHATNGUON IS NULL));
+                        END IF;
+                     END LOOP;
+                     --CLOSE PHATSINH_CO_CUR;
+                END;
+                
+                --END REGION
+            END IF;
+        END;
+    END CDTK_LENCANDOI;
+END CANDOI_TAIKHOAN;
+/

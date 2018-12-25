@@ -1,0 +1,23 @@
+﻿<div>
+    <style>
+        #reportViewer1 {
+            width: 100%;
+            height:90vh;
+        }
+
+        .class-window .modal-dialog {
+            width: 90%;
+        }
+
+        .modal-content .modal-lg {
+            width: 100%;
+        }
+    </style>
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Đóng</button>
+    </div>
+    <report name="{{report.name}}" params="{{report.params}}"></report>
+    <div id="reportViewer1" style="display: none;">
+        loading...
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿create or replace procedure PHA_DTXDCB_MAU_01_CQTH(P_CONGTHUC VARCHAR2, NAM_HL VARCHAR2, DONVI_TIEN number, cur OUT SYS_REFCURSOR) as
+   QUERY_STR  VARCHAR2(32767); 
+   P_CT VARCHAR2(32767);   
+   P_SQL_INSERT VARCHAR2(32767);
+   MA_TKTN_TAM_UNG VARCHAR2(50);   
+   MA_DU_AN VARCHAR2(50);   
+   BEGIN
+        MA_TKTN_TAM_UNG := '''1%''';
+        MA_DU_AN := '''7%''';        
+    IF TRIM(P_CONGTHUC) IS NOT NULL THEN 
+        select STC_PA_SYS.FNC_CONVERT_FORMULA_HCSN(P_CONGTHUC) INTO P_CT from dual;
+        P_SQL_INSERT:= ' '||P_SQL_INSERT ||' and '||P_CT;
+    END IF;
+   QUERY_STR:='select A.MA_DVQHNS, B.TEN_DVQHNS,
+            SUM (CASE WHEN (A.MA_TKTN LIKE '||MA_TKTN_TAM_UNG||') THEN GIA_TRI_HACH_TOAN/NVL('|| DONVI_TIEN ||',1) ELSE 0 END) AS DU_TU_CHUYEN_NGUON_SANG_NAM,
+            SUM (CASE WHEN (A.MA_TKTN LIKE '||MA_TKTN_TAM_UNG||') THEN GIA_TRI_HACH_TOAN/NVL('|| DONVI_TIEN ||',1) ELSE 0 END) AS HOAN_UNG_TRONG_NAM
+           
+            from PHA_HACHTOAN_CHI A
+            left join SYS_DVQHNS B on B.MA_DVQHNS = A.MA_DVQHNS
+            where A.MA_DVQHNS LIKE '||MA_DU_AN||'
+            AND A.NGAY_HIEU_LUC >= TO_DATE ('''|| '0101' || NAM_HL  ||''', ''ddMMyyyy'')
+            AND A.NGAY_HIEU_LUC <= TO_DATE ('''|| '3112' || NAM_HL  ||''', ''ddMMyyyy'')'||P_SQL_INSERT||'
+            group by A.MA_DVQHNS, B.TEN_DVQHNS
+            order by A.MA_DVQHNS;';
+   DBMS_OUTPUT.put_line (QUERY_STR);
+BEGIN
+--EXECUTE IMMEDIATE QUERY_STR;
+OPEN cur FOR QUERY_STR;
+EXCEPTION
+   WHEN NO_DATA_FOUND
+   THEN
+      DBMS_OUTPUT.put_line ('<your message>' || SQLERRM);
+   WHEN OTHERS
+   THEN
+      DBMS_OUTPUT.put_line (QUERY_STR  || SQLERRM); 
+END;    
+END PHA_DTXDCB_MAU_01_CQTH;

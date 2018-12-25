@@ -1,0 +1,157 @@
+﻿<style>
+    .modal-dialog.modal-md {
+        width: 65% !important;
+    }
+</style>
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}} </h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Đơn vị thuộc bộ</label><span style="color: red"> (3)</span>
+                    <input type="text" class="form-control" ng-model="target.MA_PHONGBAN" name="MA_PHONGBAN" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmPhongThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmPhongThanhTra)" readonly>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã phiếu</label><span style="color: red"> (*1)</span>
+                    <input type="text" class="form-control" ng-model="target.MA_PHIEU" name="MA_PHIEU" maxlength="50" required readonly>
+                    <span style="color: red" ng-show="_form.MA_PHIEU.$dirty && _form.MA_PHIEU.$invalid">
+                        <span ng-show="_form.MA_PHIEU.$error.maxlength">Bạn không được nhập quá 50 ký tự</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Ngày tháng lưu trữ dữ liệu</label><span style="color: red"> (2)</span>
+                    <input class="form-control" name="NGAY_LUU_DL" type="text" ng-model="target.NGAY_LUU_DL" placeholder="{{config.dateFormat}}"
+                           uib-datepicker-popup="{{config.dateFormat}}" datepicker-localdate is-open="NGAY_LUU_DL" disabled />
+                    <div class="button-calender" ng-click="NGAY_LUU_DL = !NGAY_LUU_DL; config.delegateEvent($event);">
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Đợt thanh tra</label><span style="color: red"> (3)</span>
+                    <input type="text" class="form-control" ng-model="target.DOT_THANHTRA" name="DOT_THANHTRA" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmDotThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmDotThanhTra)" readonly>
+                </div>
+                <div class="col-lg-6">
+                    <label>Năm thanh tra</label><span style="color: red"> (2)</span>
+                    <input type="number" class="form-control" ng-model="target.NAM_THANHTRA" name="NAM_THANHTRA" maxlength="50" readonly>
+                    <span style="color: red" ng-show="_form.NAM_THANHTRA.$dirty && _form.NAM_THANHTRA.$invalid">
+                        <span ng-show="_form.NAM_THANHTRA.$error.maxlength">Bạn không được nhập quá 500 ký tự</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label>Nội dung</label><span style="color: red"> (3)</span>
+                    <textarea style="resize: none; height: 156px" class="form-control" name="NOI_DUNG" maxlength="1000" ng-model="target.NOI_DUNG" readonly></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-body" id="formAddDetail" style="padding-top:0px;">
+        <label>Chi tiết dự án</label>
+        <div id="myWorkContent">
+            <table class="table table-bordered table-hover table-condensed" style="width:100%">
+                <thead>
+                    <tr style="font-weight: bold">
+                        <th style="width:auto;" class="text-center">STT</th>
+                        <th style="width:auto;" class="text-center">Loại thanh tra</th>
+                        <th style="width:auto;" class="text-center">Nhóm thanh tra</th>
+                        <th style="width: auto;" class="text-center">Đối tượng thanh tra</th>
+                        <th style="width: auto;" class="text-center">Cơ quan thanh tra</th>
+                        <th style="width: auto;" class="text-center">Nội dung thanh tra </th>
+                        <th style="width: auto;" class="text-center">Thời kỳ thanh tra</th>
+                        <th style="width: auto;" class="text-center">Tệp đính kèm</th>
+                        <th style="width:60px"></th>
+                    </tr>
+                </thead>
+                <tbody ng-form name="_formAddDetail">
+                    <tr style="background:rgba(255, 102, 102, 0.48)" ng-enter="addRow()">
+                        <td style="text-align:center;"></td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="newItem.LOAI_THANHTRA" name="LOAI_THANHTRA" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmLoaiThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmLoaiThanhTra)" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="newItem.NHOM_THANHTRA" name="NHOM_THANHTRA" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmNhomThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmNhomThanhTra)" readonly>
+
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="newItem.DOITUONG_THANHTRA" name="DOITUONG_THANHTRA" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmDoiTuongThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmDoiTuongThanhTra)" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="newItem.COQUAN_THANHTRA" name="COQUAN_THANHTRA" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmPhongThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmPhongThanhTra)" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="newItem.NOIDUNG_THANHTRA" name="NOIDUNG_THANHTRA" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="newItem.THOIKY_THANHTRA" name="THOIKY_THANHTRA" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="newItem.TEP_DINHKEM" name="TEP_DINHKEM" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmDoiTuongThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmDoiTuongThanhTra)">
+                        </td>
+
+                        <td style="white-space: nowrap" class="text-center">
+                            <div class="form-buttons form-inline">
+                                <button prevent-default type="button" ng-disabled="_formAddDetail.$invalid" ng-click="addRow()" class="btn btn-primary form-control">Thêm</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody ng-form name="_formDetail">
+                    <tr ng-if="isLoading">
+                        <td colspan="16"><my-loading></my-loading></td>
+                    </tr>
+                    <tr ng-repeat="item in target.DETAILS track by $index">
+                        <td class="text-center">{{$index + 1}}</td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.LOAI_THANHTRA" name="LOAI_THANHTRA" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmLoaiThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmLoaiThanhTra)" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.NHOM_THANHTRA" name="NHOM_THANHTRA" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmNhomThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmNhomThanhTra)" readonly>
+
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.DOITUONG_THANHTRA" name="DOITUONG_THANHTRA" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmDoiTuongThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmDoiTuongThanhTra)" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.COQUAN_THANHTRA" name="COQUAN_THANHTRA" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmPhongThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmPhongThanhTra)" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.NOIDUNG_THANHTRA" name="NOIDUNG_THANHTRA" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmDoiTuongThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmDoiTuongThanhTra)" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.THOIKY_THANHTRA" name="THOIKY_THANHTRA" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmDoiTuongThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmDoiTuongThanhTra)" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-model="item.TEP_DINHKEM" name="TEP_DINHKEM" typeahead-editable="false" typeahead-wait-ms=10 uib-typeahead="opt.Value as opt.Text for opt in lstDmDoiTuongThanhTra | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, lstDmDoiTuongThanhTra)">
+                        </td>
+                        <td style="white-space: nowrap" class="text-center">
+                            <div class="form-buttons form-inline">
+                                <button prevent-default type="button" style="height: 20px; line-height: 2px;background: rgba(255, 213, 93, 0.61);" ng-click="removeItem($index)" class="btn btn-default form-control">
+                                    Xóa
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer" style="padding:0 15px;">
+            <uib-pagination class="no-margin-vertical pagination-sm" style="margin:0;padding: 5px 0;" ng-model="paged.currentPage"
+                            ng-change="pageChanged()"
+                            items-per-page="itemsPerPage" ng-show="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.pageSize"
+                            boundary-links="true" num-pages="paged.totalPage"
+                            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+            </uib-pagination>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-click="add()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

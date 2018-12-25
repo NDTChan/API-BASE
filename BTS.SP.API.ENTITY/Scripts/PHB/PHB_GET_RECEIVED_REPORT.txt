@@ -1,0 +1,45 @@
+﻿create or replace PROCEDURE PHB_GET_RECEIVED_REPORT
+(
+  maBaoCao IN NVARCHAR2,
+  maQHNS IN NVARCHAR2,
+  namBC IN NUMBER,
+  kyBC IN NUMBER,
+  outRef OUT SYS_REFCURSOR
+)AS
+QUERY_STR  VARCHAR2(10000); 
+BEGIN
+    IF(maBaoCao <>'-1') THEN
+    QUERY_STR:='SELECT '''||maBaoCao||''' AS MA_BAO_CAO, bc.ID,bc.MA_QHNS,sys.TEN_DVQHNS,'''||maBaoCao||'-00'' as MA_TEMPLATE,bc.MA_CHUONG,bc.NAM_BC,bc.KY_BC,bc.TRANG_THAI,bc.REFID FROM '||maBaoCao||' bc,SYS_DVQHNS sys 
+                    WHERE (bc.NAM_BC='||namBC||' OR '''||namBC||'''=''-1'') AND (bc.KY_BC='||kyBC||' OR '''||kyBC||'''=''-1'') AND (bc.MA_QHNS='''||maQHNS||''' OR '''||maQHNS||'''=''-1'') AND bc.MA_QHNS=sys.MA_DVQHNS' ;
+                    DBMS_OUTPUT.PUT_LINE(QUERY_STR);
+        OPEN outRef FOR QUERY_STR;
+        
+    ELSE
+        OPEN outRef FOR
+            SELECT 'PHB_B01H' AS MA_BAO_CAO,b01h."ID",b01h.MA_QHNS,sysDVQHNS.TEN_DVQHNS,cast('PHB_B01H-00' as nvarchar2(15)) AS MA_TEMPLATE,b01h.MA_CHUONG,b01h.NAM_BC,b01h.KY_BC,b01h.TRANG_THAI,b01h.REFID FROM  PHB_B01H b01h,SYS_DVQHNS sysDVQHNS
+                WHERE (b01h.NAM_BC = namBC OR namBC=-1) AND (b01h.KY_BC = kyBC OR kyBC=-1) AND (maQHNS='-1' OR b01h.MA_QHNS=maQHNS) AND b01h.MA_QHNS = sysDVQHNS.MA_DVQHNS
+            UNION
+            (SELECT 'PHB_B02HP1' AS MA_BAO_CAO,b02hp1."ID",b02hp1.MA_QHNS,sysDVQHNS.TEN_DVQHNS,b02hp1.MA_TEMPLATE,b02hp1.MA_CHUONG,b02hp1.NAM_BC,b02hp1.KY_BC,b02hp1.TRANG_THAI,b02hp1.REFID FROM  PHB_B02HP1 b02hp1,SYS_DVQHNS sysDVQHNS
+                WHERE (b02hp1.NAM_BC = namBC OR namBC=-1) AND (b02hp1.KY_BC = kyBC OR kyBC=-1) AND (maQHNS='-1' OR b02hp1.MA_QHNS=maQHNS) AND b02hp1.MA_QHNS = sysDVQHNS.MA_DVQHNS
+            )
+            UNION
+            (SELECT 'PHB_B03CTH' AS MA_BAO_CAO,b03cth."ID",b03cth.MA_QHNS,sysDVQHNS.TEN_DVQHNS,b03cth.MA_TEMPLATE,b03cth.MA_CHUONG,b03cth.NAM_BC,b03cth.KY_BC,b03cth.TRANG_THAI,b03cth.REFID FROM  PHB_B03CTH b03cth,SYS_DVQHNS sysDVQHNS
+                WHERE (b03cth.NAM_BC = namBC OR namBC=-1) AND (b03cth.KY_BC = kyBC OR kyBC=-1) AND (maQHNS='-1' OR b03cth.MA_QHNS=maQHNS) AND b03cth.MA_QHNS = sysDVQHNS.MA_DVQHNS
+            )
+            UNION
+            (
+            SELECT 'PHB_B03H' AS MA_BAO_CAO,b03h."ID",b03h.MA_QHNS,sysDVQHNS.TEN_DVQHNS,b03h.MA_TEMPLATE,b03h.MA_CHUONG,b03h.NAM_BC,b03h.KY_BC,b03h.TRANG_THAI,b03h.REFID FROM  PHB_B03H b03h,SYS_DVQHNS sysDVQHNS
+                WHERE (b03h.NAM_BC = namBC OR namBC=-1) AND (b03h.KY_BC = kyBC OR kyBC=-1) AND (maQHNS='-1' OR b03h.MA_QHNS=maQHNS) AND b03h.MA_QHNS = sysDVQHNS.MA_DVQHNS
+            )
+            UNION
+            (
+            SELECT 'PHB_B04H' AS MA_BAO_CAO,b04h."ID",b04h.MA_QHNS,sysDVQHNS.TEN_DVQHNS,cast('PHB_B04H-00' as nvarchar2(15))AS MA_TEMPLATE,b04h.MA_CHUONG,b04h.NAM_BC,b04h.KY_BC,b04h.TRANG_THAI,b04h.REFID FROM  PHB_B04H b04h,SYS_DVQHNS sysDVQHNS
+                WHERE (b04h.NAM_BC = namBC OR namBC=-1) AND (b04h.KY_BC = kyBC OR kyBC=-1) AND (maQHNS='-1' OR b04h.MA_QHNS=maQHNS) AND b04h.MA_QHNS = sysDVQHNS.MA_DVQHNS
+            )
+            UNION
+            (
+            SELECT 'PHB_B06H' AS MA_BAO_CAO,b06h."ID",b06h.MA_QHNS,sysDVQHNS.TEN_DVQHNS,b06h.MA_TEMPLATE,b06h.MA_CHUONG,b06h.NAM_BC,b06h.KY_BC,b06h.TRANG_THAI,b06h.REFID FROM  PHB_B06H b06h,SYS_DVQHNS sysDVQHNS
+                WHERE (b06h.NAM_BC = namBC OR namBC=-1) AND (b06h.KY_BC = kyBC OR kyBC=-1) AND (maQHNS='-1' OR b06h.MA_QHNS=maQHNS) AND b06h.MA_QHNS = sysDVQHNS.MA_DVQHNS
+            );
+    END IF;
+END PHB_GET_RECEIVED_REPORT;

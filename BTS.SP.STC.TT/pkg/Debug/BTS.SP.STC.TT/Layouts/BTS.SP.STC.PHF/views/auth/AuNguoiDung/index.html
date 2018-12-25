@@ -1,0 +1,123 @@
+﻿<style type="text/css">
+    a {
+        cursor: pointer;
+    }
+
+    .k-grid .k-grid-toolbar .k-grid-add,
+    .k-grid tbody .k-grid-edit,
+    .k-grid tbody .k-grid-update,
+    .k-grid tbody .k-grid-cancel,
+    .k-grid tbody .k-grid-delete {
+        min-width: 0;
+    }
+
+        .k-grid .k-grid-toolbar .k-grid-add .k-icon,
+        .k-grid tbody .k-grid-edit .k-icon,
+        .k-grid tbody .k-grid-update .k-icon,
+        .k-grid tbody .k-grid-cancel .k-icon,
+        .k-grid tbody .k-grid-delete .k-icon {
+            margin: 0;
+        }
+
+    .k-detail-cell .k-tabstrip .k-content {
+        padding: 0.2em;
+    }
+
+    .employee-details ul {
+        list-style: none;
+        font-style: italic;
+        margin: 15px;
+        padding: 0;
+    }
+
+        .employee-details ul li {
+            margin: 0;
+            line-height: 1.7em;
+        }
+
+    .employee-details label {
+        display: inline-block;
+        width: 90px;
+        padding-right: 10px;
+        text-align: right;
+        font-style: normal;
+        font-weight: bold;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="modal-header">
+                <h3 class="modal-title">{{title}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row form-group">
+                    <div class="col-lg-4">
+                        <div id="example">
+                            <div class="demo-section k-content">
+                                <div id="treeview"></div>
+                            </div>
+                            <script id="treeview-template" type="text/kendo-ui-template">
+                                #: item.ten #
+                                # if (item.children) { #
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class="create"><i class="fa fa-plus-circle" title="Tạo tài khoản thuộc đơn vị"></i></a>
+                                # } #
+                            </script>
+                            <style>
+                                #treeview .k-sprite {
+                                    background-image: url('/_layouts/15/BTS.SP.STC.PHF/utils/kendo/styles/content/web/treeview/coloricons-sprite.png');
+                                }
+
+                                .rootfolder {
+                                    background-position: 0 0;
+                                }
+
+                                .folder {
+                                    background-position: 0 -16px;
+                                }
+
+                                .pdf {
+                                    background-position: 0 -32px;
+                                }
+
+                                .html {
+                                    background-position: 0 -48px;
+                                }
+
+                                .image {
+                                    background-position: 0 -64px;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div id="grid"></div>
+                        <script type="text/x-kendo-template" id="template">
+                            <div class="tabstrip">
+                                <ul>
+                                    <li>
+                                        Thông tin chi tiết
+                                    </li>
+                                </ul>
+                                <div>
+                                    <div class='employee-details'>
+                                        <ul>
+                                            <li><label>Tài khoản:</label>#= username #</li>
+                                            <li><label>Tên đầy đủ:</label>#= fullname #</li>
+                                            <li><label>Email:</label>#= email #</li>
+                                            <li><label>Điện thoại:</label>#= phone #</li>
+                                            <li><label>Ghi chú:</label>#= ghichu #</li>
+                                            <li><label>Mã đơn vị:</label>#= mA_DONVI #</li>
+                                            <li><label>Trạng thái:</label>#= trangthai === 1 ? 'Sử dụng' : 'Không sử dụng' #</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

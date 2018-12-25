@@ -1,0 +1,95 @@
+﻿<style type="text/css">
+    a {
+        cursor: pointer;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Kế hoạch Kiểm toán nhà nước</h2>
+            <div style="padding: 20px 0px;">
+                <button prevent-default class="btn btn-primary" title="Thêm mới" ng-click="create()" ng-if="accessList.Add" style="float: left;margin-right: 10px;">{{config.label.btnCreate}}</button>
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="filtered.Summary" ng-enter="doSearch()">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" prevent-default title="Tìm kiếm" ng-click="doSearch()" ng-if="accessList.View"><span class="fa fa-search"></span>&ensp;{{config.label.btnSearch}}</button>
+                        <button class="btn btn-default" prevent-default title="Tải lại trang" ng-click="refresh()" ng-if="accessList.View"><span class="fa fa-refresh"></span>&ensp;{{config.label.btnRefresh}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th width="10%">Hành động</th>
+                            <th width="100px">STT</th>
+                            <th>
+                                <a ng-click="sortType = 'LOAIMANHAP'; sortReverse = !sortReverse">
+                                    Đơn vị/ Địa bàn
+                                    <span ng-show="sortType == 'LOAIMANHAP' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'LOAIMANHAP' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'MA_LOAITHANHTRA'; sortReverse = !sortReverse">
+                                    Loại thanh tra
+                                    <span ng-show="sortType == 'MA_LOAITHANHTRA' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'MA_LOAITHANHTRA' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'MA_DOTTHANHTRA'; sortReverse = !sortReverse">
+                                    Đợt thanh tra
+                                    <span ng-show="sortType == 'MA_DOTTHANHTRA' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'MA_DOTTHANHTRA' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'TUNGAY'; sortReverse = !sortReverse">
+                                    Từ ngày thanh tra
+                                    <span ng-show="sortType == 'TUNGAY' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'TUNGAY' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a ng-click="sortType = 'DENNGAY'; sortReverse = !sortReverse">
+                                    Đến ngày
+                                    <span ng-show="sortType == 'DENNGAY' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'DENNGAY' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody ng-if="accessList.View">
+                        <tr ng-show="data==NULL ||data.length<=0">
+                            <td colspan="7" style="background-color: #e2e2e2;">
+                                <p>Không có dữ liệu</p>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="item in data | orderBy:sortType:sortReverse track by $index ">
+                            <td style="text-align: center;">
+                                <a class="fa fa-search" ng-click="detail(item)" ng-if="accessList.View"></a> &nbsp;&nbsp;&nbsp;
+                                <a class="fa fa-pencil" ng-click="edit(item)" ng-if="accessList.Edit"></a> &nbsp;&nbsp;&nbsp;
+                                <a class="fa fa-remove" ng-click="delete(item)" ng-if="accessList.Delete"></a>
+                            </td>
+                            <td>{{paged.itemsPerPage*(paged.currentPage-1)+$index+1}}</td>
+                            <td>{{item.LOAIMANHAP === 1? 'Theo DVQHNS': (item.LOAIMANHAP === 2? 'Theo địa bàn': '')}}</td>
+                            <td>{{item.MA_LOAITHANHTRA}}</td>
+                            <td>{{item.MA_DOTTHANHTRA}}</td>
+                            <td>{{item.TUNGAY}}</td>
+                            <td>{{item.DENNGAY}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: right;" ng-if="accessList.View">
+                    <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                                    ng-change="pageChanged()"
+                                    items-per-page="paged.itemsPerPage" ng-if="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.maxSize"
+                                    boundary-links="true" num-pages="paged.totalPage"
+                                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
